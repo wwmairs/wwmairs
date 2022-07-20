@@ -1,17 +1,13 @@
 html
 	body
-		form(action="/upload" method="POST" enctype="multipart/form-data")
-			div
+		form(action="/upload" method="post" enctype="multipart/form-data")
+			div(class="form-group")
 				label(for="name") Name
-				input(type="text" id="name" placeholder="name")
-			div
+				input(type="text" id="name" name="name" placeholder="name")
 				label(for="dimensions") Dimensions
-				input(type="text" id="dimensions" placeholder="dimensions")
-			div
+				input(type="text" id="dimensions" name="dimensions" placeholder="dimensions")
 				label(for="description") Description
-				input(type="textarea" id="description" placeholder="description")
-			div
+				input(type="textarea" id="description" name="description" placeholder="description")
 				label(for="photo") Photo
-				input(type="file" id="photo")
-			div
+				input(type="file" id="photo" name="photo")
 				button(type="submit") Upload!

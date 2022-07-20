@@ -1,15 +1,17 @@
 #!/usr/bin/env nodejs
 
-const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
-const pug 		= require("pug");
-const hash		= require("pbkdf2-password");
-const path 		= require("path");
-const fs			= require("fs");
-const session = require("express-session");
+const express 	 = require("express");
+const sqlite3 	 = require("sqlite3").verbose();
+const pug 			 = require("pug");
+const hash			 = require("pbkdf2-password");
+const path 			 = require("path");
+const fs				 = require("fs");
+const session 	 = require("express-session");
+const multer     = require("multer");
 
 const app = express();
 const db = new sqlite3.Database("test.db");
+const upload = multer({ dest: "uploads/" });
 
 const port = 8080;
 
@@ -29,6 +31,8 @@ app.use((req, res, next) => {
 	delete req.session.error;
 	delete req.session.success;
 	res.locals.message = "";
+	if (err) res.locals.message = "<p class='msg error'>" + err + "</p>";
+	if (msg) res.locals.message = "<p class='msg success'>" + msg + "</p>";
 	next();
 });
 
@@ -36,18 +40,21 @@ app.get("/", (req, res) => {
 	res.render("index");
 });
 
-app.get("/users", (req, res) => {
-	db.get("SELECT * FROM  users;", (err, response) => {
+app.get("/entries", (req, res) => {
+	db.get("SELECT * FROM entries;", (err, response) => {
 		if (err) {
 			console.log(err);
 		}
-		console.log(JSON.stringify(response));
 		res.json(response);
 	});
 });
 
-app.get("/upload", restrict, (req, res) => {
-	res.send("this is the upload page!");
+app.get("/upload", (req, res) => {
+	res.render("upload");
+});
+
+app.post("/upload", upload.single("photo"), (req, res, next) => {
+	console.log(req.file, req.body);
 });
 
 app.get("/logout", (req, res) => {
@@ -61,12 +68,11 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res, next) => {
-	console.log(req.body);
 	authenticate(req.body.proof, (err, user) => {
 		if (err) return next(err)
 		if (user) {
-			console.log(`authentication worked and user is {$user}`);
 			req.session.regenerate(function() {
+				req.session.isWill = true;
 				req.session.user = "will";
 				req.session.success = "You're Will!";
 				res.redirect("/upload");
@@ -77,17 +83,16 @@ app.post("/login", (req, res, next) => {
 
 function authenticate(proof, fn) {
 	// check if it's me!
-	fs.readFile("password.txt", "utf8", (err, data) => {
+	fs.readFile("passwords.json", "utf8", (err, data) => {
 
 		if (err) {
 			console.error(err);
 			return;
 		}
 
-		console.log(data);
-		console.log(proof);
+		var password = JSON.parse(data).will
 	
-		if (proof == data) {
+		if (proof == password) {
 			fn(false, true);
 		} else {
 			fn(null, null);
@@ -96,12 +101,12 @@ function authenticate(proof, fn) {
 	});
 }
 
-function restrict(req, res, next) {
-	if (req.session.user) {
+function redirectIfNotWill(req, res, next) {
+	if (req.session.isWill) {
 		next();
 	} else {
 		req.session.error = "You're not will!";
-		res.redirect("/login");
+		res.redirect("/");
 	}
 }
 
