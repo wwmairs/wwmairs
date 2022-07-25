@@ -18,6 +18,7 @@ const port = 8080;
 app.set("view engine", "pug");
 
 app.use("/archive", express.static("../wwmairs"));
+app.use("/uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
 	resave: false,
@@ -53,8 +54,9 @@ app.get("/upload", (req, res) => {
 	res.render("upload");
 });
 
-app.post("/upload", upload.single("photo"), (req, res, next) => {
-	console.log(req.file, req.body);
+app.post("/upload", upload.array("photo"), (req, res, next) => {
+	console.log(req.files, req.body);
+	res.json(req.files);
 });
 
 app.get("/logout", (req, res) => {
