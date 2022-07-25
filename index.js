@@ -8,12 +8,59 @@ const path 			 = require("path");
 const fs				 = require("fs");
 const session 	 = require("express-session");
 const multer     = require("multer");
+const { Sequelize, DataTypes, Model } = require("sequelize");
 
 const app = express();
-const db = new sqlite3.Database("test.db");
+const sequelize = new Sequelize({ dialect: "sqlite", storage: "test.db"});
 const upload = multer({ dest: "uploads/" });
 
 const port = 8080;
+
+const PortfolioEntry = sequelize.define("PortfolioEntry", {
+	uuid: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4
+	},
+	name: {
+		type: DataTypes.STRING,
+	},
+	date: {
+		type: DataTypes.DATE,
+	},
+	description: {
+		type: DataTypes.STRING,
+	}
+});
+
+const EntryPhoto = sequelize.define("EntryPhoto", {
+	entryuuid: {
+		type: DataTypes.UUID,
+		allowNull: false,
+	},
+	photouuid: {
+		type: DataTypes.UUID,
+		allowNull: false,
+	}
+});
+
+const Photo = sequelize.define("Photo", {
+	uuid: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4
+	},
+	filename: {
+		type: DataTypes.STRING,
+		allowNull: false
+	},
+	originalname: {
+		type: DataTypes.STRING,
+		allowNull: false
+	},
+	path: {
+		type: DataTypes.STRING,
+		allowNull: false
+	}
+});
 
 app.set("view engine", "pug");
 
@@ -42,12 +89,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/entries", (req, res) => {
-	db.get("SELECT * FROM entries;", (err, response) => {
-		if (err) {
-			console.log(err);
-		}
-		res.json(response);
-	});
+	//var entries = PortfolioEntry.findAll()
+	//res.json(entries);
 });
 
 app.get("/upload", (req, res) => {
@@ -55,9 +98,28 @@ app.get("/upload", (req, res) => {
 });
 
 app.post("/upload", upload.array("photo"), (req, res, next) => {
-	console.log(req.files, req.body);
-	res.json(req.files);
+	var portfolioEntry = PortfolioEntry.create({
+		name: req.body.name,
+		date: req.body.date,
+		description: req.body.description
+	}).then(entry => {
+		req.files.map((file) => {
+			console.log(file.filename);
+			var photo = Photo.create({
+				filename: file.filename,
+				originalname: file.originalname,
+			});
+		});
+	});
+		// save photo
+		// var entryPhoto = EntryPhoto.create({
+		// 	entryuuid: portfolioEntry.uuid,
+		// 	photouuid: photo.uuid
+		// });
+		// save entryphoto
+	//PortfolioEntry.findAll().then(entries => res.json(entries));
 });
+
 
 app.get("/logout", (req, res) => {
 	req.session.destroy(() => {
