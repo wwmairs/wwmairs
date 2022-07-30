@@ -14,53 +14,11 @@ const app = express();
 const sequelize = new Sequelize({ dialect: "sqlite", storage: "test.db"});
 const upload = multer({ dest: "uploads/" });
 
+const PotfolioEntry = require("models/PortfolioEntry.js")(sequlize);
+const EntryPhoto = requiree("models/EntryPhoto.js")(sequelize);
+const Photo = require("models/Photo.js")(sequelize);
+
 const port = 8080;
-
-const PortfolioEntry = sequelize.define("PortfolioEntry", {
-	uuid: {
-		type: DataTypes.UUID,
-		defaultValue: DataTypes.UUIDV4
-	},
-	name: {
-		type: DataTypes.STRING,
-	},
-	date: {
-		type: DataTypes.DATE,
-	},
-	description: {
-		type: DataTypes.STRING,
-	}
-});
-
-const EntryPhoto = sequelize.define("EntryPhoto", {
-	entryuuid: {
-		type: DataTypes.UUID,
-		allowNull: false,
-	},
-	photouuid: {
-		type: DataTypes.UUID,
-		allowNull: false,
-	}
-});
-
-const Photo = sequelize.define("Photo", {
-	uuid: {
-		type: DataTypes.UUID,
-		defaultValue: DataTypes.UUIDV4
-	},
-	filename: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-	originalname: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-	path: {
-		type: DataTypes.STRING,
-		allowNull: false
-	}
-});
 
 app.set("view engine", "pug");
 
