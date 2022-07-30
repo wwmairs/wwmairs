@@ -1,3 +1,5 @@
+const { Sequelize, DataTypes, Model } = require("sequelize");
+
 module.exports = (sequelize) => {
 	const Photo = sequelize.define("Photo", {
 		uuid: {

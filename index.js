@@ -14,9 +14,9 @@ const app = express();
 const sequelize = new Sequelize({ dialect: "sqlite", storage: "test.db"});
 const upload = multer({ dest: "uploads/" });
 
-const PotfolioEntry = require("models/PortfolioEntry.js")(sequlize);
-const EntryPhoto = requiree("models/EntryPhoto.js")(sequelize);
-const Photo = require("models/Photo.js")(sequelize);
+const PortfolioEntry = require("./models/PortfolioEntry.js")(sequelize);
+const EntryPhoto = require("./models/EntryPhoto.js")(sequelize);
+const Photo = require("./models/Photo.js")(sequelize);
 
 const port = 8080;
 
@@ -46,9 +46,18 @@ app.get("/", (req, res) => {
 	res.render("index");
 });
 
+app.get("/entry/:entryUuid", (req, res) => {
+	PortfolioEntry.findOne({ where: { uuid: req.params.uuid}})
+		.then(portfolioEntry => {
+			res.render("entry", { entry: portfolioEntry });
+		});
+});
+
 app.get("/entries", (req, res) => {
-	//var entries = PortfolioEntry.findAll()
-	//res.json(entries);
+	PortfolioEntry.findAll()
+		.then((entries) => {
+			res.render("entries", { entries: entries});
+		});
 });
 
 app.get("/upload", (req, res) => {
@@ -56,26 +65,25 @@ app.get("/upload", (req, res) => {
 });
 
 app.post("/upload", upload.array("photo"), (req, res, next) => {
-	var portfolioEntry = PortfolioEntry.create({
+	PortfolioEntry.create({
 		name: req.body.name,
 		date: req.body.date,
 		description: req.body.description
 	}).then(entry => {
 		req.files.map((file) => {
-			console.log(file.filename);
-			var photo = Photo.create({
+			Photo.create({
 				filename: file.filename,
 				originalname: file.originalname,
+				path: file.path
+			}).then(photo => {
+				EntryPhoto.create({
+					entryuuid: entry.uuid,
+					photouuid: photo.uuid
+				});
 			});
 		});
 	});
-		// save photo
-		// var entryPhoto = EntryPhoto.create({
-		// 	entryuuid: portfolioEntry.uuid,
-		// 	photouuid: photo.uuid
-		// });
-		// save entryphoto
-	//PortfolioEntry.findAll().then(entries => res.json(entries));
+	res.redirect("/entries");
 });
 
 

@@ -1,0 +1,17 @@
+html
+	head
+		title = entries
+	body
+		table
+			thead
+				tr
+					th Name
+					th Date
+					th Description
+			tbody
+				each entry in entries
+					tr
+						td #{entry.name}
+						td #{new Date(entry.date).toDateString()}
+						td #{entry.description}
+					

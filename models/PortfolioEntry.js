@@ -1,3 +1,5 @@
+const { Sequelize, DataTypes, Model } = require("sequelize");
+
 module.exports = (sequelize) => {
 	const PortfolioEntry = sequelize.define("PortfolioEntry", {
 		uuid: {
