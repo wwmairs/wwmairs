@@ -8,17 +8,16 @@ const path 			 = require("path");
 const fs				 = require("fs");
 const session 	 = require("express-session");
 const multer     = require("multer");
-const { Sequelize, DataTypes, Model } = require("sequelize");
 
 const app = express();
-const sequelize = new Sequelize({ dialect: "sqlite", storage: "test.db"});
+const sequelize = require("./sequelize");
 const upload = multer({ dest: "uploads/" });
 
-const PortfolioEntry = require("./models/PortfolioEntry.js")(sequelize);
-const EntryPhoto = require("./models/EntryPhoto.js")(sequelize);
-const Photo = require("./models/Photo.js")(sequelize);
 
 const port = 8080;
+
+// sequelize.sync({ alter: true});
+// sequelize.authenticate();
 
 app.set("view engine", "pug");
 
@@ -30,6 +29,10 @@ app.use(session({
 	saveUninitialized: false,
 	secret: "something better should go here"
 }));
+
+////////////
+// ROUTES //
+////////////
 
 app.use((req, res, next) => {
 	var err = req.session.error;
@@ -46,15 +49,16 @@ app.get("/", (req, res) => {
 	res.render("index");
 });
 
-app.get("/entry/:entryUuid", (req, res) => {
-	PortfolioEntry.findOne({ where: { uuid: req.params.uuid}})
+app.get("/entry/:id", (req, res) => {
+	sequelize.models.PortfolioEntry.findOne({ where: { id: req.params.id},
+				       									  include: sequelize.models.Photo })
 		.then(portfolioEntry => {
 			res.render("entry", { entry: portfolioEntry });
 		});
 });
 
 app.get("/entries", (req, res) => {
-	PortfolioEntry.findAll()
+	sequelize.models.PortfolioEntry.findAll()
 		.then((entries) => {
 			res.render("entries", { entries: entries});
 		});
@@ -65,23 +69,22 @@ app.get("/upload", (req, res) => {
 });
 
 app.post("/upload", upload.array("photo"), (req, res, next) => {
-	PortfolioEntry.create({
+	var photos = [];
+	req.files.map(file => {
+		photos.push({
+			filename: file.filename,
+			originalname: file.originalname,
+			path: file.path
+		});
+	});
+
+	sequelize.models.PortfolioEntry.create({
 		name: req.body.name,
 		date: req.body.date,
-		description: req.body.description
-	}).then(entry => {
-		req.files.map((file) => {
-			Photo.create({
-				filename: file.filename,
-				originalname: file.originalname,
-				path: file.path
-			}).then(photo => {
-				EntryPhoto.create({
-					entryuuid: entry.uuid,
-					photouuid: photo.uuid
-				});
-			});
-		});
+		description: req.body.description,
+		Photos: photos
+	}, { 
+		include: [sequelize.models.Photo]
 	});
 	res.redirect("/entries");
 });
@@ -111,6 +114,10 @@ app.post("/login", (req, res, next) => {
 	});
 });
 
+////////////////
+// MIDDLEWARE //
+////////////////
+
 function authenticate(proof, fn) {
 	// check if it's me!
 	fs.readFile("passwords.json", "utf8", (err, data) => {
@@ -139,6 +146,10 @@ function redirectIfNotWill(req, res, next) {
 		res.redirect("/");
 	}
 }
+
+////////////
+// LISTEN //
+////////////
 
 app.listen(port, () => {
 	console.log(`Listening on ${port}`);

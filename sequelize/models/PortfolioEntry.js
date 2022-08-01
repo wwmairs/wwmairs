@@ -2,9 +2,10 @@ const { Sequelize, DataTypes, Model } = require("sequelize");
 
 module.exports = (sequelize) => {
 	const PortfolioEntry = sequelize.define("PortfolioEntry", {
-		uuid: {
+		id: {
 			type: DataTypes.UUID,
-			defaultValue: DataTypes.UUIDV4
+			defaultValue: DataTypes.UUIDV4,
+			primaryKey: true
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -16,5 +17,6 @@ module.exports = (sequelize) => {
 			type: DataTypes.STRING,
 		}
 	});
+
 	return PortfolioEntry;
 };
