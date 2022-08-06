@@ -1,6 +1,8 @@
 extends layout.pug 
 
 block content
+	#upload
+		include upload.pug
 	#entries
 			each entry in entries
 				.entry
@@ -12,6 +14,4 @@ block content
 						img(src=entry.Photos[0].path)
 					p #{entry.description}
 					span.date= `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
-	#upload
-		include upload.pug
 				

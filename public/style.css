@@ -6,6 +6,11 @@ html {
 	--border: #2b151c;
 	--background: #f9f9e8;
 	--light-background: #fafafa;
+	--yellow: #f5d53f;
+	--green: #698a62;
+	--light-purple: #d7cee4;
+	--light-blue: #c7d8dc;
+	--tan: #dbd4cb;
 	background: var(--background);
 	color: var(--text);
 }
@@ -35,12 +40,22 @@ h4 {
 	margin-bottom: .25em;
 }
 
+button {
+	border: 1.5px solid var(--text);
+	border-radius: 0;
+	background: var(--yellow);
+	color: var(--text);
+	font-family: covik-sans, sans-serif;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
 #menu {
 	position: fixed;
 	background: var(--light-background);
 	bottom: 0;
 	left: 0;
-	width: 100vw;
+	width: calc(100vw - 1em);
 	border-top: 1px solid var(--border);
 	border-bottom: 1px solid var(--border);
 	padding: .5em;
@@ -70,10 +85,16 @@ form {
 }
 
 .form-group {
-	padding: .5em;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	border-bottom: 2px solid var(--text);
 }
 
-.form-group input {
+.form-group:first-child {
+	border-top: 2px solid var(--text);
+}
+
+.form-group input:not(#photo) {
 	float: right;
 }
 
@@ -81,7 +102,12 @@ form {
 	width: 100%;
 }
 
-@media(min-width: 750px) {
+#upload {
+	background: var(--tan);
+	padding: 1em;
+}
+
+@media (min-width: 750px) {
 	#entries {
 		margin-left: 30vw;
 		width: 60vw;
@@ -91,8 +117,7 @@ form {
 		position: fixed;
 		bottom: 3em;
 		left: .5em;
-		border: 1px solid var(--border);
-		width: calc(30vw - 1em);
-}
+		width: calc(30vw - 2.5em);
+	}
 
 }
