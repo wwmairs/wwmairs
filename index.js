@@ -23,6 +23,7 @@ app.set("view engine", "pug");
 
 app.use("/archive", express.static("../wwmairs"));
 app.use("/uploads", express.static("uploads"));
+app.use("/public", express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
 	resave: false,
