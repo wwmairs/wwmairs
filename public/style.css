@@ -2,9 +2,12 @@ html {
 	font-family: covik-sans, sans-serif;
 	font-feature-settings: "kern" 1;
 	font-kerning: normal;
-	--text: #123456;
-	--background: #345678;
+	--text: #4b383e;
+	--border: #2b151c;
+	--background: #f9f9e8;
+	--light-background: #fafafa;
 	background: var(--background);
+	color: var(--text);
 }
 
 a {
@@ -17,21 +20,29 @@ a {
 p {
 	margin-top: .25em;
 	margin-bottom: .5em;
+	font-family: swear-text, serif;
+}
+
+h1 {
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 56pt;
 }
 
 h4 {
-	border-bottom: 1px solid var(--text);
+	border-bottom: 1px solid var(--border);
 	text-align: right;
-	margin-bottom: .5em;
+	margin-bottom: .25em;
 }
 
 #menu {
 	position: fixed;
+	background: var(--light-background);
 	bottom: 0;
 	left: 0;
 	width: 100vw;
-	border-top: 1px solid var(--text);
-	border-bottom: 1px solid var(--text);
+	border-top: 1px solid var(--border);
+	border-bottom: 1px solid var(--border);
 	padding: .5em;
 }
 
@@ -46,6 +57,12 @@ h4 {
 
 #entries {
 	padding-top: 40vh;
+}
+
+.date {
+	font-size: 12;
+	text-align: right;
+	display: block;
 }
 
 form {
@@ -74,7 +91,7 @@ form {
 		position: fixed;
 		bottom: 3em;
 		left: .5em;
-		border: 1px solid var(--text);
+		border: 1px solid var(--border);
 		width: calc(30vw - 1em);
 }
 
