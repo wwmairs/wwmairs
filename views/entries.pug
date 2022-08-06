@@ -1,14 +1,16 @@
 extends layout.pug 
 
 block content
-	.entries
+	#entries
 			each entry in entries
 				.entry
 					h4
 						- var url = "/entry/" + entry.id;
 						a(href=url) #{entry.name}
-					p #{new Date(entry.date).toDateString()}
+					span #{new Date(entry.date).toDateString()}
 					p #{entry.description}
-
-	a(href="/upload") Uploads
+					if entry.Photos.length
+						img(src=entry.Photos[0].path)
+	#upload
+		include upload.pug
 				

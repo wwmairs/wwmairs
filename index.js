@@ -52,14 +52,15 @@ app.get("/", (req, res) => {
 
 app.get("/entry/:id", (req, res) => {
 	sequelize.models.PortfolioEntry.findOne({ where: { id: req.params.id},
-				       									  include: sequelize.models.Photo })
+				       									  					include: sequelize.models.Photo })
 		.then(portfolioEntry => {
 			res.render("entry", { entry: portfolioEntry });
 		});
 });
 
 app.get("/entries", (req, res) => {
-	sequelize.models.PortfolioEntry.findAll()
+	sequelize.models.PortfolioEntry.findAll({ include: sequelize.models.Photo,
+																						order: [["date", "DESC"]] })
 		.then((entries) => {
 			res.render("entries", { entries: entries});
 		});
@@ -83,6 +84,7 @@ app.post("/upload", upload.array("photo"), (req, res, next) => {
 		name: req.body.name,
 		date: req.body.date,
 		description: req.body.description,
+		link: req.body.link,
 		Photos: photos
 	}, { 
 		include: [sequelize.models.Photo]

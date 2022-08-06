@@ -1,13 +1,21 @@
-html
-	body
-		form(action="/upload" method="post" enctype="multipart/form-data")
-			div(class="form-group")
-				label(for="name") Name
-				input(type="text" id="name" name="name" placeholder="name")
-				label(for="date") Date
-				input(type="date" id="date" name="date" value="2022-07-15")
-				label(for="description") Description
-				input(type="textarea" id="description" name="description" placeholder="description")
-				label(for="photo") Photo
-				input(type="file" multiple="multiple" id="photo" name="photo")
-				button(type="submit") Upload!
+extends layout.pug	
+
+block content
+	form(action="/upload" method="post" enctype="multipart/form-data")
+		.form-group
+			label(for="name") Name
+			input(type="text" id="name" name="name" placeholder="name")
+		.form-group
+			label(for="date") Date
+			input(type="date" id="date" name="date" value="2022-07-15")
+		.form-group
+			label(for="link") Link
+			input(type="text" id="link" name="link" placeholder="link")
+		.form-group
+			label(for="description") Description
+			input(type="textarea" id="description" name="description" placeholder="description")
+		.form-group
+			label(for="photo") Photo
+			input(type="file" multiple="multiple" id="photo" name="photo")
+		.form-group
+			button(type="submit") Upload!

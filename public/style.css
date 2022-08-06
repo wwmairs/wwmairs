@@ -2,10 +2,36 @@ html {
 	font-family: covik-sans, sans-serif;
 	font-feature-settings: "kern" 1;
 	font-kerning: normal;
+	--text: #123456;
+	--background: #345678;
+	background: var(--background);
+}
+
+a {
+	color: var(--text);
+	text-decoration: none;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+p {
+	margin-top: .25em;
+	margin-bottom: .5em;
+}
+
+h4 {
+	border-bottom: 1px solid var(--text);
+	text-align: right;
+	margin-bottom: .5em;
 }
 
 #menu {
-	border: 1px solid black;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	border-top: 1px solid var(--text);
+	border-bottom: 1px solid var(--text);
 	padding: .5em;
 }
 
@@ -18,10 +44,38 @@ html {
 	text-align: center;
 }
 
-#menu a {
-	text-decoration: none;
-	border-bottom: none;
-	color: black;
+#entries {
+	padding-top: 40vh;
 }
 
+form {
+	margin-bottom: 0;
+}
 
+.form-group {
+	padding: .5em;
+}
+
+.form-group input {
+	float: right;
+}
+
+.entry img {
+	width: 100%;
+}
+
+@media(min-width: 750px) {
+	#entries {
+		margin-left: 30vw;
+		width: 60vw;
+	}
+
+	#upload {
+		position: fixed;
+		bottom: 3em;
+		left: .5em;
+		border: 1px solid var(--text);
+		width: calc(30vw - 1em);
+}
+
+}
