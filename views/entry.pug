@@ -3,7 +3,8 @@ extends layout.pug
 block content
 	h4 #{entry.name}
 	p #{entry.description}
-	p #{new Date(entry.date).toDateString()}
+	- var date = new Date(entry.date)
+	span.date= `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 	each photo in entry.Photos
 		- var path = "../uploads/" + photo.filename;
 		img(src=path style="max-width: 90vw")
