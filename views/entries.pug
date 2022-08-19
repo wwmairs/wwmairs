@@ -7,10 +7,12 @@ block content
 	#entries
 			each entry in entries
 				.entry
-					h4
-						- var url = "/entry/" + entry.id;
-						a(href=url) #{entry.name}
-					if entry.Photos.length
-						img(src=entry.Photos[0].path)
-					p #{entry.description}
+					.entry-description
+						h4
+							- var url = "/entry/" + entry.id;
+							a(href=url) #{entry.name}
+						p #{entry.description}
+					.entry-photos
+						if entry.Photos.length
+							img(src=entry.Photos[0].path)
 				

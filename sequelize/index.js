@@ -3,7 +3,7 @@ const { associateModels } = require("./associations.js");
 
 const sequelize = new Sequelize({
 	dialect: "sqlite",
-	storage: "../test.db"
+	storage: "../prod.db"
 });
 
 const modelDefiners = [

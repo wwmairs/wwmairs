@@ -3,7 +3,6 @@
 const express 	 = require("express");
 const sqlite3 	 = require("sqlite3").verbose();
 const pug 			 = require("pug");
-const hash			 = require("pbkdf2-password");
 const path 			 = require("path");
 const fs				 = require("fs");
 const session 	 = require("express-session");
@@ -62,7 +61,7 @@ app.get("/entries", (req, res) => {
 	sequelize.models.PortfolioEntry.findAll({ include: sequelize.models.Photo,
 																						order: [["date", "DESC"]] })
 		.then((entries) => {
-			res.render("entries", { entries: entries});
+			res.render("entries", { entries: entries, upload: req.session.isWill });
 		});
 });
 
@@ -111,7 +110,7 @@ app.post("/login", (req, res, next) => {
 				req.session.isWill = true;
 				req.session.user = "will";
 				req.session.success = "You're Will!";
-				res.redirect("/upload");
+				res.redirect("/entries");
 			});
 		}
 	});

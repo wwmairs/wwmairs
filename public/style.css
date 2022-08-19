@@ -1,34 +1,40 @@
+@font-face {
+	font-family: VTCMarsha-Bold;
+	src: url("public/fonts-vtc-marsha/VTCMarsha-Bold.otf");
+}
+
 html {
-	font-family: covik-sans, sans-serif;
 	font-feature-settings: "kern" 1;
 	font-kerning: normal;
-	--text: #4b383e;
-	--border: #2b151c;
-	--background: #f9f9e8;
-	--light-background: #fafafa;
-	--yellow: #f5d53f;
-	--green: #698a62;
-	--light-purple: #d7cee4;
-	--light-blue: #c7d8dc;
-	--tan: #dbd4cb;
+	--background: #2e3535;
+	--red: #b4222c;
+	--pink: #ee919b;
 	background: var(--background);
-	color: var(--text);
+	color: var(--pink);
+	font-family: swear-display, serif;
+	font-weight: 500;
 }
 
 a {
-	color: var(--text);
+	color: var(--pink);
 	text-decoration: none;
 	font-weight: 400;
 	text-transform: uppercase;
 }
 
 p {
-	margin-top: .25em;
-	margin-bottom: .5em;
-	font-family: swear-text, serif;
+	margin-top: .125em;
+	margin-bottom: .25em;
+	font-family: owners, sans-serif;
+	font-weight: 900;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	text-align: right;
 }
 
 h1 {
+	color: var(--red);
+	font-family: cheee, sans-serif;
 	font-weight: 400;
 	text-transform: uppercase;
 	font-size: 56pt;
@@ -37,16 +43,18 @@ h1 {
 }
 
 h4 {
-	border-bottom: 1px solid var(--border);
-	text-align: right;
+	border-bottom: 1px solid var(--background);
+	margin-top: -.05em;
 	margin-bottom: .25em;
+	font-weight: 400;
+	text-transform: uppercase;
 }
 
-button {
-	border: 1.5px solid var(--text);
+button{
+	border: 1.5px solid var(--pink);
 	border-radius: 0;
 	background: var(--yellow);
-	color: var(--text);
+	color: var(--pink);
 	font-family: covik-sans, sans-serif;
 	font-size: 1em;
 	text-transform: uppercase;
@@ -58,13 +66,15 @@ button {
 
 #menu {
 	position: fixed;
-	background: var(--light-background);
 	bottom: 0;
 	left: 0;
 	width: calc(100vw - 1em);
-	border-top: 1px solid var(--border);
-	border-bottom: 1px solid var(--border);
 	padding: .5em;
+}
+
+#menu a {
+  font-family: cheee, sans-serif;
+	color: var(--red);
 }
 
 #menu ul {
@@ -85,6 +95,22 @@ button {
 	margin-bottom: 3em;
 }
 
+.entry {
+	margin-bottom: 50vh;
+}
+
+.entry-description {
+	border-top: 2px solid var(--pink);
+	padding-top: .25em;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-gap: 2em;
+}
+
+.entry-photos img {
+	width: 100%;
+}
+
 .date {
 	font-size: 12;
 	text-align: right;
@@ -102,30 +128,51 @@ form {
 .form-group {
 	padding-top: .5em;
 	padding-bottom: .5em;
-	border-bottom: 2px solid var(--text);
+	border-bottom: 2px solid var(--pink);
 }
 
 .form-group:first-child {
-	border-top: 2px solid var(--text);
+	border-top: 2px solid var(--pink);
 }
 
-.form-group input:not(#photo) {
+.form-group input:not(#photo){
 	float: right;
 }
 
-.entry img {
-	width: 100%;
-}
-
 #upload {
-	background: var(--tan);
+	background: var(--red);
 	padding: 1em;
 }
 
+#upload input {
+	background: var(--red);
+	border: 1px dashed var(--pink);
+}
+
+#upload input::placeholder {
+	color: var(--pink);
+}
+
+#upload input[type=date] {
+	color: var(--pink);
+}
+
+#upload input[type=file] {
+	margin-top: .125em;
+	width: 100%;
+	display: block;
+}
+
 @media (min-width: 750px) {
+	.entry {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		grid-gap: 1em;
+	}
+	
 	#entries {
-		margin-left: 30vw;
-		width: 60vw;
+		width: 90vw;
+		margin: auto;
 	}
 
 	#upload {
