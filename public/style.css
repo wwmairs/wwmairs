@@ -74,6 +74,7 @@ button{
 
 #menu a {
   font-family: cheee, sans-serif;
+	font-size: 2em;
 	color: var(--red);
 }
 
@@ -81,9 +82,11 @@ button{
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
+	/*
 	display: grid;
-	grid-template-columns: 1fr 75vw 1fr;
+	grid-template-columns: 1fr 1fr;
 	text-align: center;
+	*/
 }
 
 /***********
