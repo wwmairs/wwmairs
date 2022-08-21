@@ -6,12 +6,10 @@ const pug 			 = require("pug");
 const path 			 = require("path");
 const fs				 = require("fs");
 const session 	 = require("express-session");
-const multer     = require("multer");
 
 const app = express();
 const sequelize = require("./sequelize");
-const upload = multer({ dest: "uploads/" });
-
+const loadRoutes = require("./routes");
 
 const port = 8080;
 
@@ -30,10 +28,6 @@ app.use(session({
 	secret: "something better should go here"
 }));
 
-////////////
-// ROUTES //
-////////////
-
 app.use((req, res, next) => {
 	var err = req.session.error;
 	var msg = req.session.success;
@@ -45,52 +39,13 @@ app.use((req, res, next) => {
 	next();
 });
 
+////////////
+// ROUTES //
+////////////
+
 app.get("/", (req, res) => {
 	res.render("index");
 });
-
-app.get("/entry/:id", (req, res) => {
-	sequelize.models.PortfolioEntry.findOne({ where: { id: req.params.id},
-				       									  					include: sequelize.models.Photo })
-		.then(portfolioEntry => {
-			res.render("entry", { entry: portfolioEntry });
-		});
-});
-
-app.get("/entries", (req, res) => {
-	sequelize.models.PortfolioEntry.findAll({ include: sequelize.models.Photo,
-																						order: [["date", "DESC"]] })
-		.then((entries) => {
-			res.render("entries", { entries: entries, upload: req.session.isWill });
-		});
-});
-
-app.get("/upload", (req, res) => {
-	res.render("upload");
-});
-
-app.post("/upload", upload.array("photo"), (req, res, next) => {
-	var photos = [];
-	req.files.map(file => {
-		photos.push({
-			filename: file.filename,
-			originalname: file.originalname,
-			path: file.path
-		});
-	});
-
-	sequelize.models.PortfolioEntry.create({
-		name: req.body.name,
-		date: req.body.date,
-		description: req.body.description,
-		link: req.body.link,
-		Photos: photos
-	}, { 
-		include: [sequelize.models.Photo]
-	});
-	res.redirect("/entries");
-});
-
 
 app.get("/logout", (req, res) => {
 	req.session.destroy(() => {
@@ -115,6 +70,8 @@ app.post("/login", (req, res, next) => {
 		}
 	});
 });
+
+loadRoutes(app);
 
 ////////////////
 // MIDDLEWARE //
