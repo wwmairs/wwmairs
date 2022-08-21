@@ -132,13 +132,14 @@ form {
 	padding-top: .5em;
 	padding-bottom: .5em;
 	border-bottom: 2px solid var(--pink);
+	overflow: auto;
 }
 
 .form-group:first-child {
 	border-top: 2px solid var(--pink);
 }
 
-.form-group input:not(#photo){
+.form-group input:not(#photo), .form-group textarea{
 	float: right;
 }
 
@@ -165,6 +166,7 @@ form {
 	width: 100%;
 	display: block;
 }
+
 
 @media (min-width: 750px) {
 	.entry {
