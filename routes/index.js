@@ -1,5 +1,6 @@
 const routeLoaders = [
-	require("./portfolioentries.js")
+	require("./portfolioentries.js"),
+	require("./login.js")
 ];
 
 module.exports = (app) => {
