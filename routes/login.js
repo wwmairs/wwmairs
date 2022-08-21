@@ -1,7 +1,3 @@
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
-const sequelize = require("../sequelize");
-
 const { onlyWill } = require("../middleware.js");
 
 function defineRoutes(app) {
