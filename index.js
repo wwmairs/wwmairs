@@ -1,20 +1,14 @@
 #!/usr/bin/env nodejs
 
 const express 	 = require("express");
-const sqlite3 	 = require("sqlite3").verbose();
-const pug 			 = require("pug");
-const path 			 = require("path");
-const fs				 = require("fs");
 const session 	 = require("express-session");
 
 const app = express();
-const sequelize = require("./sequelize");
 const loadRoutes = require("./routes");
 
 const port = 8080;
 
 // sequelize.sync({ alter: true});
-// sequelize.authenticate();
 
 app.set("view engine", "pug");
 
@@ -40,10 +34,6 @@ app.use((req, res, next) => {
 	if (msg) res.locals.message = "<p class='msg success'>" + msg + "</p>";
 	next();
 });
-
-////////////
-// ROUTES //
-////////////
 
 app.get("/", (req, res) => {
 	res.render("index");
