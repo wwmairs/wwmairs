@@ -2,6 +2,8 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const sequelize = require("../sequelize");
 
+const { onlyWill } = require("../middleware.js");
+
 function defineRoutes(app) {
 
 	app.get("/entry/:id", (req, res) => {
@@ -20,11 +22,11 @@ function defineRoutes(app) {
 			});
 	});
 	
-	app.get("/upload", (req, res) => {
+	app.get("/upload", onlyWill, (req, res) => {
 		res.render("upload");
 	});
 	
-	app.post("/upload", upload.array("photo"), (req, res, next) => {
+	app.post("/upload", onlyWill, upload.array("photo"), (req, res, next) => {
 		var photos = [];
 		req.files.map(file => {
 			photos.push({
