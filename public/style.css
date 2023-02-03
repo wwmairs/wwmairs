@@ -1,18 +1,18 @@
 html {
 	font-feature-settings: "kern" 1;
 	font-kerning: normal;
-	--background: #2e3535;
-	--red: #b4222c;
-	--pink: #ee919b;
+	--background: #c2ffb0;
+	--green: #36c20c;
+	--dark-green: #0e3b00;
 	background: var(--background);
-	color: var(--pink);
+	color: var(--dark-green);
 	font-family: swear-display, serif;
 	font-weight: 500;
 	letter-spacing: 1px;
 }
 
 a {
-	color: var(--pink);
+	color: var(--green);
 	text-decoration: none;
 	font-weight: 400;
 }
@@ -25,7 +25,7 @@ p {
 }
 
 h1 {
-	color: var(--red);
+	color: var(--green);
 	font-family: cheee, sans-serif;
 	font-weight: 400;
 	text-transform: uppercase;
@@ -42,10 +42,10 @@ h4 {
 }
 
 button{
-	border: 1.5px solid var(--pink);
+	border: 1.5px solid var(--dark-green);
 	border-radius: 0;
-	background: var(--yellow);
-	color: var(--pink);
+	background: var(--green);
+	color: var(--dark-green);
 	font-family: covik-sans, sans-serif;
 	font-size: 1em;
 	text-transform: uppercase;
@@ -94,7 +94,7 @@ button{
 }
 
 .entry-description {
-	border-top: 2px solid var(--pink);
+	border-top: 2px solid var(--green);
 	padding-top: .25em;
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -122,12 +122,12 @@ form {
 .form-group {
 	padding-top: .5em;
 	padding-bottom: .5em;
-	border-bottom: 2px solid var(--pink);
+	border-bottom: 2px solid var(--green);
 	overflow: auto;
 }
 
 .form-group:first-child {
-	border-top: 2px solid var(--pink);
+	border-top: 2px solid var(--green);
 }
 
 .form-group input:not(#photo), .form-group textarea{
@@ -135,21 +135,21 @@ form {
 }
 
 #upload {
-	background: var(--red);
+	background: var(--green);
 	padding: 1em;
 }
 
 #upload input {
-	background: var(--red);
-	border: 1px dashed var(--pink);
+	background: var(--green);
+	border: 1px dashed var(--dark-green);
 }
 
 #upload input::placeholder {
-	color: var(--pink);
+	color: var(--green);
 }
 
 #upload input[type=date] {
-	color: var(--pink);
+	color: var(--green);
 }
 
 #upload input[type=file] {
