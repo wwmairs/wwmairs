@@ -1,14 +1,14 @@
 html {
 	font-feature-settings: "kern" 1;
 	font-kerning: normal;
-	--background: #c2ffb0;
+	--light-green: #c2ffb0;
 	--green: #36c20c;
 	--dark-green: #0e3b00;
-	background: var(--background);
+	background: var(--light-green);
 	color: var(--dark-green);
-	font-family: swear-display, serif;
 	font-weight: 500;
 	letter-spacing: 1px;
+	font-family: news-gothic-std, sans-serif;
 }
 
 a {
@@ -20,22 +20,23 @@ a {
 p {
 	margin-top: .125em;
 	margin-bottom: .25em;
-	font-family: owners-text, sans-serif;
 	text-align: right;
 }
 
 h1 {
-	color: var(--green);
-	font-family: cheee, sans-serif;
-	font-weight: 400;
+	color: var(--light-green);
 	text-transform: uppercase;
-	font-size: 56pt;
-	letter-spacing: .25em;
+	font-size: 72pt;
 	text-align: center;
+	-webkit-text-stroke: 3px var(--green);
+	text-stroke: 3px var(--green);
+	border-top: 4px solid var(--green);
+	border-bottom: 4px solid var(--green);
+	display: inline-block;
 }
 
 h4 {
-	border-bottom: 1px solid var(--background);
+	border-bottom: 1px solid var(--light-green);
 	margin-top: -.05em;
 	margin-bottom: .25em;
 	font-weight: 400;
@@ -46,7 +47,6 @@ button{
 	border-radius: 0;
 	background: var(--green);
 	color: var(--dark-green);
-	font-family: covik-sans, sans-serif;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -64,7 +64,6 @@ button{
 }
 
 #menu a {
-  font-family: cheee, sans-serif;
 	font-size: 2em;
 	color: var(--red);
 }
@@ -176,13 +175,6 @@ form {
 		bottom: 3em;
 		left: .5em;
 		width: calc(30vw - 2.5em);
-	}
-
-	#bigname {
-		width: 50vw;
-		margin-top: 15vh;
-		margin-left: auto;
-		margin-right: auto;
 	}
 }
 
