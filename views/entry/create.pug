@@ -1,21 +1,31 @@
-extends ../layout.pug	
-
 block content
 	form(action="/upload" method="post" enctype="multipart/form-data")
-		.form-group
-			label(for="name") Name
-			input(type="text" id="name" name="name" placeholder="name" required="required")
-		.form-group
-			label(for="date") Date
-			input(type="date" id="date" name="date" value="2022-07-15")
-		.form-group
-			label(for="link") Link
-			input(type="text" id="link" name="link" placeholder="link")
-		.form-group
-			label(for="description") Description
-			input(type="textarea" id="description" name="description" placeholder="description")
-		.form-group
-			label(for="photo") Photo
-			input(type="file" multiple="multiple" id="photo" name="photo")
-		.form-group
-			button(type="submit") Upload!
+		table
+			tr
+				th
+					label(for="name") Name
+				td
+					input(type="text" id="name" name="name" placeholder="name" required="required")
+			tr
+				th
+					label(for="date") Date
+				td
+					input(type="date" id="date" name="date" value="2022-07-15")
+			tr
+				th
+					label(for="link") Link
+				td
+					input(type="text" id="link" name="link" placeholder="link")
+			tr
+				th
+					label(for="description") Description
+				td
+					input(type="textarea" id="description" name="description" placeholder="description")
+			tr
+				th
+					label(for="photo") Photo
+				td
+					input(type="file" multiple="multiple" id="photo" name="photo")
+			tr
+				th
+					button(type="submit") Upload!

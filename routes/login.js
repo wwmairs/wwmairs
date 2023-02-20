@@ -1,6 +1,6 @@
 import onlyWill from "../middleware.js";
 
-import * as fs from 'node:fs';
+import fs from 'node:fs';
 
 function defineRoutes(app) {
 
@@ -16,16 +16,15 @@ function defineRoutes(app) {
 	
 	app.post("/login", (req, res, next) => {
 		authenticate(req.body.proof, (err, user) => {
-			if (err) 
-				console.log(next);
-				return next(err)
+			if (err) {
+				return next(err);
+			}
 			if (user) {
-				console.log("hm");
 				req.session.regenerate(function() {
 					req.session.isWill = true;
 					req.session.user = "will";
 					req.session.success = "You're Will!";
-					res.redirect("/entries");
+					res.redirect("/");
 				});
 			}
 		});
@@ -53,4 +52,4 @@ function authenticate(proof, fn) {
 }
 
 
-export default defineRoutes;;
+export default defineRoutes;

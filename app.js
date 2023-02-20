@@ -5,7 +5,6 @@ import session from "express-session";
 import loadRoutes from "./routes/index.js";
 
 const app = express();
-//const loadRoutes = require("./routes");
 
 const port = 8080;
 

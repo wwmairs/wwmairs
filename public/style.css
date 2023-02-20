@@ -4,7 +4,8 @@ html {
 	--light-green: #c2ffb0;
 	--green: #36c20c;
 	--dark-green: #0e3b00;
-	background: var(--light-green);
+	--off-white: #f0ede6;
+	background: var(--off-white);
 	color: var(--dark-green);
 	font-weight: 500;
 	font-family: news-gothic-std, sans-serif;
@@ -25,7 +26,7 @@ p {
 h1 {
 	color: var(--light-green);
 	text-transform: uppercase;
-	font-size: 72pt;
+	font-size: 36px;
 	text-align: center;
 	-webkit-text-stroke: 3px var(--green);
 	text-stroke: 3px var(--green);
@@ -39,7 +40,6 @@ h1 {
 }
 
 h4 {
-	border-bottom: 1px solid var(--light-green);
 	margin-top: -.05em;
 	margin-bottom: .25em;
 	font-weight: 400;
@@ -118,29 +118,17 @@ form {
 	margin-bottom: 0;
 }
 
-.form-group {
-	padding-top: .5em;
-	padding-bottom: .5em;
-	border-bottom: 2px solid var(--green);
-	overflow: auto;
-}
-
-.form-group:first-child {
-	border-top: 2px solid var(--green);
-}
-
-.form-group input:not(#photo), .form-group textarea{
-	float: right;
-}
 
 #upload {
-	background: var(--green);
+	border: 3px dashed var(--green);
 	padding: 1em;
+	margin-top: 1em;
 }
 
 #upload input {
-	background: var(--green);
-	border: 1px dashed var(--dark-green);
+	border: none;
+	background-color: var(--off-white);
+	color: var(--dark-green);
 }
 
 #upload input::placeholder {
@@ -168,13 +156,6 @@ form {
 	#entries {
 		width: 90vw;
 		margin: auto;
-	}
-
-	#upload {
-		position: fixed;
-		bottom: 3em;
-		left: .5em;
-		width: calc(30vw - 2.5em);
 	}
 }
 
