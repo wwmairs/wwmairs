@@ -1,6 +1,6 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
+import { Sequelize, DataTypes, Model } from "sequelize";
 
-module.exports = (sequelize) => {
+const exports = (sequelize) => {
 	const Photo = sequelize.define("Photo", {
 		id: {
 			type: DataTypes.UUID,
@@ -23,3 +23,5 @@ module.exports = (sequelize) => {
 	
 	return Photo;
 };
+
+export default exports;

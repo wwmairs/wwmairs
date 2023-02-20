@@ -1,8 +1,10 @@
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
-const sequelize = require("../sequelize");
+import multer from "multer";
+import sequelize from "../sequelize/index.js";
 
-const { onlyWill } = require("../middleware.js");
+import onlyWill from "../middleware.js";
+
+const upload = multer({ dest: "uploads/" });
+
 
 function getEntryByID(req, res) {
 	fetchWithPhotosByID(req.params.id)
@@ -24,10 +26,13 @@ function fetchWithPhotosByID(id) {
 }
 
 function getEntries(req, res) {
-	sequelize.models.PortfolioEntry.findAll({ include: sequelize.models.Photo,
-																						order: [["date", "DESC"]] })
+	sequelize.models.PortfolioEntry.findAll({ 
+		include: sequelize.models.Photo,
+		order: [["date", "DESC"]] })
 		.then((entries) => {
-			res.render("entry/all", { entries: entries, upload: req.session.isWill });
+			res.render("entry/all", { entries: entries, 
+																upload: req.session.isWill,
+																noMenu: true });
 		});
 }
 
@@ -88,7 +93,8 @@ function defineRoutes(app) {
 
 	app.get("/entry/:id", getEntryByID);
 	
-	app.get("/entries", getEntries);
+	app.get("/", getEntries);
+	// app.get("/entries", getEntries);
 	
 	app.post("/entry/save", onlyWill, upload.array("photo"), saveEntry);
 	
@@ -100,4 +106,5 @@ function defineRoutes(app) {
 
 }
 
-module.exports = defineRoutes;
+
+export default defineRoutes;

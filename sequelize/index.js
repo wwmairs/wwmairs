@@ -1,15 +1,16 @@
-const { Sequelize } = require("sequelize");
-const { associateModels } = require("./associations.js");
+import Sequelize from "sequelize";
+import associateModels from "./associations.js";
+
+import Photo from "./models/Photo.js";
+import PortfolioEntry from "./models/PortfolioEntry.js";
+
 
 const sequelize = new Sequelize({
 	dialect: "sqlite",
 	storage: "../prod.db"
 });
 
-const modelDefiners = [
-	require("./models/Photo.js"),
-	require("./models/PortfolioEntry.js")
-];
+const modelDefiners = [ Photo, PortfolioEntry];
 
 for (const definer of modelDefiners) {
 	definer(sequelize);
@@ -17,4 +18,4 @@ for (const definer of modelDefiners) {
 
 associateModels(sequelize);
 
-module.exports = sequelize;
+export default sequelize;

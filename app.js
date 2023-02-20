@@ -1,10 +1,11 @@
 #!/usr/bin/env nodejs
 
-const express 	 = require("express");
-const session 	 = require("express-session");
+import express from "express";
+import session from "express-session";
+import loadRoutes from "./routes/index.js";
 
 const app = express();
-const loadRoutes = require("./routes");
+//const loadRoutes = require("./routes");
 
 const port = 8080;
 
@@ -35,11 +36,13 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get("/", (req, res) => {
-	res.render("index");
-});
 
 loadRoutes(app);
+
+
+// app.get("/", (req, res) => {
+// 	res.render("index", {"noMenu": true});
+// });
 
 app.listen(port, () => {
 	console.log(`Listening on ${port}`);

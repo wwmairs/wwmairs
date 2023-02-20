@@ -1,11 +1,17 @@
+
+import portfolioEntries from "./portfolioentries.js";
+import login from "./login.js";
+
 const routeLoaders = [
-	require("./portfolioentries.js"),
-	require("./login.js")
+	portfolioEntries,
+	login
 ];
 
-module.exports = (app) => {
-	for (loadRoutes of routeLoaders) {
+const exports = (app) => {
+	for (var loadRoutes of routeLoaders) {
 		loadRoutes(app);
 	}
 
 }
+
+export default exports;

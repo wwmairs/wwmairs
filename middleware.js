@@ -7,6 +7,5 @@ function redirectIfNotWill(req, res, next) {
 	}
 }
 
-module.exports = {
-	onlyWill: redirectIfNotWill
-};
+
+export default redirectIfNotWill;

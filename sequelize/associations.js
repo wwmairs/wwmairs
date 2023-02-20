@@ -4,4 +4,4 @@ function associateModels(sequelize) {
 	PortfolioEntry.hasMany(Photo);
 }
 
-module.exports = { associateModels };
+export default associateModels;
