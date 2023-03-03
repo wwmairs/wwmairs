@@ -5,16 +5,22 @@ html {
 	--green: #36c20c;
 	--dark-green: #0e3b00;
 	--off-white: #f0ede6;
+	--blue: #1520ed;
+	--yellow: #fcd41e;
+	--red: #f23524;
 	background: var(--off-white);
 	color: var(--dark-green);
-	font-weight: 500;
+	font-weight: 800;
 	font-family: news-gothic-std, sans-serif;
+	letter-spacing: .25em;
+	margin-left: 15vw;
+	font-size: 20px;
+	text-transform: uppercase;
 }
 
 a {
-	color: var(--green);
+	color: var(--dark-green);
 	text-decoration: none;
-	font-weight: 400;
 }
 
 p {
@@ -42,11 +48,23 @@ h1 {
 h4 {
 	margin-top: -.05em;
 	margin-bottom: .25em;
-	font-weight: 400;
+	border-bottom: 3px dashed var(--dark-green);
+}
+
+#name {
+	border: 3px dashed var(--red);
+	color: var(--blue);
+	padding: 1em;
+	padding-left: 1.5em;
+	padding-right: 1.75em;
+	text-align: right;
+	display: inline-block;
+	float: right;
+	letter-spacing: 1em;
 }
 
 button{
-	border: 1.5px solid var(--dark-green);
+	border: 3px dashed var(--dark-green);
 	border-radius: 0;
 	background: var(--green);
 	color: var(--dark-green);
@@ -93,10 +111,13 @@ button{
 
 .entry {
 	margin-bottom: 50vh;
+	display: inline-block;
 }
 
 .entry-description {
-	padding-top: .25em;
+	border: 3px dashed var(--yellow);
+	padding: 1em;
+	height: max-content;
 }
 
 .entry-photos img {
@@ -151,11 +172,6 @@ form {
 		display: grid;
 		grid-template-columns: 1fr 5fr;
 		grid-gap: 1em;
-	}
-	
-	#entries {
-		width: 90vw;
-		margin: auto;
 	}
 }
 
