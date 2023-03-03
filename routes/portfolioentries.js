@@ -70,7 +70,7 @@ function saveEntry(req, res) {
 		// if match, update
 		// else just create
 	}
-	res.redirect("/entries");
+	res.redirect("/");
 }
 
 function extractPhotosIfAny(req) {

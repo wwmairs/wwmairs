@@ -1,5 +1,5 @@
 block content
-	form(action="/upload" method="post" enctype="multipart/form-data")
+	form(action="/entry/save" method="post" enctype="multipart/form-data")
 		table
 			tr
 				th
@@ -28,4 +28,5 @@ block content
 					input(type="file" multiple="multiple" id="photo" name="photo")
 			tr
 				th
+				td
 					button(type="submit") Upload!
