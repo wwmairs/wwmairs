@@ -6,7 +6,7 @@ import loadRoutes from "./routes/index.js";
 
 const app = express();
 
-const port = 8080;
+const port = 80;
 
 // sequelize.sync({ alter: true});
 
