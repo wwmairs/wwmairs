@@ -8,7 +8,6 @@ import associateModels from "./associations.js";
 import Photo from "./models/Photo.js";
 import PortfolioEntry from "./models/PortfolioEntry.js";
 
-console.log(process.env)
 
 const sequelize = new Sequelize({
 	dialect: "sqlite",
