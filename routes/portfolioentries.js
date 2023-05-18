@@ -1,12 +1,12 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import multer from "multer";
 import sequelize from "../sequelize/index.js";
 
 import onlyWill from "../middleware.js";
-import getJSON from "../helpers.js";
 
-var photoPath = getJSON("secrets.json").photo_path;
-
-const upload = multer({ dest: photoPath });
+const upload = multer({ dest: process.env.PHOTO_PATH });
 
 
 function getEntryByID(req, res) {

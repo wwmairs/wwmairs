@@ -1,5 +1,6 @@
 #!/usr/bin/env nodejs
 
+import dotenv from "dotenv";
 import express from "express";
 import session from "express-session";
 import loadRoutes from "./routes/index.js";
@@ -7,6 +8,8 @@ import loadRoutes from "./routes/index.js";
 const app = express();
 
 const port = 80;
+
+dotenv.config();
 
 app.set("view engine", "pug");
 

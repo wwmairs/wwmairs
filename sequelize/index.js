@@ -1,22 +1,23 @@
+import * as dotenv from "dotenv";
+
+dotenv.config();
+
 import Sequelize from "sequelize";
 import associateModels from "./associations.js";
 
 import Photo from "./models/Photo.js";
 import PortfolioEntry from "./models/PortfolioEntry.js";
-import getJSON from "../helpers.js"
 
-const sqlitePath = getJSON("secrets.json").sqlite_path;
-
+console.log(process.env)
 
 const sequelize = new Sequelize({
 	dialect: "sqlite",
-	storage: sqlitePath
+	storage: process.env.SQLITE_PATH 
 });
 
 const modelDefiners = [ Photo, PortfolioEntry];
 
 for (const definer of modelDefiners) {
-    console.log(sqlitePath);
 	definer(sequelize);
 }
 

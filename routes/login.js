@@ -1,7 +1,7 @@
-import onlyWill from "../middleware.js";
-import getJSON from "../helpers.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-import fs from 'node:fs';
+import onlyWill from "../middleware.js";
 
 function defineRoutes(app) {
 
@@ -34,11 +34,8 @@ function defineRoutes(app) {
 
 function authenticate(proof, fn) {
 	// check if it's me!
-
-    var data = getJSON("passwords.json")
-    var password = data.will;
 	    
-    if (proof == password) {
+    if (proof == process.env.WILLS_PW) {
     	fn(false, true);
     } else {
     	fn(null, null);
