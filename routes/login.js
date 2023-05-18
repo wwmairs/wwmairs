@@ -1,4 +1,5 @@
 import onlyWill from "../middleware.js";
+import getJSON from "../helpers.js";
 
 import fs from 'node:fs';
 
@@ -33,22 +34,16 @@ function defineRoutes(app) {
 
 function authenticate(proof, fn) {
 	// check if it's me!
-	fs.readFile("passwords.json", "utf8", (err, data) => {
 
-		if (err) {
-			console.error(err);
-			return;
-		}
-
-		var password = JSON.parse(data).will
+    var data = getJSON("passwords.json")
+    var password = data.will;
+	    
+    if (proof == password) {
+    	fn(false, true);
+    } else {
+    	fn(null, null);
+    }
 	
-		if (proof == password) {
-			fn(false, true);
-		} else {
-			fn(null, null);
-		}
-	
-	});
 }
 
 

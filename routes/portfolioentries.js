@@ -2,8 +2,11 @@ import multer from "multer";
 import sequelize from "../sequelize/index.js";
 
 import onlyWill from "../middleware.js";
+import getJSON from "../helpers.js";
 
-const upload = multer({ dest: "uploads/" });
+var photoPath = getJSON("secrets.json").photo_path;
+
+const upload = multer({ dest: photoPath });
 
 
 function getEntryByID(req, res) {
