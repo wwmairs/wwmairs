@@ -8,8 +8,6 @@ const app = express();
 
 const port = 80;
 
-// sequelize.sync({ alter: true});
-
 app.set("view engine", "pug");
 
 app.use("/archive", express.static("../wwmairs"));
