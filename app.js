@@ -46,5 +46,5 @@ loadRoutes(app);
 // });
 
 app.listen(port, ip, () => {
-	console.log(`Listening on ${port}`);
+	console.log(`Listening on ${ip}:${port}`);
 });
