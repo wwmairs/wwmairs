@@ -2,11 +2,14 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import multer from "multer";
-import sequelize from "../sequelize/index.js";
+import db from "../models/index.js";
 
 import onlyWill from "../middleware.js";
 
 const upload = multer({ dest: process.env.PHOTO_PATH });
+
+const Photo = db.sequelize.models.Photo;
+const PortfolioEntry = db.sequelize.models.PortfolioEntry;
 
 
 function getEntryByID(req, res) {
@@ -24,18 +27,18 @@ function edit(req, res) {
 }
 
 function fetchWithPhotosByID(id) {
-	return sequelize.models.PortfolioEntry.findOne({ where: { id: id},
-						          									  				 include: sequelize.models.Photo });
+	return PortfolioEntry.findOne({ where: { id: id},
+						       	    include: Photo });
 }
 
 function getEntries(req, res) {
-	sequelize.models.PortfolioEntry.findAll({ 
-		include: sequelize.models.Photo,
+	PortfolioEntry.findAll({ 
+		include: Photo,
 		order: [["date", "DESC"]] })
 		.then((entries) => {
 			res.render("entry/all", { entries: entries, 
-																upload: req.session.isWill,
-																noMenu: true });
+									  upload: req.session.isWill,
+									  noMenu: true });
 		});
 }
 
@@ -49,20 +52,20 @@ function saveEntry(req, res) {
 	};
 
 	var includePhotos = {
-		include: [sequelize.models.Photo]
+		include: Photo
 	}
 
 	if (!req.body.id) {
-		sequelize.models.PortfolioEntry.create(portfolioEntry, includePhotos);
+		PortfolioEntry.create(portfolioEntry, includePhotos);
 	} else {
 		var filter = {
 			where: {
 				id: req.body.id
 			}, 
-			include: [sequelize.models.Photo]
+			include: [Photo]
 		};
 
-		sequelize.models.PortfolioEntry.findOne(filter).then((oldEntry) => {
+		PortfolioEntry.findOne(filter).then((oldEntry) => {
 			if (oldEntry) {
 				oldEntry.update(portfolioEntry, includePhotos);
 			} else {
@@ -97,7 +100,6 @@ function defineRoutes(app) {
 	app.get("/entry/:id", getEntryByID);
 	
 	app.get("/", getEntries);
-	// app.get("/entries", getEntries);
 	
 	app.post("/entry/save", onlyWill, upload.array("photo"), saveEntry);
 	

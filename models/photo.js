@@ -11,10 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Photo.belongsToMany(models.PortfolioEntry, { through: "PortfolioEntryPhotos"});
     }
   }
   Photo.init({
-    id: DataTypes.UUIDV4,
+    id: { type: DataTypes.UUIDV4, primaryKey: true },
     filename: DataTypes.STRING,
     originalname: DataTypes.STRING,
     path: DataTypes.STRING

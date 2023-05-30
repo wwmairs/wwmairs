@@ -34,7 +34,6 @@ function defineRoutes(app) {
 
 function authenticate(proof, fn) {
 	// check if it's me!
-	    
     if (proof == process.env.WILLS_PW) {
     	fn(false, true);
     } else {

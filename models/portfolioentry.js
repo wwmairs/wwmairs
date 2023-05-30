@@ -11,13 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      PortfolioEntry.hasMany(models.Photo, {
-          forgeignKey: "id",
-      })
+      PortfolioEntry.belongsToMany(models.Photo, { through: "PortfolioEntryPhotos" });
     }
   }
   PortfolioEntry.init({
-    id: DataTypes.UUIDV4,
+    id: { type: DataTypes.UUIDV4, primaryKey: true },
     name: DataTypes.STRING,
     date: DataTypes.DATE,
     description: DataTypes.STRING,
