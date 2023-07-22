@@ -15,6 +15,7 @@ block content
                     .entry-photos
                         if entry.Photos.length
                             - var photo = entry.Photos[0];
-                            - var data = "data:" + photo.mimetype + ";base64" + photo.bytes;
+                            - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
                             img(src=data)
+                            p #{photo.encoding}
                 

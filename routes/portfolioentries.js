@@ -37,8 +37,6 @@ function getEntries(req, res) {
 		include: Photo,
 		order: [["date", "DESC"]] })
 		.then((entries) => {
-            if (entries.Photos && entries.Photos.length) {
-            }
 			res.render("entry/all", { entries: entries, 
 									  upload: req.session.isWill,
 									  noMenu: true });
@@ -92,14 +90,13 @@ function extractPhotosIfAny(req) {
                 id: uuidv4(),
 				name: file.originalname,
 				originalname: file.originalname,
-                bytes: Buffer.from(file.buffer).toString("base64"),
+                bytes: Buffer.from(file.buffer).toString("base64", file.encoding),
                 encoding: file.encoding,
                 mimetype: file.mimetype,
                 size: file.size
 			});
 		});
 	}
-    console.log(photos);
 
 	return photos;
 }
