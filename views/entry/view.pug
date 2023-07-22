@@ -8,8 +8,11 @@ block content
 				- var date = new Date(entry.date)
 				span.date= `${date.getMonth() + 1}/${date.getFullYear()}`
 		.entry-photos
-			each photo in entry.Photos
-				- var path = "../uploads/" + photo.filename;
-				img(src=path style="max-width: 90vw")
+			each photo in entry.photos
+				- var data = "data:" + photo.mimetype + ";" + photo.encoding + photo.bytes;
+				img(src=data style="max-width: 90vw")
+                p #{photo.filename}
+                p hi
+
 
 

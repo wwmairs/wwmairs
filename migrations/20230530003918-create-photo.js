@@ -5,21 +5,29 @@ module.exports = {
     await queryInterface.createTable('Photos', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      id: {
         type: Sequelize.UUIDV4
       },
-      filename: {
+      portfolioEntryId: {
+          type: Sequelize.UUIDV4
+      },
+      name: {
         type: Sequelize.STRING
       },
       originalname: {
         type: Sequelize.STRING
       },
-      path: {
+      bytes: {
+        type: Sequelize.BLOB
+      },
+      encoding: {
         type: Sequelize.STRING
+      },
+      mimetype: {
+        type: Sequelize.STRING
+      },
+      size: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -11,14 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Photo.belongsToMany(models.PortfolioEntry, { through: "PortfolioEntryPhotos"});
+      Photo.belongsTo(models.PortfolioEntry, { 
+          foreignKey: "portfolioEntryId",
+          onDelete: "CASCADE",
+      });
     }
   }
   Photo.init({
     id: { type: DataTypes.UUIDV4, primaryKey: true },
-    filename: DataTypes.STRING,
+    name: DataTypes.STRING,
     originalname: DataTypes.STRING,
-    path: DataTypes.STRING
+    bytes: DataTypes.BLOB,
+    encoding: DataTypes.STRING,
+    mimetype: DataTypes.STRING,
+    size: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Photo',

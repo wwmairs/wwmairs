@@ -1,18 +1,20 @@
 extends ../layout.pug 
 
 block content
-	if upload
-		#upload
-			include create.pug
-	#entries
-			each entry in entries
-				.entry
-					.entry-description
-						h4
-							- var url = "/entry/" + entry.id;
-							a(href=url) #{entry.name}
-						p #{entry.description}
-					.entry-photos
-						if entry.Photos.length
-							img(src=entry.Photos[0].path)
-				
+    if upload
+        #upload
+            include create.pug
+    #entries
+            each entry in entries
+                .entry
+                    .entry-description
+                        h4
+                            - var url = "/entry/" + entry.id;
+                            a(href=url) #{entry.name}
+                        p #{entry.description}
+                    .entry-photos
+                        if entry.Photos.length
+                            - var photo = entry.Photos[0];
+                            - var data = "data:" + photo.mimetype + ";base64" + photo.bytes;
+                            img(src=data)
+                

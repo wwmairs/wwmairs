@@ -1,12 +1,13 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
+import { v4 as uuidv4 } from "uuid";
 import multer from "multer";
 import db from "../models/index.js";
 
 import onlyWill from "../middleware.js";
 
-const upload = multer({ dest: process.env.PHOTO_PATH });
+const upload = multer();
 
 const Photo = db.sequelize.models.Photo;
 const PortfolioEntry = db.sequelize.models.PortfolioEntry;
@@ -36,6 +37,8 @@ function getEntries(req, res) {
 		include: Photo,
 		order: [["date", "DESC"]] })
 		.then((entries) => {
+            if (entries.Photos && entries.Photos.length) {
+            }
 			res.render("entry/all", { entries: entries, 
 									  upload: req.session.isWill,
 									  noMenu: true });
@@ -44,6 +47,7 @@ function getEntries(req, res) {
 
 function saveEntry(req, res) {
 	var portfolioEntry = {
+        id: uuidv4(),
 		name: req.body.name,
 		date: req.body.date,
 		description: req.body.description,
@@ -85,12 +89,17 @@ function extractPhotosIfAny(req) {
 	if (req.files) {
 		req.files.map(file => {
 			photos.push({
-				filename: file.filename,
+                id: uuidv4(),
+				name: file.originalname,
 				originalname: file.originalname,
-				path: file.path
+                bytes: Buffer.from(file.buffer).toString("base64"),
+                encoding: file.encoding,
+                mimetype: file.mimetype,
+                size: file.size
 			});
 		});
 	}
+    console.log(photos);
 
 	return photos;
 }

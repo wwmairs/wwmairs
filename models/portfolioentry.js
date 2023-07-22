@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      PortfolioEntry.belongsToMany(models.Photo, { through: "PortfolioEntryPhotos" });
+      PortfolioEntry.hasMany(models.Photo, { 
+          foreignKey: "portfolioEntryId",
+      });
     }
   }
   PortfolioEntry.init({
