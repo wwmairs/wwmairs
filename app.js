@@ -8,7 +8,6 @@ import loadRoutes from "./routes/index.js";
 const app = express();
 
 const port = 80;
-const ip = "0.0.0.0";
 
 dotenv.config();
 
@@ -45,6 +44,6 @@ loadRoutes(app);
 // 	res.render("index", {"noMenu": true});
 // });
 
-app.listen(port, ip, () => {
-	console.log(`Listening on ${ip}:${port}`);
+app.listen(port, () => {
+	console.log(`Listening on ${port}`);
 });
