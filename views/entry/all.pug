@@ -7,15 +7,9 @@ block content
     #entries
             each entry in entries
                 .entry
-                    .entry-description
-                        h4
-                            - var url = "/entry/" + entry.id;
-                            a(href=url) #{entry.name}
-                        p #{entry.description}
-                    .entry-photos
+                    a(href=url name=entry.name)
                         if entry.Photos.length
-                            - var photo = entry.Photos[0];
-                            - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
-                            img(src=data)
-                            p #{photo.encoding}
+                          - var photo = entry.Photos[0];
+                          - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
+                          img(src=data style="height: calc(100vh - 4em)")
                 

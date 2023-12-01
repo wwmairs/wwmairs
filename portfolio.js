@@ -7,7 +7,7 @@ import loadRoutes from "./routes/index.js";
 
 const app = express();
 
-const port = 80;
+const port = 8080;
 
 dotenv.config();
 
