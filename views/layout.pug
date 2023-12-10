@@ -1,22 +1,25 @@
 doctype html
 html
-	head
-	title WWMAIRS
-	meta(name="viewport" content="width=device-width, initial-scale=1.0")
-	block scripts
-		script(src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js" 
-					 integrity="sha512-rCZdHNB0AePry6kAnKAVFMRfWPmUXSo+/vlGtrOUvhsxD0Punm/xWbEh+8vppPIOzKB9xnk42yCRZ5MD/jvvjQ==" 
-					 crossorigin="anonymous"
-					 referrerpolicy="no-referrer")
-		link(href="/public/style.css" rel="stylesheet")
-		link(rel="stylesheet" href="https://use.typekit.net/gjr2olc.css")
-	body
+    head
+    title WWMAIRS
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    block scripts
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js" 
+                     integrity="sha512-rCZdHNB0AePry6kAnKAVFMRfWPmUXSo+/vlGtrOUvhsxD0Punm/xWbEh+8vppPIOzKB9xnk42yCRZ5MD/jvvjQ==" 
+                     crossorigin="anonymous"
+                     referrerpolicy="no-referrer")
+        link(href="/public/style.css" rel="stylesheet")
+        link(rel="stylesheet" href="https://use.typekit.net/gjr2olc.css")
+    body
 
-		// div.border
-		// h1 wwmairs
-		// div.border
+        // div.border
+        // h1 wwmairs
+        // div.border
 
-		#name 
-			h4 wwmairs
+        #sidebar
+            #name 
+                h4 
+                    a(href="/") 
+                        span +--wwmairs--+
 
-		block content
+        block content

@@ -13,7 +13,10 @@ const Photo = db.sequelize.models.Photo;
 const PortfolioEntry = db.sequelize.models.PortfolioEntry;
 
 
-function getEntryByID(req, res) {
+function view(req, res) {
+    if (req.session.isWill) {
+        edit(req, res);
+    }
 	fetchWithPhotosByID(req.params.id)
 		.then(portfolioEntry => {
 			res.render("entry/view", { entry: portfolioEntry });
@@ -103,7 +106,7 @@ function extractPhotosIfAny(req) {
 
 function defineRoutes(app) {
 
-	app.get("/entry/:id", getEntryByID);
+	app.get("/entry/:id", view);
 	
 	app.get("/", getEntries);
 	
@@ -113,7 +116,7 @@ function defineRoutes(app) {
 		res.render("entry/create");
 	});
 
-	app.get("/entry/edit/:id", edit);
+	app.get("/entry/edit/:id", onlyWill, edit);
 
 }
 

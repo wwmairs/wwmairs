@@ -17,171 +17,20 @@ html {
 	
 }
 
-body {
-	margin: 2em;
-	display: grid; 
-	grid-gap: 2em;
-	height: calc(100vh - 4em);
-}
-
 a {
-	color: var(--black);
-	text-decoration: none;
+    text-decoration: none;
+    color: initial;
 }
 
-p {
-	margin-top: .125em;
-	margin-bottom: .25em;
-	font-size: 10pt;
-}
-
-h1 {
-	color: var(---black);
-	text-transform: uppercase;
-	font-size: 36px;
-	text-align: center;
-	-webkit-text-stroke: 3px var(--black);
-	text-stroke: 3px var(--black);
-	margin-top: 12pt;
-	margin-bottom: 10pt;
-}
-
-h4 {
-	margin-top: 0;
-	margin-bottom: .25em;
-}
-
-h5 {
-	margin: 0;
-	font-style: normal;
-}
-
-hr {
-	border-bottom: 2px solid var(--black);
-	width: 1em;
-	margin-right: 0;
-}
-
-#name h4 {
-	font-style: normal;
-	color: var(--black);
-}
-
-button{
-	border: 3px dashed var(--dark-green);
-	border-radius: 0;
-	background: var(--black);
-	color: var(--dark-green);
-	font-size: 1em;
-	text-transform: uppercase;
-}
-
-/***********
- * entries *
- ***********/
-
-.entry {
-	display: inline-block;
-	margin-bottom: 2em;
-}
-
-.entry-description {
-	padding-top: 1em;
-	height: max-content;
-	text-align: right;
-}
-
-.entry a {
-	display: block;
-}
-
-.entry img {
-	padding-top: 1em;
-}
-
-.date {
-	font-size: 12;
-	text-align: right;
-	display: block;
-}
-
-/**********
- * upload *
- **********/
-
-form {
-	margin-bottom: 0;
-}
-
-
-#upload {
-	border: 3px dashed var(--black);
-	padding: 1em;
-	display: inline-block;
-}
-
-#upload td {
-	float: right;
-}
-
-#upload th {
-	text-align: left;
-}
-
-#upload tr:not(:last-child) > th {
-	border-bottom: 2px dashed var(--black);
-	border-right: 2px dashed var(--black);
-}
-
-#upload input {
-	border: none;
-	background-color: var(--off-white);
-	color: var(--dark-green);
-}
-
-#upload input::placeholder {
-	color: var(--black);
-}
-
-#upload input[type=date] {
-	color: var(--black);
-}
-
-#upload input[type=file] {
-	margin-top: .125em;
-	width: 100%;
-	display: block;
-}
-
-
-@media (min-width: 750px) {
-	body {
-		grid-template-columns: 150px 1fr;
-		grid-gap: 2em;
-	}
-
-	#entries {
-		padding-top: 0;
-		grid-column: 2 / 3;
-		overflow-x: scroll;
-		white-space: nowrap;
-	}
-
-	.entry {
-		margin-bottom: 0;
-	}
-
-	.entry img {
-		padding-right: 1em;
-		padding-top: 0;
-	}
+body {
+    margin: 2em;
+    display: grid;
 
 }
 
-/*********
- * index *
- *********/
+@media (min-width: 720px) {
+    body {
+        grid-template-columns: 200px 1fr;
+    }
 
-.p5canvas {
-	width: 100%;
 }

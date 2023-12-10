@@ -5,11 +5,12 @@ block content
         #upload
             include create.pug
     #entries
-            each entry in entries
-                .entry
+        each entry in entries
+            .entry
+                if entry.Photos.length
+                    - var photo = entry.Photos[0];
+                    - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
+                    - var url = "/entry/" + entry.id;
                     a(href=url name=entry.name)
-                        if entry.Photos.length
-                          - var photo = entry.Photos[0];
-                          - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
-                          img(src=data style="height: calc(100vh - 4em)")
+                        img(src=data style="height: calc(100vh - 4em)")
                 
