@@ -1,18 +1,19 @@
 extends ../layout.pug
 
 block content
-    .entry
-        .entry-description
-            h4 #{entry.name}
-            p #{entry.description}
-                - var date = new Date(entry.date)
-                span.date= `${date.getMonth() + 1}/${date.getFullYear()}`
-        .entry-photos
-            if entry.Photos.length
-                each photo in entry.Photos
-                    - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
-                    img(src=data style="max-width: 90vw")
-                    p #{photo.filename}
+    .content
+        .entry
+            .entry-description
+                h4 #{entry.name}
+                p #{entry.description}
+                    - var date = new Date(entry.date)
+                    span.date= `${date.getMonth() + 1}/${date.getFullYear()}`
+            .entry-photos
+                if entry.Photos.length
+                    each photo in entry.Photos
+                        - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
+                        img.entry-img(src=data style="max-width: 90vw")
+                        p #{photo.filename}
 
 
 

@@ -17,6 +17,10 @@ html {
 	
 }
 
+#name {
+    text-transform: uppercase;
+}
+
 a {
     text-decoration: none;
     color: initial;
@@ -26,6 +30,30 @@ body {
     margin: 2em;
     display: grid;
 
+}
+
+.content {
+    overflow: scroll;
+    height: calc(100vh - 4em);
+}
+
+.entry-img {
+    margin-bottom: 6em;
+    width: 100%
+}
+
+form {
+    border: .125em solid black;
+    box-shadow: 10px 10px black;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    padding: 1em;
+    width: max-content;
+
+}
+
+.form-group {
+    margin-bottom: .5em;
 }
 
 @media (min-width: 720px) {

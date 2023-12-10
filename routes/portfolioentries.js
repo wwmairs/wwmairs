@@ -14,12 +14,9 @@ const PortfolioEntry = db.sequelize.models.PortfolioEntry;
 
 
 function view(req, res) {
-    if (req.session.isWill) {
-        edit(req, res);
-    }
 	fetchWithPhotosByID(req.params.id)
 		.then(portfolioEntry => {
-			res.render("entry/view", { entry: portfolioEntry });
+			res.render(req.session.isWill ? "entry/edit" : "entry/view", { entry: portfolioEntry });
 		});
 }
 
