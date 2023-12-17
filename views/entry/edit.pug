@@ -2,7 +2,7 @@ extends ../layout.pug
 
 block content
     .content
-        form(action="/save" method="post" enctype="multipart/form-data")
+        form(action="/entry/save" method="post" enctype="multipart/form-data")
             .form-group
                 label(for="name") Name
                 input(type="text" id="name" name="name" 

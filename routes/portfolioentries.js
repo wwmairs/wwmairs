@@ -57,6 +57,8 @@ function saveEntry(req, res) {
 		include: Photo
 	}
 
+    console.log(portfolioEntry);
+
 	if (!req.body.id) {
 		PortfolioEntry.create(portfolioEntry, includePhotos);
 	} else {
