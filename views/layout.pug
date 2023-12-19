@@ -11,15 +11,14 @@ html
         link(href="/public/style.css" rel="stylesheet")
         link(rel="stylesheet" href="https://use.typekit.net/gjr2olc.css")
     body
-
-        // div.border
-        // h1 wwmairs
-        // div.border
-
-        #sidebar
-            #name 
+        #menu
+            #name.round-border 
                 h4 
-                    a(href="/") 
-                        span +--wwmairs--+
-
+                    a(href="/") wwmairs
+            a#menu-button.round-border(onclick="document.getElementById('menu-links').classList.toggle('hidden')")
+                        | ~
+            #menu-links.round-border.hidden
+                ul
+                    li
+                        a(href="/about") about
         block content

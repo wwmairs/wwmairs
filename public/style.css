@@ -1,37 +1,84 @@
 html {
 	font-feature-settings: "kern" 1;
 	font-kerning: normal;
-	--light-green: #c2ffb0;
-	--green: #36c20c;
-	--dark-green: #0e3b00;
+    --hunter-green: #407060;
+    --green: #00a95c;
+    --sky: #4982cf;
+    --crimson: #e45d50;
+    --melon: #ffae3b;
 	--off-white: #f0ede6;
-	--blue: #1520ed;
-	--yellow: #fcd41e;
-	--red: #f23524;
+    --midnight: #435060;
 	--black: #000000;
 	color: var(--black);
 	font-size: 12pt;
 	font-family: ocr-a-std, monospace;
-	font-weight: 400;
+	font-weight: 100;
 	font-style: italic;
-	
+}
+
+#menu {
+    background-color: white;;
+    display: inline-block;
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    padding: 1em;
+    border: 1px solid var(--midnight);
+    border-radius: .5em;
 }
 
 #name {
     text-transform: uppercase;
+    letter-spacing: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    display: inline-block;
+}
+
+.round-border {
+    border: 1px solid black;
+    border-radius: 2em;
+}
+
+#name h4 {
+    padding-left: 1em;
+}
+
+#menu-button {
+    margin-left: .5em;
+    padding: .5em;
+    position: relative;
+    top: -.5em;
+}
+
+#menu-links {
+    margin-top: .5em;
+}
+
+#menu-links ul {
+    list-style-type: none;
+}
+
+#menu-links li ::before {
+    content: "+ ";
 }
 
 a {
     text-decoration: none;
-    color: initial;
+    color: black;
 }
 
 body {
-    margin: 2em;
+    margin: 1em;
+    margin-top: 9em;
+}
 
+h4 {
+    margin: 0;
 }
 
 .content {
+    margin-top: 5.25em;
     height: calc(100vh - 4em);
 }
 
@@ -64,4 +111,8 @@ form {
         grid-template-columns: 200px 1fr;
     }
 
+}
+
+.hidden {
+    display: none;
 }

@@ -12,7 +12,7 @@ block content
                 if entry.Photos.length
                     each photo in entry.Photos
                         - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
-                        img.entry-img(src=data style="max-width: 90vw")
+                        img.entry-img(src=data)
                         p #{photo.filename}
 
 
