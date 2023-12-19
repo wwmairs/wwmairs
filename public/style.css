@@ -11,9 +11,8 @@ html {
 	--black: #000000;
 	color: var(--black);
 	font-size: 12pt;
-	font-family: ocr-a-std, monospace;
-	font-weight: 100;
-	font-style: italic;
+    font-family: "ouma-latin-variable", sans-serif;
+    font-variation-settings: "wght" 300;
 }
 
 #menu {
@@ -93,8 +92,7 @@ h4 {
 }
 
 form {
-    border: .125em solid black;
-    box-shadow: 10px 10px black;
+    box-shadow: 2px 2px black;
     margin-top: 3em;
     margin-bottom: 3em;
     padding: 1em;

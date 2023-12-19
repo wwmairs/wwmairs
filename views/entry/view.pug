@@ -7,7 +7,7 @@ block content
                 h4 #{entry.name}
                 p #{entry.description}
                     - var date = new Date(entry.date)
-                    span.date= `${date.getMonth() + 1}/${date.getFullYear()}`
+                p.date= `${date.getMonth() + 1}/${date.getFullYear()}`
             .entry-photos
                 if entry.Photos.length
                     each photo in entry.Photos

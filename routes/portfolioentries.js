@@ -76,9 +76,6 @@ function saveEntry(req, res) {
 				throw new Error("no entry with that id to update");
 			}
 		});
-		// look for the id
-		// if match, update
-		// else just create
 	}
 	res.redirect("/");
 }
