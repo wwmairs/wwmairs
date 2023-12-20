@@ -6,13 +6,12 @@ import db from "../models/index.js";
 
 import onlyWill from "../middleware.js";
 
-
 const Tag = db.sequelize.models.Tag;
 
 
 function getTags(req, res) {
-    Tag.findall().then((tags) => {
-        res.render("tag/", {tags: tags});
+    Tag.findAll().then((tags) => {
+        res.render("tag/edit", {tags: tags});
     });
 }
 
@@ -21,6 +20,7 @@ function saveTag(req, res) {
         id: uuidv4(),
 		name: req.body.name,
 	};
+    console.log(req.body);
 
 
 	if (!req.body.id) {
@@ -47,7 +47,7 @@ function defineRoutes(app) {
 
 	app.get("/tags", onlyWill, getTags);
 	
-	app.post("/tag/save", onlyWill, saveTag);
+	app.post("/tags/save", onlyWill, saveTag);
 }
 
 

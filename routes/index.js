@@ -1,7 +1,7 @@
 
 import portfolioEntries from "./portfolioentries.js";
 import login from "./login.js";
-import tag from "./tag.js";
+import tag from "./tags.js";
 
 const routeLoaders = [
 	portfolioEntries,
