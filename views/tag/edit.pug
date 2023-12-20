@@ -1,0 +1,16 @@
+extends ../layout.pug 
+
+block content
+    .content
+        #tags
+            each tag in tags
+                .tag
+                    span tag.name
+        form(action="/tag/save" method="post" enctype="multipart/form-data")
+            input(type="hidden" id="id" name="id" value=tag.id)
+            .form-group
+                label(for="name") Name
+                input(type="text" id="name" name="name"
+                      placeholder="tag name" required="required")
+            .form-group
+                button(type="submit") create tag ~

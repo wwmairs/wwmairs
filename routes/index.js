@@ -1,10 +1,12 @@
 
 import portfolioEntries from "./portfolioentries.js";
 import login from "./login.js";
+import tag from "./tag.js";
 
 const routeLoaders = [
 	portfolioEntries,
-	login
+	login,
+    tag
 ];
 
 const exports = (app) => {
