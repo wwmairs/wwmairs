@@ -25,8 +25,6 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('Item_Tags', {
-    // do this, will !
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Tags');
