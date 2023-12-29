@@ -1,0 +1,32 @@
+block content
+    form.round-border(action="/entry/save" method="post" enctype="multipart/form-data")
+        table
+            tr
+                th
+                    label(for="name") Name
+                td
+                    input(type="text" id="name" name="name" placeholder="name" required="required")
+            tr
+                th
+                    label(for="date") Date
+                td
+                    input(type="date" id="date" name="date" value=date)
+            tr
+                th
+                    label(for="link") Link
+                td
+                    input(type="text" id="link" name="link" placeholder="link")
+            tr
+                th
+                    label(for="description") Description
+                td
+                    input(type="textarea" id="description" name="description" placeholder="description")
+            tr
+                th
+                    label(for="photo") Photo
+                td
+                    input(type="file" multiple="multiple" id="photo" name="photo")
+            tr
+                th
+                td
+                    button(type="submit") Upload!

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: "portfolioEntryId",
       });
       PortfolioEntry.belongsToMany(models.Tag, {
-          through: "Item_Tags",
+          through: "PortfolioEntry_Tags",
       })
     }
   }

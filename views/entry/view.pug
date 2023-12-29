@@ -8,6 +8,9 @@ block content
                 p #{entry.description}
                     - var date = new Date(entry.date)
                 p.date= `${date.getMonth() + 1}/${date.getFullYear()}`
+                p.tags
+                    each tag in entry.Tags
+                        span #{tag.name}
             .entry-photos
                 if entry.Photos.length
                     each photo in entry.Photos

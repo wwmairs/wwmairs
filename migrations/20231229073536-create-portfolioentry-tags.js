@@ -2,18 +2,16 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Tags', {
-      id: {
+    await queryInterface.createTable('PortfolioEntry_Tags', {
+      PortfolioEntryId: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUIDV4,
       },
-      id: {
-        type: Sequelize.UUID
-      },
-      name: {
-        type: Sequelize.STRING
+      tagId: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.UUIDV4
       },
       createdAt: {
         allowNull: false,
@@ -24,11 +22,8 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
-
-    await queryInterface.createTable('Item_Tags', {
-    // do this, will !
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tags');
+    await queryInterface.dropTable('PortfolioEntry_Tags');
   }
 };

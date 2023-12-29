@@ -15,6 +15,9 @@ function getTags(req, res) {
     });
 }
 
+function findAllTags() {
+}
+
 function saveTag(req, res) {
 	var tag = {
         id: uuidv4(),

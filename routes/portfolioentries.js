@@ -11,35 +11,43 @@ const upload = multer();
 
 const Photo = db.sequelize.models.Photo;
 const PortfolioEntry = db.sequelize.models.PortfolioEntry;
+const Tag = db.sequelize.models.Tag;
 
 
 function view(req, res) {
 	fetchWithPhotosByID(req.params.id)
 		.then(portfolioEntry => {
-			res.render(req.session.isWill ? "entry/edit" : "entry/view", { entry: portfolioEntry });
+            Tag.findAll().then((tags) => {
+			    res.render(req.session.isWill ? "entry/edit" : "entry/view", { tags: tags, entry: portfolioEntry });
+            });
 		});
 }
 
 function edit(req, res) {
 	fetchWithPhotosByID(req.params.id)
 		.then(portfolioEntry => {
-			res.render("entry/edit", { entry: portfolioEntry });
+            Tag.findAll().then((tags) => {
+			    res.render("entry/edit", { tags: tags, entry: portfolioEntry });
+            });
 		});
 }
 
 function fetchWithPhotosByID(id) {
 	return PortfolioEntry.findOne({ where: { id: id},
-						       	    include: Photo });
+						       	    include: [Photo, Tag] });
 }
 
 function getEntries(req, res) {
 	PortfolioEntry.findAll({ 
-		include: Photo,
+		include: [Photo, Tag],
 		order: [["date", "DESC"]] })
 		.then((entries) => {
-			res.render("entry/all", { entries: entries, 
-									  upload: req.session.isWill,
-									  noMenu: true });
+            Tag.findAll().then((tags) => {
+			    res.render("entry/all", { tags: tags, 
+                                          entries: entries, 
+			    						  upload: req.session.isWill,
+			    						  noMenu: true });
+            });
 		});
 }
 
@@ -50,11 +58,12 @@ function saveEntry(req, res) {
 		date: req.body.date,
 		description: req.body.description,
 		link: req.body.link,
-		Photos: extractPhotosIfAny(req)
+		Photos: extractPhotosIfAny(req),
+        Tags: req.body.tags,
 	};
 
 	var includePhotos = {
-		include: Photo
+		include: [Photo, Tag]
 	}
 
     console.log(portfolioEntry);
@@ -66,7 +75,7 @@ function saveEntry(req, res) {
 			where: {
 				id: req.body.id
 			}, 
-			include: [Photo]
+			include: [Photo, Tag]
 		};
 
 		PortfolioEntry.findOne(filter).then((oldEntry) => {

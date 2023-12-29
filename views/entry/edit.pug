@@ -23,12 +23,17 @@ block content
             .form-group
                 label(for="photo") Photo
                 input(type="file" multiple="multiple" id="photo" name="photo")
+
+            .form-group
+                label(for="tags") Tags
+                select(name="tags" id="tags" multiple placeholder='select some tags')
+                    each tag in tags
+                        option(value=tag.id) #{tag.name}
             .form-group
                 button(type="submit") Upload!
 
         .entry-photos
         if entry.Photos.length
             each photo in entry.Photos
-                - var data = "data:" + photo.mimetyp + ";base64," + photo.bytes;
+                - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
                 img.entry-img(src=data)
-
