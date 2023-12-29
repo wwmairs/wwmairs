@@ -59,28 +59,30 @@ function saveEntry(req, res) {
 		description: req.body.description,
 		link: req.body.link,
 		Photos: extractPhotosIfAny(req),
-        Tags: req.body.tags,
 	};
 
-	var includePhotos = {
-		include: [Photo, Tag]
-	}
-
-    console.log(portfolioEntry);
-
 	if (!req.body.id) {
-		PortfolioEntry.create(portfolioEntry, includePhotos);
+		PortfolioEntry.create(portfolioEntry, {include: Photo});
+			// .then((entryInstance) => {
+			// 	entryInstance.setTags(req.body.tags);
+			// });
 	} else {
 		var filter = {
 			where: {
 				id: req.body.id
 			}, 
-			include: [Photo, Tag]
+			include: Photo
 		};
 
 		PortfolioEntry.findOne(filter).then((oldEntry) => {
 			if (oldEntry) {
-				oldEntry.update(portfolioEntry, includePhotos);
+				oldEntry.update(portfolioEntry, {include: Photo})
+					.then((entryInstance) => {
+						Tag.findAll({where: {id: req.body.tags}})
+							.then((tags) => { 
+								entryInstance.setTags(tags)
+							});
+					});
 			} else {
 				throw new Error("no entry with that id to update");
 			}

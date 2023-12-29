@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   PortfolioEntry_Tags.init({
     PortfolioEntryId: { type: DataTypes.UUIDV4, primaryKey: true },
-    tagId: { type: DataTypes.UUIDV4, primaryKey: true }
+    TagId: { type: DataTypes.UUIDV4, primaryKey: true }
   }, {
     sequelize,
     modelName: 'PortfolioEntry_Tags',
