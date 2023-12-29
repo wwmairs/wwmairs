@@ -67,28 +67,32 @@ function saveEntry(req, res) {
 			// 	entryInstance.setTags(req.body.tags);
 			// });
 	} else {
-		var filter = {
-			where: {
-				id: req.body.id
-			}, 
-			include: Photo
-		};
-
-		PortfolioEntry.findOne(filter).then((oldEntry) => {
+		PortfolioEntry.findOne({where: {id: req.body.id}})
+		.then((oldEntry) => {
 			if (oldEntry) {
-				oldEntry.update(portfolioEntry, {include: Photo})
-					.then((entryInstance) => {
-						Tag.findAll({where: {id: req.body.tags}})
-							.then((tags) => { 
-								entryInstance.setTags(tags)
-							});
+				oldEntry.update(portfolioEntry)
+				.then((entryInstance) => {
+					portfolioEntry.Photos.map((photo) => {
+						photo.portfolioEntryId = entryInstance.id;
+						Photo.create(photo)
 					});
+					updateAnyTagsOnEntry(req, entryInstance);
+				});
 			} else {
 				throw new Error("no entry with that id to update");
 			}
 		});
 	}
 	res.redirect("/");
+}
+
+function updateAnyTagsOnEntry(req, entry) {
+	if (req.body.tags) {
+		Tag.findAll({where: {id: req.body.tags}})
+		.then((tags) => { 
+			entryInstance.setTags(tags)
+		});
+	}
 }
 
 function extractPhotosIfAny(req) {
