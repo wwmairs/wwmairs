@@ -35,5 +35,4 @@ block content
         .entry-photos
         if entry.Photos.length
             each photo in entry.Photos
-                - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
-                img.entry-img(src=data)
+                img.entry-img(src="../" + photo.path)

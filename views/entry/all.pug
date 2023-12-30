@@ -4,14 +4,13 @@ block content
     .content
         if upload
             #upload
-                include create.pug
+                include edit.pug
         #entries
             each entry in entries
                 .entry
                     if entry.Photos.length
                         - var photo = entry.Photos[0];
-                        - var data = "data:" + photo.mimetype + ";base64," + photo.bytes;
                         - var url = "/entry/" + entry.id;
                         a(href=url name=entry.name)
-                            img.round-border.entry-img(src=data)
+                            img.round-border.entry-img(src=photo.path)
                     

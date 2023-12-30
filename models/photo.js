@@ -21,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.UUIDV4, primaryKey: true },
     name: DataTypes.STRING,
     originalname: DataTypes.STRING,
-    bytes: DataTypes.BLOB,
     encoding: DataTypes.STRING,
     mimetype: DataTypes.STRING,
     size: DataTypes.INTEGER,
+    path: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Photo',
