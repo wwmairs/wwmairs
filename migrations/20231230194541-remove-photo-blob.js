@@ -4,14 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
       return Promise.all([
-        queryInterface.addColumn(
-            'Photos',
-            'path',
-            {
-                type: Sequelize.STRING
-            }
-        ),
-
+        queryInterface.removeColumn('Photos', 'bytes'),
       ]);
   },
 
@@ -24,7 +17,6 @@ module.exports = {
                 type: Sequelize.BLOB
             }
         ),
-        queryInterface.removeColumn('Photos', 'path'),
       ]);
   }
 };
