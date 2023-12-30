@@ -7,7 +7,7 @@ import db from "../models/index.js";
 
 import onlyWill from "../middleware.js";
 
-const upload = multer();
+const upload = multer({ dest: "uploads/", preservePath: true });
 
 const Photo = db.sequelize.models.Photo;
 const PortfolioEntry = db.sequelize.models.PortfolioEntry;
@@ -104,10 +104,10 @@ function extractPhotosIfAny(req) {
                 id: uuidv4(),
 				name: file.originalname,
 				originalname: file.originalname,
-                bytes: Buffer.from(file.buffer).toString("base64", file.encoding),
                 encoding: file.encoding,
                 mimetype: file.mimetype,
-                size: file.size
+                size: file.size,
+                path: file.path
 			});
 		});
 	}

@@ -2,6 +2,7 @@ extends ../layout.pug
 
 block content
     .content
+        - entry = entry ?? {date: new Date(), Photos: []};
         form(action="/entry/save" method="post" enctype="multipart/form-data")
             input(type="hidden" id="id" name="id" value=entry.id)
             .form-group
@@ -35,4 +36,4 @@ block content
         .entry-photos
         if entry.Photos.length
             each photo in entry.Photos
-                img.entry-img(src="../" + photo.path)
+                img.entry-img(src="/" + photo.path)
