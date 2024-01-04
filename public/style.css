@@ -36,7 +36,7 @@ html {
 
 .round-border {
     border: 1px solid black;
-    border-radius: 2em;
+    border-radius: 1em;
 }
 
 #name h4 {
@@ -82,12 +82,14 @@ h4 {
 }
 
 .entry-img {
-    margin-bottom: 4em;
+    margin-bottom: 1em;
     display: block;
     max-height: calc(100vh - 2em);
     max-width: 100%;
     height: auto;
     width: auto;
+    float: right;
+    margin-left: 1em;
 }
 
 form {
@@ -106,6 +108,10 @@ form {
 @media (min-width: 720px) {
     body {
         grid-template-columns: 200px 1fr;
+    }
+
+    .entry-img {
+        max-height: calc(50vh - 4em);
     }
 
 }
