@@ -5,7 +5,7 @@ block content
         #tags
             each tag in tags
                 .tag
-                    span #{tag.id + tag.name}
+                    span #{tag.name}
         form(action="/tags/save" method="post")
             .form-group
                 label(for="name") Name
