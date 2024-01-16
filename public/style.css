@@ -15,6 +15,29 @@ html {
     font-variation-settings: "wght" 300;
 }
 
+/*
+
+::-webkit-scrollbar {
+    width: .75em;
+    padding: .5em;
+}
+
+::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-thumb {
+    border: 1px solid black;
+    border-radius: 1em;
+    outline: 2px solid white;
+}
+
+::-webkit-scrollbar-thumb:hover {
+      background: black;
+}
+
+*/
+
+
 #menu {
     background-color: white;;
     display: inline-block;

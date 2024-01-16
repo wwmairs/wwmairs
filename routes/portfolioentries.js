@@ -90,7 +90,7 @@ function updateAnyTagsOnEntry(req, entry) {
 	if (req.body.tags) {
 		Tag.findAll({where: {id: req.body.tags}})
 		.then((tags) => { 
-			entryInstance.setTags(tags)
+			entry.setTags(tags)
 		});
 	}
 }

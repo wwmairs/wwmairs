@@ -10,7 +10,7 @@ block content
                 p.date= `${date.getMonth() + 1}/${date.getFullYear()}`
                 p.tags
                     each tag in entry.Tags
-                        span #{tag.name}
+                        entry-tag(name=tag.name)
             .entry-photos
                 if entry.Photos.length
                     each photo in entry.Photos
