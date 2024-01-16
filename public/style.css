@@ -111,7 +111,7 @@ form {
     }
 
     .entry-img {
-        max-height: calc(50vh - 4em);
+        max-height: calc(50vh - 2em);
     }
 
 }

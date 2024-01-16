@@ -22,6 +22,6 @@
   },
   "type": "module",
   "devDependencies": {
-    "sequelize-cli": "^6.6.0"
+    "sequelize-cli": "^6.6.2"
   }
 }
