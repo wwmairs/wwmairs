@@ -116,12 +116,28 @@ h4 {
 }
 
 form {
-    box-shadow: 2px 2px black;
+    border: 1px solid black;
+    border-radius: 1em;
     margin-top: 3em;
     margin-bottom: 3em;
     padding: 1em;
     max-width: max-content;
 
+}
+
+label {
+    display: block;
+}
+
+input { 
+    width: -moz-available;
+    width: -webkit-fill-available;
+}
+
+textarea {
+    width: -moz-available;
+    width: -webkit-fill-available;
+    min-height: 4em;
 }
 
 .form-group {

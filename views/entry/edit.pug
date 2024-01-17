@@ -1,8 +1,11 @@
 extends ../layout.pug   
 
+
 block content
+    script(src="/public/webcomponents/tag-select.js")
+    script(src="/public/webcomponents/edit-entry.js")
     .content
-        - entry = entry ?? {date: new Date(), Photos: []};
+        - entry = entry ?? {date: new Date(), Photos: [], Tags: []};
         form(action="/entry/save" method="post" enctype="multipart/form-data")
             input(type="hidden" id="id" name="id" value=entry.id)
             .form-group
@@ -28,11 +31,12 @@ block content
             .form-group
                 label(for="tags") Tags
                 select(name="tags" id="tags" multiple placeholder='select some tags')
+                    - var tagIDs = entry.Tags.map((x) => x.id);
                     each tag in tags
-                        option(value=tag.id) #{tag.name}
+                        - var selected = tagIDs.includes(tag.id);
+                        option(value=tag.id selected=selected) #{tag.name}
             .form-group
                 button(type="submit") Upload!
-
         .entry-photos
         if entry.Photos.length
             each photo in entry.Photos

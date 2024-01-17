@@ -10,7 +10,6 @@ class EntryTag extends HTMLElement {
         // set style
         var tagName = this.getAttribute("name");
         this.colorInfo = colors.find((color) => color.name.toLowerCase() == tagName.toLowerCase());
-        console.log(this.colorInfo);
 
         const shadow = this.attachShadow({ mode: "open" });
         const wrapper = document.createElement("span");
