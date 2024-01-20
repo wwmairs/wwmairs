@@ -7,7 +7,7 @@ block content
                 include edit.pug
         #entries
             each entry in entries
-                .entry
+                .entry.entry-tile
                     if entry.Photos.length
                         - var photo = entry.Photos[0];
                         - var url = "/entry/" + entry.id;
