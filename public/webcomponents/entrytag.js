@@ -1,4 +1,4 @@
-class EntryTag extends HTMLElement {
+class EntryTags extends HTMLElement {
     constructor() {
         super();
     }
@@ -8,18 +8,27 @@ class EntryTag extends HTMLElement {
         // set style
 
         const shadow = this.attachShadow({ mode: "open" });
-        const wrapper = document.createElement("span");
-        wrapper.setAttribute("class", "tag");
+        const wrapper = document.createElement("div");
 
-        var tagName = this.getAttribute("name");
-        this.colorInfo = colors.find((color) => color.name.toLowerCase() == tagName.toLowerCase());
-        var info = document.createElement("span");
-        info.textContent = this.colorInfo ? "" : this.getAttribute("name");
+        var tags = JSON.parse(this.getAttribute("tags"));
+        tags.map((tag) => {
+            tag.colorInfo = colors.find((color) => color.name.toLowerCase() == tag.name.toLowerCase());
+        });
+        console.log(tags);
+        tags.sort((a, b) => !a.colorInfo && b.colorInfo ? -1 : 0);
+
+        for (var tag of tags) {
+            var span = document.createElement("span");
+            span.setAttribute("class", "tag");
+            span.textContent = tag.colorInfo ? "" : tag.name;
+            span.style = `background: ${tag.colorInfo ? tag.colorInfo.hex : "initial"};`;
+            wrapper.appendChild(span);
+        }
+
 
         const style = document.createElement("style");
         style.textContent = this.getStyle();
 
-        wrapper.appendChild(info);
 
 
         shadow.appendChild(style);
@@ -29,13 +38,15 @@ class EntryTag extends HTMLElement {
 
     getStyle() {
         return `
+            .tags {
+            }
+
             .tag {
                 font-size: .7rem;
                 text-transform: uppercase;
                 display: inline-block;
                 border: 1px solid black;
                 border-radius: 1rem;
-                background: ${this.colorInfo ? this.colorInfo.hex : "initial"};
                 padding: .25rem;
                 margin: .25rem;
                 min-width: .75rem;
@@ -516,4 +527,4 @@ const colors = [
   }
 ];
 
-customElements.define("entry-tag", EntryTag);
+customElements.define("entry-tags", EntryTags);
