@@ -44,9 +44,7 @@ function getEntries(req, res) {
 		.then((entries) => {
             Tag.findAll().then((tags) => {
 			    res.render("entry/all", { tags: tags, 
-                                          entries: entries, 
-			    						  upload: req.session.isWill,
-			    						  noMenu: true });
+                                          entries: entries});
             });
 		});
 }

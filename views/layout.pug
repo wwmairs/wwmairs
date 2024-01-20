@@ -23,4 +23,17 @@ html
                 ul
                     li.round-border
                         a(href="/about") about
+                    if session.isWill
+                        li.round-border
+                            a(href="/logout") logout
         block content
+
+        script.
+            var menuButton = document.getElementById("menu-button");
+            function ondblclick(e) {
+                menuButton.ondblclick = (e) => window.location = "/login";
+                setTimeout(() => {
+                    menuButton.ondblclick = ondblclick;
+                }, 2000);
+            }
+            menuButton.ondblclick = ondblclick;

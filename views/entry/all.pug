@@ -2,7 +2,7 @@ extends ../layout.pug
 
 block content
     .content
-        if upload
+        if session.isWill
             #upload
                 include edit.pug
         #entries

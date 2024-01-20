@@ -26,6 +26,11 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
+
+app.use((req, res, next) => {
 	var err = req.session.error;
 	var msg = req.session.success;
 	delete req.session.error;
