@@ -9,17 +9,21 @@ html {
 	--off-white: #f0ede6;
     --midnight: #435060;
 	--black: #000000;
+    --flo-orange: #ff7477;
+    --grape: #6c5d80;
 	color: var(--black);
-	font-size: 12pt;
-    font-family: "ouma-latin-variable", sans-serif;
-    font-variation-settings: "wght" 300;
+	font-size: 6vw;
+    font-family: ocr-a-std, monospace;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--off-white);
 }
 
 /*
 
 ::-webkit-scrollbar {
-    width: .75em;
-    padding: .5em;
+    width: .75rem;
+    padding: .5rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -27,7 +31,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
     border: 1px solid black;
-    border-radius: 1em;
+    border-radius: 1rem;
     outline: 2px solid white;
 }
 
@@ -37,102 +41,135 @@ html {
 
 */
 
-
-#menu {
-    background-color: white;;
-    display: inline-block;
-    position: fixed;
-    top: 1em;
-    left: 1em;
-    padding: 1em;
-    border: 1px solid var(--midnight);
-    border-radius: .5em;
-}
-
-#name {
-    text-transform: uppercase;
-    letter-spacing: 1em;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    display: inline-block;
-}
-
-.round-border {
-    border: 1px solid black;
-    border-radius: 1em;
-}
-
-#name h4 {
-    padding-left: 1em;
-}
-
-#menu-button {
-    margin-left: .5em;
-    padding: .5em;
-    position: relative;
-    top: -.5em;
-}
-
-#menu-links {
-    margin-top: .5em;
-}
-
-#menu-links ul {
-    list-style-type: none;
-}
-
-#menu-links li ::before {
-    content: "+ ";
-}
-
 a {
     text-decoration: none;
     color: black;
 }
 
+a:hover {
+    color: var(--green);
+    cursor: pointer;
+}
+
 body {
-    margin: 1em;
-    margin-top: 9em;
+    margin: 1rem;
+    margin-top: 9rem;
 }
 
 h4 {
     margin: 0;
 }
 
+#menu {
+    background-color: var(--off-white);
+    display: inline-block;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    padding: .75rem;
+    border: 1px solid var(--midnight);
+    border-radius: .5rem;
+}
+
+#menu:hover {
+    border: 1px solid var(--sky);
+}
+
+#name {
+    padding: .5rem;
+    display: inline-block;
+}
+
+#name a:hover {
+    color: var(--crimson);
+}
+
+.round-border {
+    border: 1px solid black;
+    border-radius: 1rem;
+}
+
+.round-border:hover {
+    border: 1px solid var(--melon);
+}
+
+.row > *:last-child {
+    float: right;
+}
+
+
+#menu-button {
+    margin-left: .5rem;
+    padding: .5rem;
+    position: relative;
+}
+
+#menu-links {
+    margin-top: .5rem;
+}
+
+#menu-links ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu-links li {
+    padding: .5rem;
+}
+
+#menu-links li:not(:last-child) {
+    margin-bottom: .5rem;
+}
+
+#menu-links li ::before {
+    content: "+ ";
+}
+
 .content {
-    margin-top: 5.25em;
-    height: calc(100vh - 4em);
+    margin-top: 5.25rem;
+    margin-bottom: 3rem;
+    height: calc(100vh - 4rem);
 }
 
 
 .entry-tile {
     float: right;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
+}
+
+.entry-photos {
+    float: right;
 }
 
 
 .entry-img {
     display: block;
-    max-height: 100%;
+    max-height: calc(100vh - 4rem);
     max-width: 100%;
     height: auto;
     width: auto;
 }
 
-.tags {
-    margin-top: .5em;
+.entry {
+    float: right;
 }
 
-#entries > .entry-img {
-    max-height: calc(100vh - 2em);
+.tags {
+    margin-top: .5rem;
+    float: right;
+}
+
+.about p {
+    max-width: 400px;
 }
 
 form {
     border: 1px solid black;
-    border-radius: 1em;
-    margin-top: 3em;
-    margin-bottom: 3em;
-    padding: 1em;
+    border-radius: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 1rem;
     max-width: max-content;
 
 }
@@ -149,24 +186,28 @@ input {
 textarea {
     width: -moz-available;
     width: -webkit-fill-available;
-    min-height: 4em;
+    min-height: 4rem;
 }
 
 .form-group {
-    margin-bottom: .5em;
+    margin-bottom: .5rem;
 }
 
 @media (min-width: 720px) {
+    html {
+        font-size: 2.5vw;
+    }
+
     body {
-        grid-template-columns: 200px 1fr;
+        grid-tremplate-columns: 200px 1fr;
     }
 
     .entry {
-        margin-right: 1em;
+        margin-right: 1rem;
     }
 
-    .entry-img {
-        max-height: calc(50vh - 2em);
+    .entry-tile > a > .entry-img {
+        max-height: calc(50vh - 2rem);
         float: right;
     }
 
@@ -175,7 +216,7 @@ textarea {
     }
 
     .entry-tile > .tags {
-        max-width: 8em;
+        max-width: 8rem;
         float: right;
     }
 

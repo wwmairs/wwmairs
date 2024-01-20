@@ -4,17 +4,18 @@ block content
     .content
         .entry
             .entry-description
-                h4 #{entry.name}
-                p #{entry.description}
+                .row
+                    span #{entry.name}
                     - var date = new Date(entry.date)
-                p.date= `${date.getMonth() + 1}/${date.getFullYear()}`
+                    span.date= `${date.getMonth() + 1}/${date.getFullYear()}`
+                p #{entry.description}
                 p.tags
                     each tag in entry.Tags
                         entry-tag(name=tag.name)
             .entry-photos
                 if entry.Photos.length
                     each photo in entry.Photos
-                        img.entry-img(src="../" + photo.path)
+                        img.round-border.entry-img(src="../" + photo.path)
                         p #{photo.filename}
 
 

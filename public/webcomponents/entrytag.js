@@ -30,16 +30,16 @@ class EntryTag extends HTMLElement {
     getStyle() {
         return `
             .tag {
-                font-size: .6em;
+                font-size: .7rem;
                 text-transform: uppercase;
                 display: inline-block;
                 border: 1px solid black;
-                border-radius: 1em;
+                border-radius: 1rem;
                 background: ${this.colorInfo ? this.colorInfo.hex : "initial"};
-                padding: .25em;
-                margin: .25em;
-                min-width: 1em;
-                min-height: 1em;
+                padding: .25rem;
+                margin: .25rem;
+                min-width: .75rem;
+                min-height: .75rem;
                 vertical-align: bottom;
             }
         `;
