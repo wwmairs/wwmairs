@@ -1,8 +1,5 @@
 User-agent: Googlebot
-Disallow: /login
-Disallow: /uploads
+Disallow: /login/
+Disallow: /uploads/
 Disallow: /entry/save/
-
-User-agent: *
-Allow: /
 
