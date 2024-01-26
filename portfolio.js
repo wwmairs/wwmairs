@@ -17,6 +17,11 @@ app.use("/archive", express.static("../wwmairs"));
 app.use("/uploads", express.static("uploads"));
 app.use("/public", express.static("public"));
 
+app.use("/robots.txt", (req, res, next) => {
+    res.type("text/plain");
+    res.send("user-agent: *\nDisallow: /");
+});
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({

@@ -11,6 +11,6 @@ block content
                     if entry.Photos.length
                         - var photo = entry.Photos[0];
                         - var url = "/entry/" + entry.id;
-                        a(href=url name=entry.name)
+                        a.noarrow(href=url name=entry.name)
                             img.round-border.entry-img(src=photo.path)
                     
