@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     encoding: DataTypes.STRING,
     mimetype: DataTypes.STRING,
     size: DataTypes.INTEGER,
-    path: DataTypes.STRING
+    path: DataTypes.STRING,
+    order: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Photo',
