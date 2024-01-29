@@ -6,7 +6,7 @@ block content
     script(src="/public/webcomponents/edit-entry.js")
     .content
         - entry = entry ?? {date: new Date(), Photos: [], Tags: []};
-        form(action="/entry/save" method="post" enctype="multipart/form-data")
+        form(action="/entry/save2" method="post" enctype="multipart/form-data")
             input(type="hidden" id="id" name="id" value=entry.id)
             .form-group
                 label(for="name") Name
@@ -19,7 +19,8 @@ block content
                 input(type="date" id="date" name="date" value=date)
             .form-group
                 label(for="link") Link
-                input(type="text" id="link" name="link" placeholder="link" value=entry.link)
+                input(type="text" id="link" 
+                      name="link" placeholder="link" value=entry.link)
             .form-group
                 label(for="description") Description
                 textarea(id="description" name="description" 
@@ -30,7 +31,7 @@ block content
 
             .form-group
                 label(for="tags") Tags
-                select(name="tags" id="tags" multiple placeholder='select some tags')
+                tag-select(name="tags" id="tags")
                     - var tagIDs = entry.Tags.map((x) => x.id);
                     each tag in tags
                         - var selected = tagIDs.includes(tag.id);

@@ -1,48 +1,59 @@
 class TagSelect extends HTMLElement {
+    static formAssociated = true;
+
     constructor() {
         super();
+        this.internals_ = this.attachInternals();
+        this.value_ = [];
+        this.tags = [];
     }
 
     connectedCallback() {
-        // get options
-        // id = option value
-        // name = option textContent
-
-        // set style
-        var tagName = this.getAttribute("name");
-
-        const shadow = this.attachShadow({ mode: "open" });
+        const style = document.createElement("style");
+        style.textContent = this.getStyle();
 
         setTimeout(()=>{
             this.options = this.children;
             this.options.forEach((x) => {
-                console.log(x.innerText)
-                var tag = document.createElement("span")
-                tag.innerText = x.innerText;
-                tag.setAttribute("class", "tag-option");
-                tag.setAttribute("value", x.value);
-                tag.setAttribute("selected", x.selected);
-                tag.onclick = () => toggleTag(x);
-                shadow.appendChild(tag);
+                x.classList.add("tag-option");
+                x.onclick = () => this.toggleTag(x);
             });
         });
-
-
-        // const info = document.createElement("span");
-        // if (!this.colorInfo) { 
-        //     info.textContent = this.getAttribute("name");
-        // }
-
-        const style = document.createElement("style");
-        style.textContent = this.getStyle();
-
-        shadow.appendChild(style);
 
     }
 
     toggleTag(tag) {
-
+        if (tag.selected) {
+            tag.removeAttribute("selected");
+        } else {
+            tag.setAttribute("selected", "true");
+        }
+        this.internals_.setFormValue(this.value);
     }
+
+    get value() {
+        var selectedTags = [];
+        [...this.options].filter((x) => {
+            return x.selected ? selectedTags.push(x.value) : 0;
+        });
+        this.value_ = selectedTags;
+        return selectedTags;
+    }
+
+    set value(tags) {
+        console.log(tags);
+    }
+
+    get form() { return this.internals_.form; }
+    get name() { return this.getAttribute('name'); }
+    get type() { return this.localName; }
+    get validity() {return this.internals_.validity; }
+    get validationMessage() {return this.internals_.validationMessage; }
+    get willValidate() {return this.internals_.willValidate; }
+
+    checkValidity() { return this.internals_.checkValidity(); }
+    reportValidity() {return this.internals_.reportValidity(); }j
+
 
     getStyle() {
         return `
