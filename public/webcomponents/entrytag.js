@@ -48,10 +48,15 @@ class EntryTags extends HTMLElement {
                 border: 1px solid black;
                 border-radius: 1rem;
                 padding: .25rem;
-                margin: .25rem;
+                margin-top: .25rem;
+                margin-bottom: .25rem;
                 min-width: .75rem;
                 min-height: .75rem;
                 vertical-align: bottom;
+            }
+
+            .tag:not(:last-child) {
+                margin-right: .25rem;
             }
         `;
     }

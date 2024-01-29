@@ -63,6 +63,7 @@ a.noarrow {
 
 a.noarrow:hover {
     color: var(--green);
+    border-bottom: none;
 }
 
 a {
