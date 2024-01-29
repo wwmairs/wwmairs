@@ -18,7 +18,8 @@ function view(req, res) {
 	fetchWithPhotosByID(req.params.id)
 		.then(portfolioEntry => {
             Tag.findAll().then((tags) => {
-			    res.render(req.session.isWill ? "entry/edit" : "entry/view", { tags: tags, entry: portfolioEntry });
+			    res.render(req.session.isWill ? "entry/edit" : "entry/view", 
+                           { tags: tags, entry: portfolioEntry });
             });
 		});
 }
@@ -60,10 +61,10 @@ function saveEntry(req, res) {
 	};
 
 	if (!req.body.id) {
-		PortfolioEntry.create(portfolioEntry, {include: Photo});
-			// .then((entryInstance) => {
-			// 	entryInstance.setTags(req.body.tags);
-			// });
+		PortfolioEntry.create(portfolioEntry, {include: Photo})
+		    .then((entryInstance) => {
+		    	entryInstance.setTags(req.body.tags.split(","));
+		    });
 	} else {
 		PortfolioEntry.findOne({where: {id: req.body.id}})
 		.then((oldEntry) => {
@@ -86,8 +87,12 @@ function saveEntry(req, res) {
 
 function updateAnyTagsOnEntry(req, entry) {
 	if (req.body.tags) {
-		Tag.findAll({where: {id: req.body.tags}})
+        var tagIds = req.body.tags.split(',');
+        console.log(tagIds);
+		Tag.findAll({where: {id: tagIds}})
 		.then((tags) => { 
+            console.log(tags);
+            entry.setTags([]);
 			entry.setTags(tags)
 		});
 	}
