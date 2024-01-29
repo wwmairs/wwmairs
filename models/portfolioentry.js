@@ -24,7 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     date: DataTypes.DATE,
     description: DataTypes.STRING,
-    link: DataTypes.STRING
+    link: DataTypes.STRING,
+    selling: DataTypes.BOOLEAN,
+    price: DataTypes.DECIMAL(10, 2),
+    edition: DataTypes.INTEGER,
+    available: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'PortfolioEntry',
