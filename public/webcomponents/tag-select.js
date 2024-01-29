@@ -20,6 +20,8 @@ class TagSelect extends HTMLElement {
             });
         });
 
+        document.getElementsByTagName("head")[0].appendChild(style);
+
     }
 
     toggleTag(tag) {
@@ -57,18 +59,25 @@ class TagSelect extends HTMLElement {
 
     getStyle() {
         return `
-            .tag-option {
+            tag-select > .tag-option {
                 display: inline-block;
-                background: ${this.colorInfo ? this.colorInfo.hex : "initial"};
                 padding: .25em;
                 margin: .25em;
                 min-width: .75em;
                 min-height: .75em;
+                border: 1px solid var(--off-white);
             }
 
-            .tag-option:checked {
+            tag-select > .tag-option:hover { 
+                cursor: pointer;
                 border: 1px solid black;
                 border-radius: 1em;
+            }
+
+            tag-select > .tag-option:checked {
+                border: 1px solid black;
+                border-radius: 1em;
+                background: var(--green);
             }
         `;
     }

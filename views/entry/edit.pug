@@ -6,7 +6,7 @@ block content
     script(src="/public/webcomponents/edit-entry.js")
     .content
         - entry = entry ?? {date: new Date(), Photos: [], Tags: []};
-        form(action="/entry/save2" method="post" enctype="multipart/form-data")
+        form(action="/entry/save" method="post" enctype="multipart/form-data")
             input(type="hidden" id="id" name="id" value=entry.id)
             .form-group
                 label(for="name") Name
