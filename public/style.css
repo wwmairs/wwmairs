@@ -30,9 +30,9 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    border: 1px solid black;
+    border: 1.5px solid black;
     border-radius: 1rem;
-    outline: 2px solid white;
+    outline: 1.5px solid white;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -78,22 +78,21 @@ a:hover {
 
 body {
     margin: 1rem;
-    margin-top: 6rem;
 }
 
 #menu {
     background-color: var(--off-white);
     display: inline-block;
     position: fixed;
-    top: 1rem;
-    left: 1rem;
+    bottom: 1rem;
+    right: 1rem;
     padding: .75rem;
-    border: 1px solid var(--midnight);
+    border: 1.5px solid var(--midnight);
     border-radius: .5rem;
 }
 
 #menu:hover {
-    border: 1px solid var(--sky);
+    border: 1.5px solid var(--sky);
 }
 
 #menu h4 {
@@ -110,16 +109,21 @@ body {
 }
 
 .round-border {
-    border: 1px solid black;
+    border: 1.5px solid black;
     border-radius: 1rem;
 }
 
 .round-border:hover {
-    border: 1px solid var(--melon);
+    border: 1.5px solid var(--melon);
 }
 
 .row > *:last-child {
     float: right;
+}
+
+.row {
+    border-bottom: .3rem solid var(--sky);
+    line-height: 2.5rem;
 }
 
 
@@ -130,7 +134,7 @@ body {
 }
 
 #menu-links {
-    margin-top: .5rem;
+    margin-bottom: .5rem;
 }
 
 #menu-links ul {
@@ -152,21 +156,19 @@ body {
 }
 
 .content {
-    margin-top: 5.25rem;
+    margin-top: 1rem;
     margin-bottom: 3rem;
     height: calc(100vh - 4rem);
 }
 
 
 .entry-tile {
-    float: right;
     margin-bottom: 1rem;
 }
 
 .entry-photos {
-    float: right;
+    margin-top: .5rem;
 }
-
 
 .entry-img {
     display: block;
@@ -177,8 +179,9 @@ body {
 }
 
 .entry {
-    float: right;
+    float: left;
 }
+
 
 .tags {
     margin-top: .5rem;
@@ -190,7 +193,7 @@ body {
 }
 
 form {
-    border: 1px solid black;
+    border: 1.5px solid black;
     border-radius: 1rem;
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -218,6 +221,17 @@ textarea {
     margin-bottom: .5rem;
 }
 
+
+.bigtextblobs {
+    display: inline-block;
+    font-size: 1.8rem;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1.5px solid black;
+    border-radius: 4rem;
+}
+
+
 @media (min-width: 720px) {
     html {
         font-size: 2.5vw;
@@ -232,7 +246,7 @@ textarea {
     }
 
     .entry-tile > a > .entry-img {
-        max-height: calc(50vh - 2rem);
+        max-height: calc(100vh - 2rem);
         float: right;
     }
 
@@ -246,6 +260,7 @@ textarea {
     }
 
 }
+
 
 .hidden {
     display: none;

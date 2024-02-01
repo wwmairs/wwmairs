@@ -24,11 +24,6 @@ html
             height="0" width="0" style="display:none;visibility:hidden")
         <!-- End Google Tag Manager (noscript) -->
         #menu
-            #name.round-border 
-                h4 
-                    a.noarrow(href="/") wwmairs
-            a#menu-button.round-border.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')")
-                        | ...
             #menu-links.hidden
                 ul
                     li.round-border
@@ -36,6 +31,11 @@ html
                     if session.isWill
                         li.round-border
                             a.noarrow(href="/logout") logout
+            #name.round-border 
+                h4 
+                    a.noarrow(href="/") wwmairs
+            a#menu-button.round-border.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')")
+                        | ...
         block content
 
         script.
