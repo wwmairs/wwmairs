@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUIDV4,
       },
-      tagId: {
+      TagId: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUIDV4

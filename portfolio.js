@@ -46,6 +46,15 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.use((req, res, next) => {
+    if (!req.session.isWill) {
+        req.session.regenerate(function() {
+            req.session.isWill = true;
+            req.session.user = "will";
+        });
+    }
+    next();
+});
 
 loadRoutes(app);
 
@@ -53,6 +62,7 @@ loadRoutes(app);
 app.get("/about", (req, res) => {
     res.render("about");
 });
+
 
 app.listen(port, () => {
 	console.log(`Listening on ${port}`);

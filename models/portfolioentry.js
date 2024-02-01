@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: "portfolioEntryId",
       });
       PortfolioEntry.belongsToMany(models.Tag, {
-          through: "PortfolioEntry_Tags",
-      })
+          through: { model: "PortfolioEntry_Tags", unique: false }
+      });
     }
   }
   PortfolioEntry.init({

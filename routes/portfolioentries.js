@@ -72,8 +72,10 @@ function saveEntry(req, res) {
 				oldEntry.update(portfolioEntry)
 				.then((entryInstance) => {
 					portfolioEntry.Photos.map((photo) => {
-						photo.portfolioEntryId = entryInstance.id;
-						Photo.create(photo)
+                        if (!photo.id) {
+						    photo.portfolioEntryId = entryInstance.id;
+						    Photo.create(photo)
+                        }
 					});
 					updateAnyTagsOnEntry(req, entryInstance);
 				});
@@ -88,13 +90,14 @@ function saveEntry(req, res) {
 function updateAnyTagsOnEntry(req, entry) {
 	if (req.body.tags) {
         var tagIds = req.body.tags.split(',');
-        console.log(tagIds);
-		Tag.findAll({where: {id: tagIds}})
-		.then((tags) => { 
+        entry.getTags().then((tags) => {
             console.log(tags);
-            entry.setTags([]);
-			entry.setTags(tags)
-		});
+            var entryTagIds = tags.map((tag) => tag.id);
+            var idsToAdd = tagIds.filter(id => !entryTagIds.includes(id));
+            var idsToDelete = entryTagIds.filter(id => !tagIds.includes(id));
+            entry.addTags(idsToAdd);
+            entry.removeTags(idsToDelete);
+        });
 	}
 }
 

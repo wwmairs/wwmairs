@@ -14,7 +14,6 @@ class EntryTags extends HTMLElement {
         tags.map((tag) => {
             tag.colorInfo = colors.find((color) => color.name.toLowerCase() == tag.name.toLowerCase());
         });
-        console.log(tags);
         tags.sort((a, b) => !a.colorInfo && b.colorInfo ? -1 : 0);
 
         for (var tag of tags) {
