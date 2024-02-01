@@ -57,6 +57,10 @@ function saveEntry(req, res) {
 		date: req.body.date,
 		description: req.body.description,
 		link: req.body.link,
+        selling: req.body.selling == "on",
+        price: req.body.price,
+        edition: req.body.edition,
+        available: req.body.available,
 		Photos: extractPhotosIfAny(req),
 	};
 

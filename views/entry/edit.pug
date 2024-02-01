@@ -18,6 +18,22 @@ block content
                 - var date = entry.date.toISOString().split("T")[0];
                 input(type="date" id="date" name="date" value=date)
             .form-group
+                label(for="edition") Edition Size
+                input(type="number" min="1" id="edition" name="edition"
+                      value=entry.edition)
+            .form-group
+                label(for="selling") For sale ?
+                input(type="checkbox" id="selling" name="selling" 
+                      checked=entry.selling)
+            .form-group
+                label(for="price") Price
+                input(type="number" min="0" step=".01" id="price"
+                      name="price" value=entry.price)
+            .form-group
+                label(for="available") Copies Available
+                input(type="number" min="0" id="available" 
+                      name="available" value=entry.available)
+            .form-group
                 label(for="link") Link
                 input(type="text" id="link" 
                       name="link" placeholder="link" value=entry.link)
