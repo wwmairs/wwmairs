@@ -6,18 +6,20 @@ block title
 block content
     .content
         .entry
-            .entry-description
-                .row
-                    span #{entry.name}
-                    - var date = new Date(entry.date)
-                    span.date= `${date.getMonth() + 1}/${date.getFullYear()}`
-                p #{entry.description}
-                entry-tags(tags=entry.Tags)
+            .entry-info
+                p #{entry.name}
+                - var date = new Date(entry.date)
+                p.date= `${date.getMonth() + 1}/${date.getFullYear()}`
+            p #{entry.description}
+            div
+                p for sale? #{entry.selling}
+                p edition size: #{entry.edition}
+                p price: #{entry.price}
+                p numm available: #{entry.available}
+            entry-tags(tags=entry.Tags)
             .entry-photos
                 if entry.Photos.length
                     each photo in entry.Photos
                         img.round-border.entry-img(src="../" + photo.path)
-                        p #{photo.filename}
-
 
 

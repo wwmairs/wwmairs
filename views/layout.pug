@@ -24,18 +24,13 @@ html
             height="0" width="0" style="display:none;visibility:hidden")
         <!-- End Google Tag Manager (noscript) -->
         #menu
+            #name 
+                a.noarrow(href="/") wwmairs
+                a#menu-button.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')") ...
             #menu-links.hidden
-                ul
-                    li.round-border
-                        a.noarrow(href="/about") about
-                    if session.isWill
-                        li.round-border
-                            a.noarrow(href="/logout") logout
-            #name.round-border 
-                h4 
-                    a.noarrow(href="/") wwmairs
-            a#menu-button.round-border.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')")
-                        | ...
+                a.noarrow(href="/about") about
+                if session.isWill
+                    a.noarrow(href="/logout") logout
         block content
 
         script.

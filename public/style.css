@@ -20,6 +20,16 @@ html {
 }
 
 /*
+html * {
+    padding: .5rem;
+    margin: .5rem;
+    border: .125rem solid black;
+    box-shadow: .125rem .125rem black;
+    border-radius: .25rem;
+}
+*/
+
+/*
 
 ::-webkit-scrollbar {
     width: .75rem;
@@ -80,33 +90,33 @@ body {
     margin: 1rem;
 }
 
+
 #menu {
-    background-color: var(--off-white);
     display: inline-block;
     position: fixed;
     bottom: 1rem;
     right: 1rem;
-    padding: .75rem;
-    border: 1.5px solid var(--midnight);
-    border-radius: .5rem;
+
+    /*animation: 3s infinite alternate twist;*/
 }
 
-#menu:hover {
+#name:hover {
     border: 1.5px solid var(--sky);
 }
 
-#menu h4 {
-    margin: 0;
-}
 
 #name {
-    padding: .5rem;
     display: inline-block;
+    padding: .5rem;
+    border: 1.5px solid var(--midnight);
+    border-radius: 2rem;
+    background-color: var(--off-white);
 }
 
 #name a:hover {
     color: var(--crimson);
 }
+
 
 .round-border {
     border: 1.5px solid black;
@@ -117,15 +127,6 @@ body {
     border: 1.5px solid var(--melon);
 }
 
-.row > *:last-child {
-    float: right;
-}
-
-.row {
-    border-bottom: .3rem solid var(--sky);
-    line-height: 2.5rem;
-}
-
 
 #menu-button {
     margin-left: .5rem;
@@ -134,25 +135,11 @@ body {
 }
 
 #menu-links {
-    margin-bottom: .5rem;
+    display: inline-block;
 }
 
-#menu-links ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-#menu-links li {
-    padding: .5rem;
-}
-
-#menu-links li:not(:last-child) {
-    margin-bottom: .5rem;
-}
-
-#menu-links li ::before {
-    content: "+ ";
+#menu-links * {
+    float: right;
 }
 
 .content {
@@ -164,6 +151,9 @@ body {
 
 .entry-tile {
     margin-bottom: 1rem;
+}
+
+.entry-tile:hover {
 }
 
 .entry-photos {
@@ -182,15 +172,15 @@ body {
     float: left;
 }
 
+.entry-info {
+
+}
 
 .tags {
     margin-top: .5rem;
     float: right;
 }
 
-.about p {
-    max-width: 400px;
-}
 
 form {
     border: 1.5px solid black;
@@ -221,24 +211,19 @@ textarea {
     margin-bottom: .5rem;
 }
 
-
-.bigtextblobs {
-    display: inline-block;
-    font-size: 1.8rem;
-    padding: 1rem;
-    margin: 1rem;
-    border: 1.5px solid black;
-    border-radius: 4rem;
+ul {
+    padding-left: 1rem;
 }
 
+.styledlist {
+    display: block;
+    padding-bottom: 1rem;
+}
 
 @media (min-width: 720px) {
     html {
-        font-size: 2.5vw;
-    }
-
-    body {
-        grid-tremplate-columns: 200px 1fr;
+        font-size: 1.5vw;
+        margin: 2rem;
     }
 
     .entry {
@@ -246,7 +231,8 @@ textarea {
     }
 
     .entry-tile > a > .entry-img {
-        max-height: calc(100vh - 2rem);
+        object-fit: cover;
+        max-height: calc(50vh - 2rem);
         float: right;
     }
 
@@ -259,9 +245,15 @@ textarea {
         float: right;
     }
 
+    .about {
+        max-width: 40vw;
+        margin-left: 40vw;
+        margin-top: 30vh;
+    }
+
 }
 
 
 .hidden {
-    display: none;
+    display: none !important;
 }
