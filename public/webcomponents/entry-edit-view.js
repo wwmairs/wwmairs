@@ -40,9 +40,12 @@ class EntryEditView extends HTMLElement {
 
     appendFields(fieldNames, wrapper) {
         fieldNames.map((name) => {
-            var p = document.createElement("p");
-            p.innerText = this.entry_[name];
-            wrapper.appendChild(p);
+            var displayInput = document.createElement("display-input");
+            wrapper.appendChild(displayInput);
+            displayInput.setAttribute("type", "text");
+            setTimeout(() => {
+                displayInput.value = this.entry_[name];
+            });
         })
     }
 
@@ -60,12 +63,7 @@ class EntryEditView extends HTMLElement {
 
 
     get value() {
-        var selectedTags = [];
-        [...this.options].filter((x) => {
-            return x.selected ? selectedTags.push(x.value) : 0;
-        });
-        this.value_ = selectedTags;
-        return selectedTags;
+        return this.entry_;
     }
 
     set value(tags) {

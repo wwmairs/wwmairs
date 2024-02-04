@@ -10,7 +10,6 @@ class EntryTags extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
         const wrapper = document.createElement("div");
 
-        console.log(this.tags);
         this.tags.map((tag) => {
             tag.colorInfo = colors.find((color) => color.name.toLowerCase() == tag.name.toLowerCase());
         });

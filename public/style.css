@@ -150,7 +150,7 @@ body {
 
 
 .entry-tile {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
 }
 
 .entry-tile:hover {
@@ -158,6 +158,10 @@ body {
 
 .entry-photos {
     margin-top: .5rem;
+}
+
+.entry-photos * {
+    margin-bottom: 3rem;
 }
 
 .entry-img {
