@@ -7,6 +7,7 @@ class DisplayInput extends HTMLElement {
         this.value_ = "";
         this.display_;
         this.input_
+        this.type_ = "text";
     }
 
     connectedCallback() {
@@ -14,9 +15,10 @@ class DisplayInput extends HTMLElement {
         const style = document.createElement("style");
         style.innerHTML = this.getStyle();
         shadow.appendChild(style);
+        this.type_ = this.getAttribute("type");
         this.display_ = document.createElement("span");
         this.input_ = document.createElement("input");
-        this.input_.setAttribute("type", this.getAttribute("type"))
+        this.input_.setAttribute("type", this.type);
         this.input_.onchange = (e) => { this.value = e.target.value };
         this.input_.classList.add("hidden");
         this.display_.onmouseover = () => this.showInput();
@@ -24,7 +26,6 @@ class DisplayInput extends HTMLElement {
         shadow.appendChild(this.input_)
         shadow.appendChild(this.display_)
         setTimeout(() => {
-            console.log(this.display_.offsetWidth);
             this.input_.style.width = this.display_.offsetWidth + "px";
         });
     }
@@ -39,6 +40,11 @@ class DisplayInput extends HTMLElement {
         this.input_.classList.add("hidden");
     }
 
+    formatDate(datestring) {
+        var date = new Date(datestring);
+        return `${date.getMonth() + 1}/${date.getFullYear()}`;
+    }
+
 
     get value() {
         return this.value_;
@@ -46,9 +52,15 @@ class DisplayInput extends HTMLElement {
 
     set value(val) {
         this.value_ = val;
-        this.display_.innerHTML = val;
+        if (this.type_ == "date") {
+            this.display_.innerHTML = this.formatDate(val);
+        } else {
+            this.display_.innerHTML = val;
+        }
         this.input_.value = val;
         this.showDisplay();
+        this.input_.style.width = this.display_.offsetWidth + "px";
+        this.onchange();
     }
 
     get form() { return this.internals_.form; }

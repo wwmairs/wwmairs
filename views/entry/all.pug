@@ -2,9 +2,6 @@ extends ../layout.pug
 
 block content
     .content
-        if session.isWill
-            #upload
-                include edit.pug
         #entries
             each entry in entries
                 .entry.entry-tile

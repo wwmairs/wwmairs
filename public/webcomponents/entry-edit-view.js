@@ -5,12 +5,14 @@ class EntryEditView extends HTMLElement {
         super();
         this.internals_ = this.attachInternals();
         this.entry_ = {};
+        this.editable = false;
     }
 
     connectedCallback() {
 
         var entryId = this.getAttribute("entryId");
         this.entry_ = _data[entryId];
+        this.editable = this.hasAttribute("editable");
 
         //const shadow = this.attachShadow({ mode: "open" });
         const shadow = document.createElement("div");
@@ -19,13 +21,18 @@ class EntryEditView extends HTMLElement {
         const style = document.createElement("style");
         style.textContent = this.getStyle();
 
-        this.appendFields(["name", "description", "selling"], wrapper)
+        this.appendField("name", "text", wrapper);
+        this.appendField("description", "text", wrapper);
+        this.appendField("checkbox", "selling", wrapper);
+        this.appendField("date", "date", wrapper);
 
 
+        /*
         var dateDisplay = document.createElement("p");
         var date = new Date(this.entry_.date);
         dateDisplay.innerHTML = `${date.getMonth() + 1}/${date.getFullYear()}`;
         wrapper.appendChild(dateDisplay);
+        */
 
         var entryTags = document.createElement("entry-tags");
         entryTags.tags = this.entry_.Tags;
@@ -38,16 +45,25 @@ class EntryEditView extends HTMLElement {
 
     }
 
-    appendFields(fieldNames, wrapper) {
-        fieldNames.map((name) => {
+    appendField(name, type, wrapper) {
+        if (this.editable) {
             var displayInput = document.createElement("display-input");
             wrapper.appendChild(displayInput);
-            displayInput.setAttribute("type", "text");
+            displayInput.setAttribute("type", type);
+            displayInput.onchange = () => { 
+                this.entry_[name] = displayInput.value;
+            };
             setTimeout(() => {
                 displayInput.value = this.entry_[name];
             });
-        })
+        } else {
+            var span = document.createElement("span");
+            span.innerText = this.entry_[name];
+            wrapper.appendChild(span);
+        }
+        
     }
+
 
     appendPhotos(wrapper) {
         var photosWrapper = document.createElement("div");

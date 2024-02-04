@@ -18,7 +18,8 @@ function view(req, res) {
 	fetchWithPhotosByID(req.params.id)
 		.then(portfolioEntry => {
             Tag.findAll().then((tags) => {
-			    res.render(req.session.isWill ? "entry/edit" : "entry/view", 
+                /* this silly logic is just for dev*/
+			    res.render(req.session.isWill ? "entry/view" : "entry/view", 
                            { tags: tags, entry: portfolioEntry });
             });
 		});
