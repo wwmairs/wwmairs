@@ -3,23 +3,14 @@ extends ../layout.pug
 block title
     title WWMAIRS - #{entry.name}
 
+block append scripts
+    script(src="/public/webcomponents/entry-edit-view.js" type="module")
+    script.
+        if (!_data) {
+            var _data = {};
+        }
+        _data['#{entry.id}'] = !{JSON.stringify(entry)};
+
 block content
     .content
-        .entry
-            .entry-info
-                p #{entry.name}
-                - var date = new Date(entry.date)
-                p.date= `${date.getMonth() + 1}/${date.getFullYear()}`
-            p #{entry.description}
-            div
-                p for sale? #{entry.selling}
-                p edition size: #{entry.edition}
-                p price: #{entry.price}
-                p numm available: #{entry.available}
-            entry-tags(tags=entry.Tags)
-            .entry-photos
-                if entry.Photos.length
-                    each photo in entry.Photos
-                        img.round-border.entry-img(src="../" + photo.path)
-
-
+        entry-edit-view(entryId=entry.id)

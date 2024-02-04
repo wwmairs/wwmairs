@@ -10,13 +10,13 @@ class EntryTags extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
         const wrapper = document.createElement("div");
 
-        var tags = JSON.parse(this.getAttribute("tags"));
-        tags.map((tag) => {
+        console.log(this.tags);
+        this.tags.map((tag) => {
             tag.colorInfo = colors.find((color) => color.name.toLowerCase() == tag.name.toLowerCase());
         });
-        tags.sort((a, b) => !a.colorInfo && b.colorInfo ? -1 : 0);
+        this.tags.sort((a, b) => !a.colorInfo && b.colorInfo ? -1 : 0);
 
-        for (var tag of tags) {
+        for (var tag of this.tags) {
             var span = document.createElement("span");
             span.setAttribute("class", "tag");
             span.textContent = tag.colorInfo ? "" : tag.name;
