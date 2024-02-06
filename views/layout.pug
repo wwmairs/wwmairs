@@ -24,13 +24,13 @@ html
             height="0" width="0" style="display:none;visibility:hidden")
         <!-- End Google Tag Manager (noscript) -->
         #menu
-            #name 
-                a.noarrow(href="/") wwmairs
-                a#menu-button.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')") ...
             #menu-links.hidden
                 a.noarrow(href="/about") about
                 if session.isWill
                     a.noarrow(href="/logout") logout
+            #name 
+                a.noarrow(href="/") wwmairs
+                a#menu-button.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')") ...
         block content
 
         script.

@@ -15,6 +15,7 @@ class DisplayInput extends HTMLElement {
         const style = document.createElement("style");
         style.innerHTML = this.getStyle();
         shadow.appendChild(style);
+        const wrapper = document.createElement("p");
         this.type_ = this.getAttribute("type");
         this.display_ = document.createElement("span");
         this.input_ = document.createElement("input");
@@ -22,12 +23,17 @@ class DisplayInput extends HTMLElement {
         this.input_.onchange = (e) => { this.value = e.target.value };
         this.input_.classList.add("hidden");
         this.display_.onmouseover = () => this.showInput();
-        //this.display_.onmouseout = () => this.showDisplay();
-        shadow.appendChild(this.input_)
-        shadow.appendChild(this.display_)
+        this.input_.addEventListener("focusout", (e) => this.showDisplay());
+        wrapper.appendChild(this.input_)
+        wrapper.appendChild(this.display_)
+        shadow.appendChild(wrapper);
         setTimeout(() => {
-            this.input_.style.width = this.display_.offsetWidth + "px";
+            this.fixWidth();
         });
+    }
+
+    fixWidth() {
+        this.input_.style.width = this.display_.offsetWidth + "px";
     }
 
     showInput() {

@@ -22,9 +22,11 @@ class EntryEditView extends HTMLElement {
         style.textContent = this.getStyle();
 
         this.appendField("name", "text", wrapper);
-        this.appendField("description", "text", wrapper);
-        this.appendField("checkbox", "selling", wrapper);
         this.appendField("date", "date", wrapper);
+        this.appendField("description", "text", wrapper);
+        if (this.editable) {
+            this.appendField("checkbox", "selling", wrapper);
+        }
 
 
         /*
@@ -57,9 +59,14 @@ class EntryEditView extends HTMLElement {
                 displayInput.value = this.entry_[name];
             });
         } else {
-            var span = document.createElement("span");
-            span.innerText = this.entry_[name];
-            wrapper.appendChild(span);
+            var p = document.createElement("p");
+            var val =  this.entry_[name];
+            if (type == "date") {
+                var date = new Date(val);
+                val = `${date.getMonth() + 1}/${date.getFullYear()}`;
+            }
+            p.innerText = val;
+            wrapper.appendChild(p);
         }
         
     }
