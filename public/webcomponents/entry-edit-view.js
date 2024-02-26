@@ -47,6 +47,19 @@ class EntryEditView extends HTMLElement {
 
     }
 
+    onchange() {
+        var request = { 
+            method: "POST", 
+            headers: { 
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.value)
+        };
+        fetch("/entry/save", request)
+        .then((res) => console.log(res))
+        .error((res) => console.error(res));
+    }
+
     appendField(name, type, wrapper) {
         if (this.editable) {
             var displayInput = document.createElement("display-input");
@@ -54,9 +67,10 @@ class EntryEditView extends HTMLElement {
             displayInput.setAttribute("type", type);
             displayInput.onchange = () => { 
                 this.entry_[name] = displayInput.value;
+                this.onchange();
             };
             setTimeout(() => {
-                displayInput.value = this.entry_[name];
+                displayInput.updatevalue(this.entry_[name]);
             });
         } else {
             var p = document.createElement("p");
@@ -91,6 +105,7 @@ class EntryEditView extends HTMLElement {
 
     set value(tags) {
         console.log(tags);
+        console.log("can't set value on entry-edit-view yet");
     }
 
     get form() { return this.internals_.form; }

@@ -19,7 +19,7 @@ class DisplayInput extends HTMLElement {
         this.type_ = this.getAttribute("type");
         this.display_ = document.createElement("span");
         this.input_ = document.createElement("input");
-        this.input_.setAttribute("type", this.type);
+        this.input_.setAttribute("type", this.type_);
         this.input_.onchange = (e) => { this.value = e.target.value };
         this.input_.classList.add("hidden");
         this.display_.onmouseover = () => this.showInput();
@@ -51,12 +51,7 @@ class DisplayInput extends HTMLElement {
         return `${date.getMonth() + 1}/${date.getFullYear()}`;
     }
 
-
-    get value() {
-        return this.value_;
-    }
-
-    set value(val) {
+    updatevalue(val) {
         this.value_ = val;
         if (this.type_ == "date") {
             this.display_.innerHTML = this.formatDate(val);
@@ -66,6 +61,15 @@ class DisplayInput extends HTMLElement {
         this.input_.value = val;
         this.showDisplay();
         this.input_.style.width = this.display_.offsetWidth + "px";
+    }
+
+
+    get value() {
+        return this.value_;
+    }
+
+    set value(val) {
+        this.updatevalue(val);
         this.onchange();
     }
 

@@ -22,6 +22,8 @@ app.use("/robots.txt", (req, res, next) => {
     res.send("user-agent: *\nDisallow: /");
 });
 
+app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({

@@ -68,7 +68,7 @@ function saveEntry(req, res) {
 	if (!req.body.id) {
 		PortfolioEntry.create(portfolioEntry, {include: Photo})
 		    .then((entryInstance) => {
-		    	entryInstance.setTags(req.body.tags.split(","));
+                updateAnyTagsOnEntry(req, entryInstance);
 		    });
 	} else {
 		PortfolioEntry.findOne({where: {id: req.body.id}})
@@ -89,7 +89,7 @@ function saveEntry(req, res) {
 			}
 		});
 	}
-	res.redirect("/");
+    res.sendStatus(200);
 }
 
 function updateAnyTagsOnEntry(req, entry) {
