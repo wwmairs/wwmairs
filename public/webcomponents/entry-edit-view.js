@@ -6,6 +6,8 @@ class EntryEditView extends HTMLElement {
         this.internals_ = this.attachInternals();
         this.entry_ = {};
         this.editable = false;
+        this.editing_ = false;
+        this.displayInputs = [];
     }
 
     connectedCallback() {
@@ -21,24 +23,27 @@ class EntryEditView extends HTMLElement {
         const style = document.createElement("style");
         style.textContent = this.getStyle();
 
-        this.appendField("name", "text", wrapper);
-        this.appendField("date", "date", wrapper);
-        this.appendField("description", "text", wrapper);
-        if (this.editable) {
-            this.appendField("checkbox", "selling", wrapper);
-        }
+        const appendField = this.appendFieldFnForWrapper(wrapper);
 
+        appendField("name", "text");
+        appendField("date", "date");
+        appendField("description", "text");
 
-        /*
-        var dateDisplay = document.createElement("p");
-        var date = new Date(this.entry_.date);
-        dateDisplay.innerHTML = `${date.getMonth() + 1}/${date.getFullYear()}`;
-        wrapper.appendChild(dateDisplay);
-        */
 
         var entryTags = document.createElement("entry-tags");
         entryTags.tags = this.entry_.Tags;
         wrapper.appendChild(entryTags);
+
+        if (this.editable) {
+            appendField("selling", "checkbox");
+            appendField("price", "number");
+            appendField("edition", "number");
+            appendField("available", "number");
+            var editButton = document.createElement("button");
+            editButton.onclick = () => this.toggleEditing();
+            editButton.innerHTML = "edit";
+            wrapper.appendChild(editButton);
+        }
 
         this.appendPhotos(wrapper);
 
@@ -47,44 +52,34 @@ class EntryEditView extends HTMLElement {
 
     }
 
-    onchange() {
-        var request = { 
-            method: "POST", 
-            headers: { 
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(this.value)
-        };
-        fetch("/entry/save", request)
-        .then((res) => console.log(res))
-        .error((res) => console.error(res));
-    }
-
-    appendField(name, type, wrapper) {
-        if (this.editable) {
-            var displayInput = document.createElement("display-input");
-            wrapper.appendChild(displayInput);
-            displayInput.setAttribute("type", type);
-            displayInput.onchange = () => { 
-                this.entry_[name] = displayInput.value;
-                this.onchange();
-            };
-            setTimeout(() => {
-                displayInput.updatevalue(this.entry_[name]);
-            });
-        } else {
-            var p = document.createElement("p");
-            var val =  this.entry_[name];
-            if (type == "date") {
-                var date = new Date(val);
-                val = `${date.getMonth() + 1}/${date.getFullYear()}`;
+    appendFieldFnForWrapper(wrapper) {
+        return (name, type) => {
+            if (this.editable) {
+                var displayInput = document.createElement("display-input");
+                wrapper.appendChild(displayInput);
+                displayInput.setAttribute("type", type);
+                displayInput.setAttribute("name", name);
+                displayInput.onchange = () => { 
+                    this.entry_[name] = displayInput.value;
+                    this.onchange();
+                };
+                setTimeout(() => {
+                    displayInput.updatevalue(this.entry_[name]);
+                });
+                this.displayInputs.push(displayInput);
+            } else {
+                var p = document.createElement("p");
+                var val =  this.entry_[name];
+                if (type == "date") {
+                    var date = new Date(val);
+                    val = `${date.getMonth() + 1}/${date.getFullYear()}`;
+                }
+                p.innerText = val;
+                wrapper.appendChild(p);
             }
-            p.innerText = val;
-            wrapper.appendChild(p);
         }
         
     }
-
 
     appendPhotos(wrapper) {
         var photosWrapper = document.createElement("div");
@@ -97,7 +92,59 @@ class EntryEditView extends HTMLElement {
         });
         wrapper.appendChild(photosWrapper);
     }
+    
+    // important methods
 
+    onchange() {
+        console.log(this.value);
+    }
+
+    save() {
+        var request = { 
+            method: "POST", 
+            headers: { 
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.value)
+        };
+        fetch("/entry/save", request)
+        .then((res) => console.log(res))
+        .error((res) => console.error(res));
+    }
+
+
+    // ui config helpers
+
+    showDisplay() {
+        this.displayInputs.map((el) => el.showDisplay());
+    }
+
+    showInput() {
+        this.displayInputs.map((el) => el.showInput());
+    }
+
+    updateDisplayInputs() {
+        if (this.editing_) {
+            this.showInput();
+        } else {
+            this.showDisplay();
+        }
+    }
+
+    toggleEditing() {
+        this.editing = !this.editing;
+    }
+
+    // getters & setters
+
+    get editing() {
+        return this.editing_;
+    }
+
+    set editing(val) {
+        this.editing_ = val;
+        this.updateDisplayInputs();
+    }
 
     get value() {
         return this.entry_;
@@ -107,6 +154,8 @@ class EntryEditView extends HTMLElement {
         console.log(tags);
         console.log("can't set value on entry-edit-view yet");
     }
+
+    // form validation boilerplate
 
     get form() { return this.internals_.form; }
     get name() { return this.getAttribute('name'); }

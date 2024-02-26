@@ -6,7 +6,8 @@ class DisplayInput extends HTMLElement {
         this.internals_ = this.attachInternals();
         this.value_ = "";
         this.display_;
-        this.input_
+        this.input_;
+        this.label_;
         this.type_ = "text";
     }
 
@@ -22,13 +23,18 @@ class DisplayInput extends HTMLElement {
         this.input_.setAttribute("type", this.type_);
         this.input_.onchange = (e) => { this.value = e.target.value };
         this.input_.classList.add("hidden");
-        this.display_.onmouseover = () => this.showInput();
-        this.input_.addEventListener("focusout", (e) => this.showDisplay());
-        wrapper.appendChild(this.input_)
-        wrapper.appendChild(this.display_)
+        this.label_ = document.createElement("label");
+        this.label_.innerHTML = this.getAttribute("name")
+        this.label_.setAttribute("for", this.getAttribute("name"));
+        // this.display_.onmouseover = () => this.showInput();
+        // this.input_.addEventListener("focusout", (e) => this.showDisplay());
+        wrapper.appendChild(this.input_);
+        wrapper.appendChild(this.label_);
+        wrapper.appendChild(this.display_);
         shadow.appendChild(wrapper);
         setTimeout(() => {
-            this.fixWidth();
+            //this.fixWidth();
+            this.showDisplay();
         });
     }
 
@@ -39,11 +45,13 @@ class DisplayInput extends HTMLElement {
     showInput() {
         this.display_.classList.add("hidden");
         this.input_.classList.remove("hidden");
+        this.label_.classList.remove("hidden");
     }
 
     showDisplay() {
         this.display_.classList.remove("hidden");
         this.input_.classList.add("hidden");
+        this.label_.classList.add("hidden");
     }
 
     formatDate(datestring) {
@@ -60,7 +68,6 @@ class DisplayInput extends HTMLElement {
         }
         this.input_.value = val;
         this.showDisplay();
-        this.input_.style.width = this.display_.offsetWidth + "px";
     }
 
 
@@ -94,6 +101,12 @@ class DisplayInput extends HTMLElement {
             }
             .hidden {
                 display: none;
+            }
+            label {
+                float: right;
+            }
+            p {
+                min-height: 1rem;
             }
         `;
     }
