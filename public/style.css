@@ -51,12 +51,12 @@ html * {
 
 */
 
-a::before {
-    content: "[";
+h1 {
+    font-size: 1.5rem;
 }
 
-a::after {
-    content: "] ";
+a::before {
+    content: "\02192";
 }
 
 a.noarrow::before {
@@ -68,7 +68,7 @@ a.noarrow::after {
 }
 
 a.noarrow {
-    color: black;
+    color: initial;
 }
 
 a.noarrow:hover {
@@ -92,35 +92,43 @@ body {
 
 
 #menu {
-    display: inline-block;
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-
+    left: 0;
+    top: 0;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin: auto;
+    padding-top: .25rem;
+    background: mistyrose;
+    font-size: 2rem;
     /*animation: 3s infinite alternate twist;*/
 }
 
-#name:hover {
-    border: 1.5px solid var(--sky);
+#name {
+    display: inline;
 }
 
-
-#name {
-    display: inline-block;
-    padding: .5rem;
-    border: 1.5px solid var(--midnight);
-    border-radius: 2rem;
-    background-color: var(--off-white);
+#name a {
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-transform: uppercase;
+    margin: .25rem;
 }
 
 #name a:hover {
     color: var(--crimson);
 }
 
+#menu-links a {
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-transform: uppercase;
+}
+
 
 .round-border {
     border: 1.5px solid black;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
 }
 
 .round-border:hover {
@@ -129,24 +137,24 @@ body {
 
 
 #menu-button {
+    float: right;
     margin-left: .5rem;
-    padding: .5rem;
-    position: relative;
+    font-size: 3rem;
+    -webkit-text-stroke: 1px black;
+    color: white;
 }
 
 #menu-links {
     padding: .5rem;
-    margin-bottom: .5rem;
-    margin-right: .5rem;
+    background: mistyrose;
 }
 
 #menu-links * {
 }
 
 .content {
-    margin-top: 1rem;
+    margin-top: 3rem;
     margin-bottom: 3rem;
-    height: calc(100vh - 4rem);
 }
 
 
@@ -225,10 +233,23 @@ ul {
     padding-bottom: 1rem;
 }
 
+.about {
+    margin-top: 30vh;
+}
+
 @media (min-width: 720px) {
     html {
         font-size: 1.5vw;
         margin: 2rem;
+    }
+
+    #name a {
+        font-size: 3rem;
+    }
+
+    #menu-links {
+        display: inline;
+        float: right;
     }
 
     .entry {
@@ -253,7 +274,6 @@ ul {
     .about {
         max-width: 40vw;
         margin-left: 40vw;
-        margin-top: 30vh;
     }
 
 }
