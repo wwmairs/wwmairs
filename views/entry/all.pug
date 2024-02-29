@@ -1,7 +1,20 @@
 extends ../layout.pug 
 
+block append scripts
+    script(src="/public/webcomponents/entry-edit-view.js" type="module")
+    script(src="/public/webcomponents/display-input.js" type="module")
+    script.
+        if (!_data) {
+            var _data = {};
+        }
+
 block content
     .content
+        if session.isWill
+            entry-edit-view#new-entry(editable=true)
+            p
+                button(onclick="document.getElementById('new-entry').classList.toggle('hidden')")
+                    | new entry
         #entries
             each entry in entries
                 .entry.entry-tile

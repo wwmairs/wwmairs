@@ -32,10 +32,6 @@ class DisplayInput extends HTMLElement {
         wrapper.appendChild(this.label_);
         wrapper.appendChild(this.display_);
         shadow.appendChild(wrapper);
-        setTimeout(() => {
-            //this.fixWidth();
-            this.showDisplay();
-        });
     }
 
     fixWidth() {
@@ -49,6 +45,7 @@ class DisplayInput extends HTMLElement {
     }
 
     showDisplay() {
+        console.log("display");
         this.display_.classList.remove("hidden");
         this.input_.classList.add("hidden");
         this.label_.classList.add("hidden");
@@ -67,7 +64,7 @@ class DisplayInput extends HTMLElement {
             this.display_.innerHTML = val;
         }
         this.input_.value = val;
-        this.showDisplay();
+        // this.showDisplay();
     }
 
 

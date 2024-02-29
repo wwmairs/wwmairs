@@ -13,17 +13,32 @@ class EntryEditView extends HTMLElement {
     connectedCallback() {
 
         var entryId = this.getAttribute("entryId");
-        this.entry_ = _data[entryId];
+        if (!entryId) { 
+            this.entry_ = {
+                "name": null,
+                "date": null,
+                "description": null,
+                "Tags": [],
+                "Photos": [],
+                "selling": null,
+                "price": null,
+                "edition": null,
+                "available": null
+            };
+            this.editing_ = true;
+        } else {
+            this.entry_ = _data[entryId];
+        }
         this.editable = this.hasAttribute("editable");
 
         //const shadow = this.attachShadow({ mode: "open" });
         const shadow = document.createElement("div");
         this.appendChild(shadow);
         const wrapper = document.createElement("div");
+        const appendField = this.appendFieldFnForWrapper(wrapper);
         const style = document.createElement("style");
         style.textContent = this.getStyle();
 
-        const appendField = this.appendFieldFnForWrapper(wrapper);
 
         appendField("name", "text");
         appendField("date", "date");
@@ -50,6 +65,9 @@ class EntryEditView extends HTMLElement {
         shadow.appendChild(style);
         shadow.appendChild(wrapper);        
 
+        setTimeout(() => {
+            this.updateDisplayInputs();
+        });
     }
 
     appendFieldFnForWrapper(wrapper) {
