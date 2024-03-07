@@ -22,16 +22,6 @@ block content
         #app
             <edit-entry :entry=entry></edit-entry>
 
-
-            //.form-group
-            //    label(for="tags") Tags
-            //    tag-select(name="tags" id="tags")
-            //        - var tagIDs = entry.Tags.map((x) => x.id);
-            //        each tag in tags
-            //            - var selected = tagIDs.includes(tag.id);
-            //            option(value=tag.id selected=selected) #{tag.name}
-
-
         .entry-photos
         if entry.Photos.length
             each photo in entry.Photos

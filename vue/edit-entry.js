@@ -7,6 +7,7 @@ export default {
         const entry = props.entry ? ref(props.entry) : ref(init());
         const imageUpload = ref(null);
         const availableTags = ref([])
+        entry.value.tags = entry.value.Tags.map((x) => x.id);
 
         onMounted(() => {
             fetch("/tags.json")
@@ -23,6 +24,14 @@ export default {
             return `../${path}`
         }
 
+        function toggleTag(tagID) {
+            var index = entry.value.tags.indexOf(tagID);
+            if (index == -1) {
+                entry.value.tags.push(tagID);
+            } else {
+                entry.value.tags.splice(index, 1);
+            }
+        }
 
         function init() {
             var date = new Date();
@@ -36,6 +45,7 @@ export default {
                 "name": "",
                 "selling": false,
                 "price": null,
+                "Tags": [],
             }
         }
 
@@ -63,12 +73,20 @@ export default {
                 .then( res => {
                     console.log(res);
                 })
-                .error( res => {
-                    console.error(res);
+                .catch( err => {
+                    console.error(err);
                 });
         }
 
-        return { entry, dateDisplay, photopath, imageUpload, save}
+        return { 
+            entry, 
+            dateDisplay, 
+            availableTags,
+            toggleTag,
+            photopath, 
+            imageUpload, 
+            save
+        }
     },
     template: `
         <div>
@@ -116,6 +134,18 @@ export default {
                        id="imageUpload" 
                        type="file" 
                        multiple="multiple"/>
+            </div>
+            <div>
+                <label for="tags-input"></label>
+                <div id="tags-input" class="tag-select">
+                    <option v-for="tag in availableTags"
+                            :value="tag.id"
+                            :selected="entry.tags.includes(tag.id)"
+                            @click="toggleTag(tag.id)"
+                            class="tag-option">
+                            {{ tag.name }}
+                    </option>
+                </div>
             </div>
             <div>
                 <label for="save-button"></label>
