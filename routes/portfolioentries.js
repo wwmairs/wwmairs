@@ -132,7 +132,7 @@ function defineRoutes(app) {
 	
 	app.get("/", getEntries);
 	
-	app.post("/entry/save", onlyWill, upload.array("photo"), saveEntry);
+	app.post("/entry/save", onlyWill, upload.array("imageUpload"), saveEntry);
 	
 	app.get("/entry/create", onlyWill, (req, res) => {
 		res.render("entry/create");

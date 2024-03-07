@@ -1,31 +1,27 @@
 extends ../layout.pug 
 
 block append scripts
-    script(type="module").
-        import { createApp, ref } from "vue"
-        import NewEntry from "./vue/new-entry.js"
+    if session.isWill
+        script(type="module").
+            import { createApp, ref } from "vue"
+            import NewEntry from "./vue/new-entry.js"
 
 
-        createApp({
-            components: {
-                NewEntry
-            },
-            setup() {
-                const count = ref(0);
-                return { count }
-            }
-        })
-        .mount("#app");
+            createApp({
+                components: {
+                    NewEntry
+                },
+                setup() {
+                    const count = ref(0);
+                    return { count }
+                }
+            })
+            .mount("#app");
 
 block content
     .content
         #app
             <new-entry></new-entry>
-        if session.isWill
-            entry-edit-view#new-entry(editable=true)
-            p
-                button(onclick="document.getElementById('new-entry').classList.toggle('hidden')")
-                    | new entry
         #entries
             each entry in entries
                 .entry.entry-tile

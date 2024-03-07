@@ -5,6 +5,7 @@ export default {
     props: ["entry"],
     setup(props) {
         const entry = props.entry ? ref(props.entry) : ref(init());
+        const imageUpload = ref(null);
 
         const dateDisplay = computed(() => {
             var date = new Date(entry.value.date);
@@ -17,22 +18,47 @@ export default {
 
 
         function init() {
+            var date = new Date();
+            date = `${date.getYear()}-${date.getMonth()}-${date.getDate()}`;
             return {
                 "available": 0,
-                "date": new Date().toDateString(),
+                "date": date,
                 "description": "",
                 "edition": 1,
                 "link": "",
                 "name": "",
                 "selling": false,
-                "price": null
+                "price": null,
             }
         }
 
-        function save() {
+        function filesAdded() {
+            console.log(imageUpload.value.files);
         }
 
-        return { entry, dateDisplay, photopath, save}
+        function save() {
+            var formData = new FormData();
+
+            for (var key in entry.value) {
+                formData.append(key, entry[key]);
+                console.log(key, entry[key]);
+            }
+
+            formData.append("imageUpload", imageUpload.value.files);
+
+            var options = {
+                method: "POST",
+                body: formData 
+            };
+
+
+            fetch("/entry/save", options)
+                .then( res => {
+                    console.log(res);
+                });
+        }
+
+        return { entry, dateDisplay, photopath, filesAdded, imageUpload, save}
     },
     template: `
         <div>
@@ -74,10 +100,17 @@ export default {
                 <label for="description-textarea">description</label>
                 <textarea v-model="entry.description" id="description-textarea"/>
             </div>
-            <div class="entry-photos">
-                <img class="entry-img round-border"
-                     v-for="photo in entry.Photos" 
-                     :src=photopath(photo.path)>
+            <div>
+                <label for="imageUpload"></label>
+                <input ref="imageUpload" 
+                       @change="filesAdded()"
+                       id="imageUpload" 
+                       type="file" 
+                       multiple="multiple"/>
+            </div>
+            <div>
+                <label for="save-button"></label>
+                <button id="save-button" @click="save()">save</button>
             </div>
         </div>`
 }
