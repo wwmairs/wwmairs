@@ -40,11 +40,15 @@ export default {
             var formData = new FormData();
 
             for (var key in entry.value) {
-                formData.append(key, entry[key]);
-                console.log(key, entry[key]);
+                formData.append(key, entry.value[key]);
             }
 
-            formData.append("imageUpload", imageUpload.value.files);
+            for (var i = 0; i < imageUpload.value.files.length; i++) {
+                var file = imageUpload.value.files[i];
+                console.log(file)
+                formData.append("imageUpload", file)
+            }
+
 
             var options = {
                 method: "POST",
