@@ -9,13 +9,14 @@ import onlyWill from "../middleware.js";
 const Tag = db.sequelize.models.Tag;
 
 
-function getTags(req, res) {
+function createTags(req, res) {
     Tag.findAll().then((tags) => {
         res.render("tag/edit", {tags: tags});
     });
 }
 
-function findAllTags() {
+function getTags(req, res) {
+    Tag.findAll().then((tags) => res.json(tags));
 }
 
 function saveTag(req, res) {
@@ -48,7 +49,9 @@ function saveTag(req, res) {
 
 function defineRoutes(app) {
 
-	app.get("/tags", onlyWill, getTags);
+	app.get("/tags/create", onlyWill, createTags);
+
+    app.get("/tags.json", onlyWill, getTags)
 	
 	app.post("/tags/save", onlyWill, saveTag);
 }

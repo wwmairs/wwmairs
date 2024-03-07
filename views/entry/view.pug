@@ -5,16 +5,15 @@ block title
 
 block append scripts
     script(type="module").
-        import {createApp, ref } from "vue"
+        import { createApp, ref } from "vue"
         import Entry from "/vue/entry.js"
         createApp({
             components: {
                 Entry
             },
             setup() {
-                const entryID = ref("#{entry.id}");
-                var entry = JSON.parse('!{JSON.stringify(entry)}');
-                return { entryID, entry }
+                var entry = JSON.parse(`!{JSON.stringify(entry)}`);
+                return { entry }
             }
         }).mount("#app")
 

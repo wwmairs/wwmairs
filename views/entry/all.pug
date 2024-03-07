@@ -4,12 +4,12 @@ block append scripts
     if session.isWill
         script(type="module").
             import { createApp, ref } from "vue"
-            import NewEntry from "./vue/new-entry.js"
+            import EditEntry from "./vue/edit-entry.js"
 
 
             createApp({
                 components: {
-                    NewEntry
+                    EditEntry
                 },
                 setup() {
                     const count = ref(0);
@@ -21,7 +21,7 @@ block append scripts
 block content
     .content
         #app
-            <new-entry></new-entry>
+            <edit-entry></edit-entry>
         #entries
             each entry in entries
                 .entry.entry-tile

@@ -77,19 +77,17 @@ function saveEntry(req, res) {
 				oldEntry.update(portfolioEntry)
 				.then((entryInstance) => {
 					portfolioEntry.Photos.map((photo) => {
-                        if (!photo.id) {
-						    photo.portfolioEntryId = entryInstance.id;
-						    Photo.create(photo)
-                        }
+					    photo.portfolioEntryId = entryInstance.id;
+					    Photo.create(photo)
 					});
 					updateAnyTagsOnEntry(req, entryInstance);
+                    res.json(portfolioEntry);
 				});
 			} else {
 				throw new Error("no entry with that id to update");
 			}
 		});
 	}
-    res.sendStatus(200);
 }
 
 function updateAnyTagsOnEntry(req, entry) {

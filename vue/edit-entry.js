@@ -1,4 +1,4 @@
-import { ref, watchEffect, computed } from "vue"
+import { ref, onMounted, computed } from "vue"
 
 
 export default {
@@ -6,6 +6,13 @@ export default {
     setup(props) {
         const entry = props.entry ? ref(props.entry) : ref(init());
         const imageUpload = ref(null);
+        const availableTags = ref([])
+
+        onMounted(() => {
+            fetch("/tags.json")
+            .then(res => res.json())
+            .then(json => availableTags.value = json);
+        })
 
         const dateDisplay = computed(() => {
             var date = new Date(entry.value.date);
@@ -32,10 +39,6 @@ export default {
             }
         }
 
-        function filesAdded() {
-            console.log(imageUpload.value.files);
-        }
-
         function save() {
             var formData = new FormData();
 
@@ -59,10 +62,13 @@ export default {
             fetch("/entry/save", options)
                 .then( res => {
                     console.log(res);
+                })
+                .error( res => {
+                    console.error(res);
                 });
         }
 
-        return { entry, dateDisplay, photopath, filesAdded, imageUpload, save}
+        return { entry, dateDisplay, photopath, imageUpload, save}
     },
     template: `
         <div>
@@ -107,7 +113,6 @@ export default {
             <div>
                 <label for="imageUpload"></label>
                 <input ref="imageUpload" 
-                       @change="filesAdded()"
                        id="imageUpload" 
                        type="file" 
                        multiple="multiple"/>

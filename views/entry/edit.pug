@@ -1,59 +1,37 @@
 extends ../layout.pug   
 
 
-block content
-    script(src="/public/webcomponents/tag-select.js")
-    script(src="/public/webcomponents/edit-entry.js")
-    .content
-        - entry = entry ?? {date: new Date(), Photos: [], Tags: []};
-        form(action="/entry/save" method="post" enctype="multipart/form-data")
-            input(type="hidden" id="id" name="id" value=entry.id)
-            .form-group
-                label(for="name") Name
-                input(type="text" id="name" name="name" 
-                          placeholder="name" required="required"
-                            value=entry.name)
-            .form-group
-                label(for="date") Date
-                - var date = entry.date.toISOString().split("T")[0];
-                input(type="date" id="date" name="date" value=date)
-            .form-group
-                label(for="edition") Edition Size
-                input(type="number" min="1" id="edition" name="edition"
-                      value=entry.edition)
-            .form-group
-                label(for="selling") For sale ?
-                input(type="checkbox" id="selling" name="selling" 
-                      checked=entry.selling)
-            .form-group
-                label(for="price") Price
-                input(type="number" min="0" step=".01" id="price"
-                      name="price" value=entry.price)
-            .form-group
-                label(for="available") Copies Available
-                input(type="number" min="0" id="available" 
-                      name="available" value=entry.available)
-            .form-group
-                label(for="link") Link
-                input(type="text" id="link" 
-                      name="link" placeholder="link" value=entry.link)
-            .form-group
-                label(for="description") Description
-                textarea(id="description" name="description" 
-                               placeholder="description") #{entry.description}
-            .form-group
-                label(for="photo") Photo
-                input(type="file" multiple="multiple" id="photo" name="photo")
+block append scripts
+    - entry = entry ?? "";
+    script(type="module").
+        import { createApp, ref } from "vue"
+        import EditEntry from "/vue/edit-entry.js"
 
-            .form-group
-                label(for="tags") Tags
-                tag-select(name="tags" id="tags")
-                    - var tagIDs = entry.Tags.map((x) => x.id);
-                    each tag in tags
-                        - var selected = tagIDs.includes(tag.id);
-                        option(value=tag.id selected=selected) #{tag.name}
-            .form-group
-                button(type="submit") Upload!
+        createApp({
+            components: {
+                EditEntry
+            },
+            setup() {
+                var entry = JSON.parse(`!{JSON.stringify(entry)}`);
+                return { entry }
+            }
+        }).mount("#app");
+
+block content
+    .content
+        #app
+            <edit-entry :entry=entry></edit-entry>
+
+
+            //.form-group
+            //    label(for="tags") Tags
+            //    tag-select(name="tags" id="tags")
+            //        - var tagIDs = entry.Tags.map((x) => x.id);
+            //        each tag in tags
+            //            - var selected = tagIDs.includes(tag.id);
+            //            option(value=tag.id selected=selected) #{tag.name}
+
+
         .entry-photos
         if entry.Photos.length
             each photo in entry.Photos
