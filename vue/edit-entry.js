@@ -8,6 +8,7 @@ export default {
         const imageUpload = ref(null);
         const availableTags = ref([])
         entry.value.tags = entry.value.Tags.map((x) => x.id);
+        entry.value.date = justDateFromISO(entry.value.date);
 
         onMounted(() => {
             fetch("/tags.json")
@@ -19,6 +20,11 @@ export default {
             var date = new Date(entry.value.date);
             return `${date.getMonth() + 1}/${date.getFullYear()}`;
         })
+
+        function justDateFromISO(str) {
+            var date = new Date(str);
+            return date.toISOString().substring(0, 10);
+        }
 
         function photopath(path) {
             return `../${path}`
@@ -34,8 +40,7 @@ export default {
         }
 
         function init() {
-            var date = new Date();
-            date = `${date.getYear()}-${date.getMonth()}-${date.getDate()}`;
+            var date = new Date().toISOString().substring(0, 10);
             return {
                 "available": 0,
                 "date": date,
@@ -58,7 +63,6 @@ export default {
 
             for (var i = 0; i < imageUpload.value.files.length; i++) {
                 var file = imageUpload.value.files[i];
-                console.log(file)
                 formData.append("imageUpload", file)
             }
 
@@ -72,6 +76,7 @@ export default {
             fetch("/entry/save", options)
                 .then( res => {
                     console.log(res);
+                    window.location.reload();
                 })
                 .catch( err => {
                     console.error(err);
@@ -81,6 +86,7 @@ export default {
         return { 
             entry, 
             dateDisplay, 
+            justDateFromISO,
             availableTags,
             toggleTag,
             photopath, 
@@ -89,7 +95,7 @@ export default {
         }
     },
     template: `
-        <div>
+        <div class="form">
             <div>
                 <label for="name-input">name:</label>
                 <input v-model="entry.name" id="name-input" type="text"/>

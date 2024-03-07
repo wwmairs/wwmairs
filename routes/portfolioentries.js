@@ -51,6 +51,22 @@ function getEntries(req, res) {
 		});
 }
 
+function getEntriesByTag(req, res) {
+    PortfolioEntry.findAll({
+        include: [{
+            model: Photo,
+            required: false,
+        }, {
+            model: Tag,
+            required: true,
+            where: {
+                name: req.params.tagname
+            }
+        }],
+        order: [["date", "DESC"]] })
+        .then(entries => res.json(entries));
+}
+
 function saveEntry(req, res) {
 	var portfolioEntry = {
         id: uuidv4(),
@@ -129,6 +145,8 @@ function defineRoutes(app) {
 	app.get("/entry/:id", view);
 	
 	app.get("/", getEntries);
+
+    app.get("/entry/tag/:tagname", getEntriesByTag);
 	
 	app.post("/entry/save", onlyWill, upload.array("imageUpload"), saveEntry);
 	
