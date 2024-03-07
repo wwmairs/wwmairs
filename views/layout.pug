@@ -16,6 +16,12 @@ html
                      referrerpolicy="no-referrer")
         link(href="/public/style.css" rel="stylesheet")
         link(rel="stylesheet" href="https://use.typekit.net/gjr2olc.css")
+        script(type="importmap").
+            {
+                "imports": {
+                    "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+                }
+            }
         script(src="/public/webcomponents/entrytag.js" type="module")
     body
         <!-- Google Tag Manager (noscript) -->
@@ -23,6 +29,9 @@ html
             iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-MZDPX9K9"
             height="0" width="0" style="display:none;visibility:hidden")
         <!-- End Google Tag Manager (noscript) -->
+
+
+
         #menu
             #name 
                 a.noarrow(href="/") wwmairs

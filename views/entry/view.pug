@@ -4,14 +4,21 @@ block title
     title WWMAIRS - #{entry.name}
 
 block append scripts
-    script(src="/public/webcomponents/entry-edit-view.js" type="module")
-    script(src="/public/webcomponents/display-input.js" type="module")
-    script.
-        if (!_data) {
-            var _data = {};
-        }
-        _data['#{entry.id}'] = !{JSON.stringify(entry)};
+    script(type="module").
+        import {createApp, ref } from "vue"
+        import Entry from "/vue/entry.js"
+        createApp({
+            components: {
+                Entry
+            },
+            setup() {
+                const entryID = ref("#{entry.id}");
+                var entry = JSON.parse('!{JSON.stringify(entry)}');
+                return { entryID, entry }
+            }
+        }).mount("#app")
 
 block content
     .content
-        entry-edit-view(entryId=entry.id editable=session.isWill)
+        #app
+            <Entry :id=entryID :entry=entry></Entry>
