@@ -1,4 +1,5 @@
-[
+export default 
+  [
   {
     "name": "Black",
     "hex": "#000000",

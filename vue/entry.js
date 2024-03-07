@@ -1,8 +1,12 @@
 import { ref, watchEffect, computed } from "vue"
+import Tags from "/vue/tags.js"
 
 
 export default {
     props: ["entry"],
+    components: {
+        Tags
+    },
     setup(props) {
         const entry = ref(props.entry);
 
@@ -21,6 +25,7 @@ export default {
             <h4>{{ entry.name }}</h4>
             <p><i>{{ dateDisplay }}</i></p>
             <p>{{ entry.description }}</p>
+            <Tags :tags="entry.Tags"></Tags>
             <div class="entry-photos">
                 <img class="entry-img round-border"
                      v-for="photo in entry.Photos" 
