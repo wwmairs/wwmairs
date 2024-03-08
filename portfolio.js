@@ -16,6 +16,7 @@ app.set("view engine", "pug");
 app.use("/archive", express.static("../wwmairs"));
 app.use("/uploads", express.static("uploads"));
 app.use("/public", express.static("public"));
+app.use("/vue", express.static("vue"));
 
 app.use("/robots.txt", (req, res, next) => {
     res.type("text/plain");
@@ -53,6 +54,10 @@ loadRoutes(app);
 
 app.get("/about", (req, res) => {
     res.render("about");
+});
+
+app.get("/", (req, res) => {
+    res.render("index");
 });
 
 

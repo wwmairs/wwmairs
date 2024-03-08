@@ -1,67 +1,5 @@
-class EntryTags extends HTMLElement {
-    constructor() {
-        super();
-    }
-
-    connectedCallback() {
-        // check data
-        // set style
-
-        const shadow = this.attachShadow({ mode: "open" });
-        const wrapper = document.createElement("div");
-
-        this.tags.map((tag) => {
-            tag.colorInfo = colors.find((color) => color.name.toLowerCase() == tag.name.toLowerCase());
-        });
-        this.tags.sort((a, b) => !a.colorInfo && b.colorInfo ? -1 : 0);
-
-        for (var tag of this.tags) {
-            var span = document.createElement("span");
-            span.setAttribute("class", "tag");
-            span.textContent = tag.colorInfo ? "" : tag.name;
-            span.style = `background: ${tag.colorInfo ? tag.colorInfo.hex : "initial"};`;
-            wrapper.appendChild(span);
-        }
-
-
-        const style = document.createElement("style");
-        style.textContent = this.getStyle();
-
-
-
-        shadow.appendChild(style);
-        shadow.appendChild(wrapper);
-
-    }
-
-    getStyle() {
-        return `
-            .tags {
-            }
-
-            .tag {
-                font-size: .7rem;
-                text-transform: uppercase;
-                display: inline-block;
-                border: 1px solid black;
-                border-radius: 1rem;
-                padding: .25rem;
-                margin-top: .25rem;
-                margin-bottom: .25rem;
-                min-width: .75rem;
-                min-height: .75rem;
-                vertical-align: bottom;
-            }
-
-            .tag:not(:last-child) {
-                margin-right: .25rem;
-            }
-        `;
-    }
-
-}
-
-const colors = [
+export default 
+  [
   {
     "name": "Black",
     "hex": "#000000",
@@ -528,6 +466,4 @@ const colors = [
     "pantone": "802 U",
     "zType": "S-7763"
   }
-];
-
-customElements.define("entry-tags", EntryTags);
+]

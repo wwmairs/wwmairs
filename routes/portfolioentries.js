@@ -19,7 +19,7 @@ function view(req, res) {
 		.then(portfolioEntry => {
             Tag.findAll().then((tags) => {
                 /* this silly logic is just for dev*/
-			    res.render(req.session.isWill ? "entry/view" : "entry/view", 
+			    res.render(req.session.isWill ? "entry/edit" : "entry/view", 
                            { tags: tags, entry: portfolioEntry });
             });
 		});
@@ -51,6 +51,38 @@ function getEntries(req, res) {
 		});
 }
 
+function showByTag(req, res) {
+    PortfolioEntry.findAll({
+        include: [{
+            model: Photo,
+            required: false,
+        }, {
+            model: Tag,
+            required: true,
+            where: {
+                name: req.params.tagname
+            }
+        }],
+        order: [["date", "DESC"]] })
+        .then(entries => res.render("things", {entries: entries}));
+}
+
+function getEntriesByTag(req, res) {
+    PortfolioEntry.findAll({
+        include: [{
+            model: Photo,
+            required: false,
+        }, {
+            model: Tag,
+            required: true,
+            where: {
+                name: req.params.tagname
+            }
+        }],
+        order: [["date", "DESC"]] })
+        .then(entries => res.json(entries));
+}
+
 function saveEntry(req, res) {
 	var portfolioEntry = {
         id: uuidv4(),
@@ -77,19 +109,17 @@ function saveEntry(req, res) {
 				oldEntry.update(portfolioEntry)
 				.then((entryInstance) => {
 					portfolioEntry.Photos.map((photo) => {
-                        if (!photo.id) {
-						    photo.portfolioEntryId = entryInstance.id;
-						    Photo.create(photo)
-                        }
+					    photo.portfolioEntryId = entryInstance.id;
+					    Photo.create(photo)
 					});
 					updateAnyTagsOnEntry(req, entryInstance);
+                    res.json(portfolioEntry);
 				});
 			} else {
 				throw new Error("no entry with that id to update");
 			}
 		});
 	}
-    res.sendStatus(200);
 }
 
 function updateAnyTagsOnEntry(req, entry) {
@@ -127,18 +157,22 @@ function extractPhotosIfAny(req) {
 }
 
 function defineRoutes(app) {
+	
+    app.get("/entry/all/", getEntries);
 
-	app.get("/entry/:id", view);
+    app.get("/entry/tag/:tagname", getEntriesByTag);
+
+    app.get("/things/:tagname", showByTag);
 	
-	app.get("/", getEntries);
-	
-	app.post("/entry/save", onlyWill, upload.array("photo"), saveEntry);
+	app.post("/entry/save", onlyWill, upload.array("imageUpload"), saveEntry);
 	
 	app.get("/entry/create", onlyWill, (req, res) => {
 		res.render("entry/create");
 	});
 
 	app.get("/entry/edit/:id", onlyWill, edit);
+	
+    app.get("/entry/:id", view);
 
 }
 

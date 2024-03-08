@@ -1,6 +1,30 @@
-extends layout.pug
+extends ./layout.pug 
+
+block append scripts
+    script(type="module").
+        import { createApp, ref } from "vue"
+        import EditEntry from "./vue/edit-entry.js"
+        import EntriesByTag from "./vue/entries-by-tag.js"
+
+        createApp({
+            components: {
+                EditEntry,
+                EntriesByTag
+            },
+            setup() {
+                const count = ref(0);
+                return { count }
+            }
+        })
+        .mount("#app");
 
 block content
-	div.border
-	h1 +--wwmairs--+
-	div.border
+    .content
+        #app
+            <div>
+                <entries-by-tag tagname="zine"></entries-by-tag>
+                <entries-by-tag tagname="print"></entries-by-tag>
+            </div>
+        if session.isWill
+            div.block
+                <edit-entry></edit-entry>

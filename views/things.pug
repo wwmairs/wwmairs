@@ -1,0 +1,30 @@
+extends ./layout.pug 
+
+block append scripts
+    script(type="module").
+        import { createApp, ref } from "vue"
+        import Entry from "/vue/entry.js"
+        import EditEntry from "/vue/edit-entry.js"
+        import EntriesByTag from "/vue/entries-by-tag.js"
+
+        createApp({
+            components: {
+                Entry,
+                EditEntry,
+                EntriesByTag
+            },
+            setup() {
+                const entries = JSON.parse(`!{JSON.stringify(entries)}`);
+                return { entries }
+            }
+        })
+        .mount("#app");
+
+block content
+    .content
+        #app.block
+            <div v-for="entry in entries">
+                <Entry :entry="entry"></Entry>
+            </div>
+            if session.isWill
+                <edit-entry></edit-entry>
