@@ -23,7 +23,7 @@ export default {
     template: `
         <div>
             <h4>{{ entry.name }}</h4>
-            <p><i>{{ dateDisplay }}</i></p>
+            <span><i>{{ dateDisplay }}</i></span>
             <p>{{ entry.description }}</p>
             <Tags :tags="entry.Tags"></Tags>
             <div class="entry-photos">

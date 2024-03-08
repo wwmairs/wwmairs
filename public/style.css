@@ -67,8 +67,12 @@ body {
 
 p {
     margin-bottom: 1rem;
+}
+
+.indent {
     text-indent: 50%;
 }
+
 .block {
     margin: 1rem;
 }
@@ -306,6 +310,10 @@ ul {
         font-size: 1.5vw;
     }
 
+    .about {
+        margin-left: 40vw;
+    }
+
     h1 { 
         font-size: 4.5rem;
     }
@@ -340,10 +348,6 @@ ul {
     .entry-tile > .tags {
         max-width: 8rem;
         float: right;
-    }
-
-    .about {
-        margin-left: 40vw;
     }
 
     .full-width-label {
