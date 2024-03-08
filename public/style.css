@@ -75,6 +75,7 @@ p {
 
 .block {
     margin: 1rem;
+    overflow: hidden;
 }
 
 .img-link {
@@ -207,7 +208,10 @@ p {
     float: left;
 }
 
-.entries-by-tag {
+.entries-by-tag:not(:last-child) {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px dashed black;
 
 }
 
