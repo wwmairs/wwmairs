@@ -3,17 +3,19 @@ extends ./layout.pug
 block append scripts
     script(type="module").
         import { createApp, ref } from "vue"
-        import EditEntry from "./vue/edit-entry.js"
-        import EntriesByTag from "./vue/entries-by-tag.js"
+        import Entry from "/vue/entry.js"
+        import EditEntry from "/vue/edit-entry.js"
+        import EntriesByTag from "/vue/entries-by-tag.js"
 
         createApp({
             components: {
+                Entry,
                 EditEntry,
                 EntriesByTag
             },
             setup() {
-                const count = ref(0);
-                return { count }
+                const entries = JSON.parse(`!{JSON.stringify(entries)}`);
+                return { entries }
             }
         })
         .mount("#app");
@@ -21,10 +23,8 @@ block append scripts
 block content
     .content
         #app
-            <div>
-                <entries-by-tag tagname="zine"></entries-by-tag>
-                <entries-by-tag tagname="print"></entries-by-tag>
+            <div v-for="entry in entries">
+                <Entry :entry="entry"></Entry>
             </div>
-        if session.isWill
-            div.block
+            if session.isWill
                 <edit-entry></edit-entry>

@@ -1,27 +1,10 @@
 extends ../layout.pug 
 
-block append scripts
-    if session.isWill
-        script(type="module").
-            import { createApp, ref } from "vue"
-            import EditEntry from "./vue/edit-entry.js"
-
-
-            createApp({
-                components: {
-                    EditEntry
-                },
-                setup() {
-                    const count = ref(0);
-                    return { count }
-                }
-            })
-            .mount("#app");
+block title
+    title WWMAIRS - all entries
 
 block content
     .content
-        #app
-            <edit-entry></edit-entry>
         #entries
             each entry in entries
                 .entry.entry-tile
@@ -29,5 +12,5 @@ block content
                         - var photo = entry.Photos[0];
                         - var url = "/entry/" + entry.id;
                         a.noarrow(href=url name=entry.name)
-                            img.round-border.entry-img(src=photo.path)
+                            img.round-border.entry-img(src="../../" + photo.path)
                     

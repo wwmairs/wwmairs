@@ -19,7 +19,7 @@ function view(req, res) {
 		.then(portfolioEntry => {
             Tag.findAll().then((tags) => {
                 /* this silly logic is just for dev*/
-			    res.render(req.session.isWill ? "entry/view" : "entry/view", 
+			    res.render(req.session.isWill ? "entry/edit" : "entry/view", 
                            { tags: tags, entry: portfolioEntry });
             });
 		});
@@ -49,6 +49,22 @@ function getEntries(req, res) {
                                           entries: entries});
             });
 		});
+}
+
+function showByTag(req, res) {
+    PortfolioEntry.findAll({
+        include: [{
+            model: Photo,
+            required: false,
+        }, {
+            model: Tag,
+            required: true,
+            where: {
+                name: req.params.tagname
+            }
+        }],
+        order: [["date", "DESC"]] })
+        .then(entries => res.render("things", {entries: entries}));
 }
 
 function getEntriesByTag(req, res) {
@@ -141,12 +157,12 @@ function extractPhotosIfAny(req) {
 }
 
 function defineRoutes(app) {
-
-	app.get("/entry/:id", view);
 	
-	app.get("/", getEntries);
+    app.get("/entry/all/", getEntries);
 
     app.get("/entry/tag/:tagname", getEntriesByTag);
+
+    app.get("/things/:tagname", showByTag);
 	
 	app.post("/entry/save", onlyWill, upload.array("imageUpload"), saveEntry);
 	
@@ -155,6 +171,8 @@ function defineRoutes(app) {
 	});
 
 	app.get("/entry/edit/:id", onlyWill, edit);
+	
+    app.get("/entry/:id", view);
 
 }
 
