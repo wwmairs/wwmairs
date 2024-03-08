@@ -1,8 +1,9 @@
 extends layout.pug
 
 block content   
-    form(action="/login" method="POST").form
-        h4= "are you will?"
-        input(type="password" name="proof" placeholder="prove it")
-        input(type="submit")
-
+    .content
+        form(action="/login" method="POST").form.block
+            h4= "are you will?"
+            input(type="password" name="proof" placeholder="prove it")
+            input(type="submit")
+    

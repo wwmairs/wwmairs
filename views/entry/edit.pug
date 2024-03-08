@@ -19,10 +19,10 @@ block append scripts
 
 block content
     .content
-        #app
+        #app.block
             <edit-entry :entry=entry></edit-entry>
 
-        .entry-photos
-        if entry.Photos.length
-            each photo in entry.Photos
-                img.round-border.entry-img(src="/" + photo.path)
+        .entry-photos.block
+            if entry.Photos.length
+                each photo in entry.Photos
+                    img.round-border.entry-img(src="/" + photo.path)
