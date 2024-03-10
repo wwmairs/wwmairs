@@ -2,7 +2,10 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import { v4 as uuidv4 } from "uuid";
+import { promisify } from "util";
 import multer from "multer";
+import fs from "fs";
+import convert from "heic-convert";
 import db from "../models/index.js";
 
 import onlyWill from "../middleware.js";
@@ -141,6 +144,10 @@ function extractPhotosIfAny(req) {
 	
 	if (req.files) {
 		req.files.map(file => {
+            if (file.mimetype == "image/heic") {
+                convertHEIC(file);
+                file.mimetype = "image/jpeg";
+            }
 			photos.push({
                 id: uuidv4(),
 				name: file.originalname,
@@ -156,6 +163,18 @@ function extractPhotosIfAny(req) {
 	return photos;
 }
 
+async function convertHEIC(file) {
+    const inputBuffer = await promisify(fs.readFile)(file.path);
+    const outputBuffer = await convert({
+        buffer: inputBuffer,
+        format: "JPEG",
+        quality: 1
+    });
+
+    await promisify(fs.writeFile)(file.path, outputBuffer);
+}
+
+
 function defineRoutes(app) {
 	
     app.get("/entry/all/", getEntries);
@@ -167,7 +186,7 @@ function defineRoutes(app) {
 	app.post("/entry/save", onlyWill, upload.array("imageUpload"), saveEntry);
 	
 	app.get("/entry/create", onlyWill, (req, res) => {
-		res.render("entry/create");
+		res.render("entry/edit");
 	});
 
 	app.get("/entry/edit/:id", onlyWill, edit);

@@ -870,6 +870,22 @@ hasown@^2.0.0:
   dependencies:
     function-bind "^1.1.2"
 
+heic-convert@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/heic-convert/-/heic-convert-2.1.0.tgz"
+  integrity sha512-1qDuRvEHifTVAj3pFIgkqGgJIr0M3X7cxEPjEp0oG4mo8GFjq99DpCo8Eg3kg17Cy0MTjxpFdoBHOatj7ZVKtg==
+  dependencies:
+    heic-decode "^2.0.0"
+    jpeg-js "^0.4.4"
+    pngjs "^6.0.0"
+
+heic-decode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/heic-decode/-/heic-decode-2.0.0.tgz"
+  integrity sha512-NU+zsiDvdL+EebyTjrEqjkO2XYI7FgLhQzsbmO8dnnYce3S0PBSDm/ZyI4KpcGPXYEdb5W72vp/AQFuc4F8ASg==
+  dependencies:
+    libheif-js "^1.17.1"
+
 http-cache-semantics@^4.1.0:
   version "4.1.1"
   resolved "https://registry.npmjs.org/http-cache-semantics/-/http-cache-semantics-4.1.1.tgz"
@@ -1020,6 +1036,11 @@ isexe@^2.0.0:
   resolved "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
+jpeg-js@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.npmjs.org/jpeg-js/-/jpeg-js-0.4.4.tgz"
+  integrity sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==
+
 js-beautify@^1.14.5:
   version "1.14.7"
   resolved "https://registry.npmjs.org/js-beautify/-/js-beautify-1.14.7.tgz"
@@ -1051,6 +1072,11 @@ jstransformer@1.0.0:
   dependencies:
     is-promise "^2.0.0"
     promise "^7.0.1"
+
+libheif-js@^1.17.1:
+  version "1.17.1"
+  resolved "https://registry.npmjs.org/libheif-js/-/libheif-js-1.17.1.tgz"
+  integrity sha512-g9wBm/CasGZMjmH3B2sD9+AO7Y5+79F0oPS+sdAulSxQeYeCeiTIP+lDqvlPofD+y76wvfVtotKZ8AuvZQnWgg==
 
 lodash@^4.17.21:
   version "4.17.21"
@@ -1428,6 +1454,11 @@ pg-connection-string@^2.5.0:
   version "2.6.0"
   resolved "https://registry.npmjs.org/pg-connection-string/-/pg-connection-string-2.6.0.tgz"
   integrity sha512-x14ibktcwlHKoHxx9X3uTVW9zIGR41ZB6QNhHb21OPNdCCO3NaRnpJuwKIQSR4u+Yqjx4HCvy7Hh7VSy1U4dGg==
+
+pngjs@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npmjs.org/pngjs/-/pngjs-6.0.0.tgz"
+  integrity sha512-TRzzuFRRmEoSW/p1KVAmiOgPco2Irlah+bGFCeNfJXxxYGwSw7YwAOAcd7X28K/m5bjBWKsC29KyoMfHbypayg==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"

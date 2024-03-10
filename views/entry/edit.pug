@@ -23,6 +23,6 @@ block content
             <edit-entry :entry=entry></edit-entry>
 
         .entry-photos.block
-            if entry.Photos.length
+            if entry.Photos
                 each photo in entry.Photos
                     img.round-border.entry-img(src="/" + photo.path)
