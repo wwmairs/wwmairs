@@ -42,9 +42,15 @@ export default {
                class="noarrow">
                 <h1 class="full-width-label"> more {{ tagname }}s </h1>
             </a>
-            <div class="block">
-                <EntryTile v-for="entry in rest"
-                           :entry="entry"></EntryTile>
+            <div class="block grid">
+                <div class="col-1">
+                    <EntryTile v-for="entry, i in rest.filter((e,i)=>i%2-1)"
+                               :entry="entry"></EntryTile>
+                </div>
+                <div :class="col-2">
+                    <EntryTile v-for="entry, i in rest.filter((e,i)=>i%2)"
+                               :entry="entry"></EntryTile>
+                </div>
             </div>
         </div>`
 }

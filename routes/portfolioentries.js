@@ -56,18 +56,12 @@ function getEntries(req, res) {
 
 function showByTag(req, res) {
     PortfolioEntry.findAll({
-        include: [{
-            model: Photo,
-            required: false,
-        }, {
-            model: Tag,
-            required: true,
-            where: {
-                name: req.params.tagname
-            }
-        }],
+        include: [ Photo, Tag],
         order: [["date", "DESC"]] })
-        .then(entries => res.render("things", {entries: entries}));
+        .then(entries => {
+            var filtered = entries.filter(e => e.Tags.some(t => t.name == req.params.tagname));
+            res.render("things", {entries: filtered})
+        });
 }
 
 function getEntriesByTag(req, res) {
