@@ -144,13 +144,14 @@ export default {
             <div>
                 <label for="tags-input"></label>
                 <div id="tags-input" class="tag-select">
-                    <option v-for="tag in availableTags"
+                    <span v-for="tag in availableTags"
                             :value="tag.id"
                             :selected="entry.tags.includes(tag.id)"
                             @click="toggleTag(tag.id)"
+                            :class="{ checked: entry.tags.includes(tag.id) }"
                             class="tag-option">
                             {{ tag.name }}
-                    </option>
+                    </span>
                 </div>
             </div>
             <div>

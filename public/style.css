@@ -269,7 +269,7 @@ p {
     border-radius: 1em;
 }
 
-.tag-option:checked {
+.tag-option.checked {
     border: 1px solid black;
     border-radius: 1rem;
     background: var(--green);
@@ -293,6 +293,7 @@ input {
     width: -moz-available;
     width: -webkit-fill-available;
     margin-bottom: .25rem;
+    font-size: inherit;
 }
 
 textarea {
