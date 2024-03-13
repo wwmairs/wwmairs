@@ -4,6 +4,7 @@ html {
     --hunter-green: #407060;
     --green: #00a95c;
     --sky: #4982cf;
+    --aqua: #5ec8e5;
     --crimson: #e45d50;
     --melon: #ffae3b;
 	--off-white: #f0ede6;
@@ -28,6 +29,10 @@ h1 {
     text-transform: uppercase;
     margin-bottom: 3rem;
     text-align: right;
+}
+
+h4 {
+    margin-bottom: .5rem;;
 }
 
 a::before {
@@ -67,6 +72,29 @@ body {
 
 p {
     margin-bottom: 1rem;
+}
+
+button {
+    font-family: ocr-a-std, monospace;
+    font-size: 1.25rem;
+    font-weight: 100;
+    border: 1.5px solid black;
+    border-radius: 5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    padding: .75rem 1.75rem;
+    text-transform: uppercase;
+    width: 100%;
+    min-height: 3rem;
+}
+
+button:hover {
+    cursor: pointer;
+    box-shadow: .25rem .25rem black;
+}
+
+.cart-button {
+    padding: .5rem;
 }
 
 .indent {
@@ -239,8 +267,7 @@ p {
 }
 
 .display-imgs:not(:first-child) {
-    max-width: calc(25% - 3px);
-    float: right;
+    max-width: calc(25%);
 }
 
 
@@ -249,7 +276,7 @@ p {
 
 .tags {
     margin-top: .5rem;
-    float: right;
+    margin-bottom: 1rem;
 }
 
 .tag {
@@ -306,10 +333,12 @@ label {
 }
 
 input { 
+    font-family: ocr-a-std, monospace;
     width: -moz-available;
     width: -webkit-fill-available;
     margin-bottom: .25rem;
     font-size: inherit;
+    
 }
 
 textarea {
@@ -345,6 +374,10 @@ ul {
         font-size: 1.5vw;
     }
 
+    h1 { 
+        font-size: 4.5rem;
+    }
+
     .content {
         margin-top: 4.5rem;
         /*
@@ -357,10 +390,21 @@ ul {
     }
 
     .about {
+        margin-left: 40vw;
     }
 
-    h1 { 
-        font-size: 4.5rem;
+    .entry {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        grid-gap: 1rem;
+    }
+
+    .entry > .entry-photos {
+        grid-column: 1;
+    }
+
+    .entry > .entry-details {
+        grid-column: 2;
     }
 
     #name a {

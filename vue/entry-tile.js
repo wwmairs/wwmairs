@@ -8,7 +8,7 @@ export default {
         return { entry }
     },
     template: `
-        <div class="entry entry-tile">
+        <div class="entry-tile">
              <a v-if="entry.Photos.length"
                 :href="'/entry/' + entry.id"
                 :name="entry.name"

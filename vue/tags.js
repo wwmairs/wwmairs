@@ -23,7 +23,7 @@ export default {
         return { tags, tagstyle}
     },
     template: `
-        <div>
+        <div class="tags">
             <span v-for="tag in tags" class="tag" :style="tagstyle(tag)">
                 {{ tag.colorInfo ? "" : tag.name }}
             </span>
