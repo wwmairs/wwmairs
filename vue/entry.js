@@ -37,7 +37,7 @@ export default {
                 <span><i>{{ dateDisplay }}</i></span>
                 <Tags :tags="entry.Tags"></Tags>
                 <p>{{ entry.description }}</p>
-                <span v-if="entry.edition">
+                <span v-if="entry.edition != 'null'" >
                     <i>edition of {{ entry.edition }}</i>
                 </span>
                 <p v-if="entry.selling">
