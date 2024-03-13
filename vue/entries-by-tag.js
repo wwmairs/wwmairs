@@ -30,12 +30,14 @@ export default {
     template: `
         <div class="entries-by-tag">
             <div class="block">
+                <a :name="tagname + 's'"
+                    class="noarrow"></a>
                 <a :href="'/entry/' + first.id"
                    :name="first.name"
                    class="img-link noarrow">
-                    <img v-if="first.Photos.length"
-                         :src="first.Photos[0].path"
-                         class="round-border entry-img"/>
+                    <img v-for="photo in first.Photos"
+                         :src="photo.path"
+                         class="round-border entry-img display-imgs"/>
                 </a>
             </div>
             <a :href="'/things/' + tagname" 

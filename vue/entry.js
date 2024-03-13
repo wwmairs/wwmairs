@@ -22,7 +22,10 @@ export default {
     },
     template: `
         <div>
-            <h4>{{ entry.name }}</h4>
+            <a :href="'/entry/' + entry.id"
+               class="noarrow">
+                <h4>{{ entry.name }}</h4>
+            </a>
             <span><i>{{ dateDisplay }}</i></span>
             <p>{{ entry.description }}</p>
             <Tags :tags="entry.Tags"></Tags>
