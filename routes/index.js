@@ -2,11 +2,13 @@
 import portfolioEntries from "./portfolioentries.js";
 import login from "./login.js";
 import tag from "./tags.js";
+import stripe from "./stripe.js";
 
 const routeLoaders = [
 	portfolioEntries,
 	login,
-    tag
+    tag,
+    stripe,
 ];
 
 const exports = (app) => {

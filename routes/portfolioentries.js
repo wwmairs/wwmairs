@@ -7,6 +7,8 @@ import multer from "multer";
 import fs from "fs";
 import convert from "heic-convert";
 import db from "../models/index.js";
+import conf from "../config/config.js";
+import stripeInit from "stripe"
 
 import onlyWill from "../middleware.js";
 
@@ -15,6 +17,9 @@ const upload = multer({ dest: "uploads/", preservePath: true });
 const Photo = db.sequelize.models.Photo;
 const PortfolioEntry = db.sequelize.models.PortfolioEntry;
 const Tag = db.sequelize.models.Tag;
+
+const config = conf[process.env.NODE_ENV]
+const stripe = stripeInit(config.stripe_secret);
 
 
 function view(req, res) {
@@ -98,6 +103,7 @@ function saveEntry(req, res) {
 		PortfolioEntry.create(portfolioEntry, {include: Photo})
 		    .then((entryInstance) => {
                 updateAnyTagsOnEntry(req, entryInstance);
+                createStripeProduct(entryInstance);
 		    });
 	} else {
 		PortfolioEntry.findOne({where: {id: req.body.id}})
@@ -105,6 +111,9 @@ function saveEntry(req, res) {
 			if (oldEntry) {
 				oldEntry.update(portfolioEntry)
 				.then((entryInstance) => {
+                    // update stripe product
+                    // should check whether exists already ?
+                    updateStripeProduct(entryInstance);
 					portfolioEntry.Photos.map((photo) => {
 					    photo.portfolioEntryId = entryInstance.id;
 					    Photo.create(photo)
@@ -117,6 +126,41 @@ function saveEntry(req, res) {
 			}
 		});
 	}
+}
+
+function createOrUpdateProduct(entry) {
+}
+
+function createStripeProduct(entry) {
+    var stripeProduct = stripe.products.create({
+        id: entry.id,
+        name: entry.name,
+        active: entry.selling,
+        description: entry.description,
+        default_price_data: {
+            currency: "usd",
+            unit_amount: (entry.price ?? 0) * 100,
+        }
+    });
+}
+
+function updateStripeProduct(entry) {
+    var stripeProduct = stripe.products.update(
+        entry.id,
+        {
+        name: entry.name,
+        active: entry.selling,
+        description: entry.description,
+
+        // replace this with some logic ! 
+        // update doesn't allow default_price_data
+        // only default_price which expects an price id
+
+        default_price_data: {
+            currency: "usd",
+            unit_amount: (entry.price ?? 0) * 100,
+        }
+    });
 }
 
 function updateAnyTagsOnEntry(req, entry) {
