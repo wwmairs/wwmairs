@@ -6,25 +6,26 @@ html {
     --sky: #4982cf;
     --aqua: #5ec8e5;
     --crimson: #e45d50;
+    --scarlet: #f65058;
     --melon: #ffae3b;
 	--off-white: #f0ede6;
     --midnight: #435060;
-	--black: #000000;
+	--blue: #000000;
     --flo-orange: #ff7477;
     --grape: #6c5d80;
-	color: var(--black);
+    --text-color: blue;
+	color: var(--text-color);
 	font-size: 4vw;
     font-family: ocr-a-std, monospace;
     font-weight: 400;
     font-style: normal;
-    background-color: var(--off-white);
     margin: 0;
 }
 
 h1 {
     font-size: 1.65rem;
     font-weight: 100;
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1px var(--text-color);;
     color: white;
     text-transform: uppercase;
     margin-bottom: 3rem;
@@ -48,22 +49,22 @@ a.noarrow::after {
 }
 
 a.noarrow {
-    color: initial;
+    color: var(--text-color);
 }
 
 a.noarrow:hover {
-    color: var(--green);
+    color: black;
     border-bottom: none;
 }
 
 a {
     text-decoration: none;
-    color: var(--green);
+    color: var(--aqua);
 }
 
 a:hover {
     cursor: pointer;
-    border-bottom: .125rem solid var(--green);
+    border-bottom: .125rem solid red;
 }
 
 body {
@@ -78,8 +79,10 @@ button {
     font-family: ocr-a-std, monospace;
     font-size: 1.25rem;
     font-weight: 100;
-    border: 1.5px solid black;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);;
     border-radius: 5rem;
+    background-color: lavender;
     margin-top: .5rem;
     margin-bottom: .5rem;
     padding: .75rem 1.75rem;
@@ -90,7 +93,8 @@ button {
 
 button:hover {
     cursor: pointer;
-    box-shadow: .25rem .25rem black;
+    border: 1px solid var(red);
+    background: white;
 }
 
 .cart-button {
@@ -130,13 +134,13 @@ button:hover {
     position: fixed;
     left: 0;
     top: 0;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    border-bottom: 1px solid var(--text-color);;
+    border-top: 1px solid var(--text-color);;
     width: 100%;
     margin: auto;
     padding-top: .25rem;
-    background: mistyrose;
     font-size: 2rem;
+    background: white;
     /*animation: 3s infinite alternate twist;*/
 }
 
@@ -145,18 +149,18 @@ button:hover {
 }
 
 #name a {
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1px var(--text-color);;
     color: white;
     text-transform: uppercase;
     margin: .25rem;
 }
 
 #name a:hover {
-    color: var(--crimson);
+    color: red;
 }
 
 #menu-links a {
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1px var(--text-color);;
     color: white;
     text-transform: uppercase;
 }
@@ -167,27 +171,31 @@ button:hover {
 
 
 .round-border {
-    border: 1.5px solid black;
+    border: 1px solid var(--text-color);;
     border-radius: .75rem;
 }
 
 .round-border:hover {
-    border: 1.5px solid var(--melon);
+    border: 1px solid var(--melon);
 }
 
 .full-width-label {
     font-size: 2rem;
     width: 100%;
     text-align: center;
-    border-top: 1.5px solid black;
-    border-bottom: 1.5px solid black;
-    -webkit-text-stroke: 1px black;
+    border-top: 1.5px solid var(--text-color);;
+    border-bottom: 1.5px solid var(--text-color);;
+    -webkit-text-stroke: 1px var(--text-color);;
     color: white;
     text-transform: uppercase;
     padding-top: 1rem;
     padding-bottom: 1rem;
     font-weight: 100;
     margin: 0;
+}
+
+.full-width-label:hover {
+    font-style: italic;
 }
 
 .full-width-label::before {
@@ -211,13 +219,12 @@ button:hover {
     float: right;
     margin-left: .5rem;
     font-size: 2.5rem;
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1px var(--text-color);;
     color: white;
 }
 
 #menu-links {
     padding: .5rem;
-    background: mistyrose;
 }
 
 #menu-links >  {
@@ -256,7 +263,7 @@ button:hover {
 
 .entries-by-tag:not(:last-child) {
     margin-bottom: 2rem;
-    border-bottom: 2px dashed black;
+    border-bottom: 2px dashed var(--text-color);;
 
 }
 
@@ -283,7 +290,7 @@ button:hover {
     font-size: .7rem;
     text-transform: uppercase;
     display: inline-block;
-    border: 1px solid black;
+    border: 1px solid var(--text-color);;
     border-radius: 1rem;
     padding: .25rem;
     margin-top: .25rem;
@@ -303,23 +310,23 @@ button:hover {
     margin: .25rem;
     min-width: .75rem;
     min-height: .75rem;
-    border: 1px solid var(--off-white);
+    border: 1px solid var(--text-color);;
+    border-radius: 1em;
 }
 
 .tag-option:hover {
     cursor: pointer;
-    border: 1px solid black;
-    border-radius: 1em;
+    border: 1px solid var(--text-color);;
 }
 
 .tag-option.checked {
-    border: 1px solid black;
+    border: 1px solid var(--text-color);
     border-radius: 1rem;
     background: var(--green);
 }
 
-.form {
-    border: 1.5px solid black;
+.small-box {
+    border: 1px solid var(--text-color);;
     border-radius: 1rem;
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -342,13 +349,14 @@ input {
 }
 
 textarea {
+    /*
     width: -moz-available;
     width: -webkit-fill-available;
+    */
     min-height: 4rem;
 }
 
 .form-group {
-    margin-top: 30vh;
     margin-bottom: .5rem;
 }
 
@@ -381,7 +389,7 @@ ul {
     .content {
         margin-top: 4.5rem;
         /*
-        border-left: 1px solid black;
+        border-left: 1px solid var(--text-color);;
         */
     }
 
@@ -431,6 +439,11 @@ ul {
 
     .full-width-label {
         font-size: 3rem;
+    }
+
+    .entries-by-tag {
+        margin-left: 20vw;
+        margin-right: 10vw;
     }
 
 }

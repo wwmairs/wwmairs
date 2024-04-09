@@ -22,7 +22,7 @@ export default {
         })
 
         const rest = computed(() => {
-            return entries.value.slice(1);
+            return entries.value.slice(1, 5);
         })
 
         return { entries, first, rest }

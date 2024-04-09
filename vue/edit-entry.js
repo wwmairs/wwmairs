@@ -95,7 +95,7 @@ export default {
         }
     },
     template: `
-        <div class="form">
+        <div class="small-box">
             <div>
                 <label for="name-input">name:</label>
                 <input v-model="entry.name" id="name-input" type="text"/>

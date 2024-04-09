@@ -2,11 +2,11 @@ extends ../layout.pug
 
 block content
     .content
-        #tags
+        #tags(style="width: 200px").small-box
             each tag in tags
                 .tag
                     span #{tag.name}
-        form(action="/tags/save" method="post")
+        form(action="/tags/save" method="post").small-box
             .form-group
                 label(for="name") Name
                 input(type="text" id="name" name="name"
