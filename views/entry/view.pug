@@ -7,7 +7,8 @@ block append scripts
     script(type="module").
         import { createApp, ref } from "vue"
         import Entry from "/vue/entry.js"
-        createApp({
+        const cart = ref({});
+        const app = createApp({
             components: {
                 Entry
             },
@@ -15,7 +16,9 @@ block append scripts
                 var entry = JSON.parse(`!{JSON.stringify(entry)}`);
                 return { entry }
             }
-        }).mount("#app")
+        })
+        app.provide("cart", cart);
+        app.mount("#app")
 
 block content
     .content

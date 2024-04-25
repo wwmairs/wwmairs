@@ -1,4 +1,4 @@
-import { ref, onMounted, computed } from "vue"
+import { ref, onMounted, computed, inject } from "vue"
 
 
 export default {
@@ -6,36 +6,36 @@ export default {
     setup(props) {
         const CARTNAME = "wwmairs-cart";
         const entry = ref(props.entry);
-        const cart = ref({});
+        const cart = inject("cart");
 
         onMounted(() => {
-            checkInitCart();
+            //checkInitCart();
         });
 
         function addToCart() {
-            if (!cart.value.hasOwnProperty(entry.value.id)) {
-                cart.value[entry.value.id] = {
+            if (!(entry.value.id in cart.value.items)) {
+                cart.value.items[entry.value.id] = {
                     "quantity": 0,
-                    "name": entry.name,
-                    "price": entry.price
+                    "name": entry.value.name,
+                    "price": entry.value.price
                 };
             }
-            cart.value[entry.value.id].quantity++;
+            cart.value.items[entry.value.id].quantity++;
             saveCart();
         }
 
-
         function checkInitCart() {
-            if (!localStorage.hasOwnProperty(CARTNAME)) {
+            if (!(CARTNAME in localStorage)) {
                 var blankCart = {
                     "items" : {},
                     "createdAt" : new Date(),
                 };
                 cart.value = blankCart;
                 saveCart()
+            } else {
+                console.log("getting cart");
+                getCart()
             }
-
-
         }
 
         function getCart() {
@@ -52,7 +52,7 @@ export default {
     },
     template: `
         <div class="cart-button">
-            <button @click="addToCart"><i>\${{ entry.price.toFixed(2) }}</button>
+            <button @click="addToCart"><i>\${{ entry.price.toFixed(2) }}</i></button>
 
         </div>`
 }

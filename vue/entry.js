@@ -1,13 +1,15 @@
 import { ref, watchEffect, computed } from "vue"
-import Tags from "/vue/tags.js"
+import Cart from "/vue/cart.js"
 import CartButton from "/vue/cart-button.js"
+import Tags from "/vue/tags.js"
 
 
 export default {
     props: ["entry"],
     components: {
-        Tags,
-        CartButton
+        Cart,
+        CartButton,
+        Tags
     },
     setup(props) {
         const entry = ref(props.entry);
@@ -44,5 +46,6 @@ export default {
                     <CartButton :entry="entry"></CartButton>
                 </p>
             </div>
+            <Cart></Cart>
         </div>`
 }
