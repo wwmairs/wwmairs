@@ -1,14 +1,20 @@
-import { ref, onBeforeMount, onMounted, computed, inject, watch} from "vue"
+import { ref, onBeforeMount, onMounted, computed, inject, watch } from "vue"
 
 export default {
     setup() {
-        const CARTNAME = "wwmairs-cart";
-        const cart = inject("cart");
+        const { 
+            cart, 
+            checkInitCart, 
+            saveCart, 
+            getCart, 
+            removeItem,
+            setItemQuantity,
+        } = inject("cart");
         const show = ref(false)
 
-       // watch(cart, (cart, old) => showCart());
 
         onMounted(() => {
+            watch(cart, (cart, old) => showCart(), {deep: true});
         });
 
         onBeforeMount(() => {
@@ -23,49 +29,6 @@ export default {
             }, 0);
         });
 
-        function checkInitCart() {
-            if (!(CARTNAME in localStorage)) {
-                var blankCart = {
-                    "items": {},
-                    "createdAt": new Date(),
-                };
-                cart.value = blankCart;
-                saveCart();
-            } else {
-                getCart();
-            }
-
-        }
-
-        function saveCart() {
-            localStorage.setItem(CARTNAME, JSON.stringify(cart.value));
-        }
-
-        function getCart() {
-            var fromStorage = JSON.parse(localStorage.getItem(CARTNAME));
-            cart.value = fromStorage;
-            return fromStorage;
-        }
-
-        function removeItem(itemId) {
-            delete cart.value.items[itemId];
-            saveCart();
-        }
-
-        function increaseItem(itemId) {
-            cart.value.items[itemId].quantity++;
-            saveCart();
-        }
-
-        function decreaseItem(itemId) {
-            if (cart.value.items[itemId].quantity > 1) {
-                cart.value.items[itemId].quantity--;
-            } else {
-                delete cart.value.items[itemId]
-            }
-            saveCart();
-        }
-
         function toggleCart() {
             show.value = !show.value;
         }
@@ -76,9 +39,8 @@ export default {
 
         return { 
             cart, 
-            increaseItem, 
-            decreaseItem, 
             removeItem,
+            setItemQuantity,
             total,
             toggleCart,
             show
@@ -96,7 +58,9 @@ export default {
                      class="cart-line-item">
                     <span>{{ item.name }}</span>
                     <span>
-                        <input type="number" min="0" v-model="item.quantity"></input>
+                        <input type="number" min="0" 
+                               v-model="item.quantity"
+                               @change="setItemQuantity(id, item.quantity)"></input>
                         <span @click="removeItem(id)"
                            class="btn">&times;</span>
                     </span>
