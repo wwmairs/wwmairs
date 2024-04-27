@@ -19,7 +19,7 @@ html
         script(type="importmap").
             {
                 "imports": {
-                    "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
+                    "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
                 }
             }
     body
@@ -39,6 +39,7 @@ html
                 a.noarrow(href="/about") about
                 if session.isWill
                     a.noarrow(href="/logout") logout
+        #cart-app
         block content
 
         script.

@@ -64,7 +64,7 @@ a {
 
 a:hover {
     cursor: pointer;
-    border-bottom: .125rem solid red;
+    border-bottom: .125rem solid blue;
 }
 
 body {
@@ -80,9 +80,9 @@ button {
     font-size: 1.25rem;
     font-weight: 100;
     color: var(--text-color);
-    border: 1px solid var(--text-color);;
+    border: 1px solid var(--text-color);
     border-radius: 5rem;
-    background-color: lavender;
+    background-color: rgba(0, 0, 255, .1);
     margin-top: .5rem;
     margin-bottom: .5rem;
     padding: .75rem 1.75rem;
@@ -93,12 +93,98 @@ button {
 
 button:hover {
     cursor: pointer;
-    border: 1px solid var(red);
     background: white;
+}
+
+.btn {
+    border: 1px solid blue;
+    border-radius: 1rem;
+    padding: .25rem;
+    margin-right: .25rem;
+    margin-left: .25rem;
+    background: rgba(0, 0, 255, .05);
+    display: inline-block;
+    width: 1rem;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background: white;
+}
+
+.cart {
+    border: 1px solid blue;
+    background: white;
+    position: fixed;
+    bottom: -1px;
+    left: -1px; 
+    max-height: 100vh;
+}
+
+.cart-header:hover {
+   cursor: pointer; 
+}
+
+.cart-header > h2 {
+    padding: 1rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+.cart-line-item > h4 {
+    padding: 1rem;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: left;
 }
 
 .cart-button {
     padding: .5rem;
+}
+
+.cart-line-items {
+    display: grid;
+    border-bottom: 1px solid blue;
+}
+
+.cart-line-item {
+    display: grid;
+    grid-template-columns: 4.5fr 2fr 1.5fr;
+}
+
+.cart-total-line {
+    grid-template-columns: 4fr 4fr;
+}
+
+.cart-line-item > * {
+    text-align: center;
+}
+
+.cart-line-item > *:first-child {
+    text-align: left;
+}
+
+.cart-line-item > *:last-child {
+    text-align: right;
+}
+
+.cart-line-item:not(:last-child) {
+    border-bottom: 1px dashed blue;
+}
+
+.cart-line-item > * {
+    padding: .5rem;
+}
+
+.cart-line-item > *:not(:last-child) {
+    border-right: 1px dashed blue;
+}
+
+.cart-line-item input {
+    width: 2.5rem;
+}
+
+.checkout-button {
+    margin: .5rem;
 }
 
 .indent {
@@ -156,7 +242,7 @@ button:hover {
 }
 
 #name a:hover {
-    color: red;
+    color: rgba(0, 0, 255, .2);
 }
 
 #menu-links a {
@@ -375,6 +461,12 @@ ul {
 .about {
     margin-top: 30vh;
     margin-bottom: 8rem;
+}
+
+@media (max-width: 719px) {
+    .cart-line-items {
+        width: 100vw;
+    }
 }
 
 @media (min-width: 720px) {

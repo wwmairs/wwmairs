@@ -31,11 +31,13 @@ export default {
                      v-for="photo in entry.Photos" 
                      :src=photopath(photo.path)>
             </div>
-            <div class="entry-detils">
-                <a :href="'/entry/' + entry.id"
-                   class="noarrow">
-                    <h4>{{ entry.name }}</h4>
-                </a>
+            <div class="entry-details">
+                <h4>
+                    <a :href="'/entry/' + entry.id"
+                       class="noarrow">
+                       {{ entry.name }}
+                    </a>
+                </h4>
                 <span><i>{{ dateDisplay }}</i></span>
                 <Tags :tags="entry.Tags"></Tags>
                 <p>{{ entry.description }}</p>
