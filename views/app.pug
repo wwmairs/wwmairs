@@ -1,0 +1,80 @@
+script(type="module").
+    import { createApp, ref, provide } from "vue"
+    import Cart from "/vue/cart.js"
+    import Entry from "/vue/entry.js"
+    import EditEntry from "/vue/edit-entry.js"
+    import EntriesByTag from "/vue/entries-by-tag.js"
+    const CARTNAME = "wwmairs-cart";
+    const cart = ref({});
+    const app = createApp({
+        components: {
+            Cart,
+            Entry,
+            EditEntry,
+            EntriesByTag
+        },
+        setup() {
+            function checkInitCart() {
+                if (!(CARTNAME in localStorage)) {
+                    var blankCart = {
+                        "items": {},
+                        "createdAt": new Date(),
+                    };
+                    cart.value = blankCart;
+                    saveCart();
+                } else {
+                    getCart();
+                }
+    
+            }
+
+            function saveCart() {
+                localStorage.setItem(CARTNAME, JSON.stringify(cart.value));
+            }
+
+            function getCart() {
+                var fromStorage = JSON.parse(localStorage.getItem(CARTNAME));
+                cart.value = fromStorage;
+                return fromStorage;
+            }
+
+            function removeItem(itemId) {
+                delete cart.value.items[itemId];
+                saveCart();
+            }
+
+            function increaseItem(itemId) {
+                cart.value.items[itemId].quantity++;
+                saveCart();
+            }
+
+            function decreaseItem(itemId) {
+                if (cart.value.items[itemId].quantity > 1) {
+                    cart.value.items[itemId].quantity--;
+                } else {
+                    delete cart.value.items[itemId]
+                }
+                saveCart();
+            }
+
+            function setItemQuantity(itemId, quant) {
+                if (quant > 1) {
+                    cart.value.items[itemId].quantity = quant;
+                } else {
+                    delete cart.value.items[itemId]
+                }
+                saveCart();
+            }
+    
+
+            provide("cart", {
+                cart,
+                checkInitCart,
+                saveCart,
+                getCart,
+                setItemQuantity,
+                removeItem,
+            });
+        }
+    })
+    app.mount("#app")

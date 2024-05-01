@@ -22,6 +22,7 @@ html
                     "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
                 }
             }
+        include app.pug
     body
         <!-- Google Tag Manager (noscript) -->
         noscript
@@ -29,18 +30,17 @@ html
             height="0" width="0" style="display:none;visibility:hidden")
         <!-- End Google Tag Manager (noscript) -->
 
-
-
-        #menu
-            #name 
-                a.noarrow(href="/") wwmairs
-            a#menu-button.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')") ...
-            #menu-links.hidden
-                a.noarrow(href="/about") about
-                if session.isWill
-                    a.noarrow(href="/logout") logout
-        #cart-app
-        block content
+        #app
+            <Cart></Cart>
+            #menu
+                #name 
+                    a.noarrow(href="/") wwmairs
+                a#menu-button.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')") ...
+                #menu-links.hidden
+                    a.noarrow(href="/about") about
+                    if session.isWill
+                        a.noarrow(href="/logout") logout
+            block content
 
         script.
             var menuButton = document.getElementById("menu-button");

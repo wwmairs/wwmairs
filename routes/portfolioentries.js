@@ -33,6 +33,16 @@ function view(req, res) {
 		});
 }
 
+function getEntry(req, res) {
+	fetchWithPhotosByID(req.params.id)
+		.then(portfolioEntry => {
+            Tag.findAll().then((tags) => {
+                res.json({entry: portfolioEntry, tags: tags});
+            });
+		});
+
+}
+
 function edit(req, res) {
 	fetchWithPhotosByID(req.params.id)
 		.then(portfolioEntry => {
@@ -226,6 +236,8 @@ function defineRoutes(app) {
 	app.get("/entry/create", onlyWill, (req, res) => {
 		res.render("entry/edit");
 	});
+
+    app.get("/entry/get/:id", getEntry);
 
 	app.get("/entry/edit/:id", onlyWill, edit);
 	

@@ -1,17 +1,22 @@
-import { ref, watchEffect, computed } from "vue"
+import { ref, watch, watchEffect, computed } from "vue"
 import  risoColors  from "/public/riso-colors.js"
 
 
 export default {
     props: ["tags"],
     setup(props) {
-        var _tags = props.tags ?? [];
-        _tags.map((tag) => {
-            tag.colorInfo = risoColors.find((clr) => clr.name.toLowerCase() == tag.name.toLowerCase());
+        const tags = ref([]);
+
+        watch(props, async (newProps, oldProps) => {
+            var _tags = newProps.tags ?? [];
+            _tags.map((tag) => {
+                tag.colorInfo = risoColors.find((clr) => clr.name.toLowerCase() == tag.name.toLowerCase());
+            });
+
+            _tags.sort((a, b) => !a.colorInfo && b.colorInfo ? -1 : 0);
+            tags.value = _tags;
         });
 
-        _tags.sort((a, b) => !a.colorInfo && b.colorInfo ? -1 : 0);
-        const tags = ref(_tags);
 
         function tagstyle(tag) {
             return `background: ${tag.colorInfo ? tag.colorInfo.hex : "initial" };`

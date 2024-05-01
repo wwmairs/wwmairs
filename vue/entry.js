@@ -5,15 +5,24 @@ import Tags from "/vue/tags.js"
 
 
 export default {
-    props: ["entry"],
+    props: ["id"],
     components: {
         Cart,
         CartButton,
         Tags
     },
     setup(props) {
-        const entry = ref(props.entry);
+        const url = "/entry/get/";
+        const entryID = props.id;
+        const entry = ref({"name": "loading", "description": "...", "date": "0000-00-00T00:00:00.000Z"});
 
+        watchEffect(async() => {
+            var full_url = `${url}${entryID}`;
+            var res = await (await fetch(full_url)).json();
+            entry.value = res.entry;
+        });
+
+        
         const dateDisplay = computed(() => {
             var date = new Date(entry.value.date);
             return `${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -22,6 +31,7 @@ export default {
         function photopath(path) {
             return `../${path}`
         }
+
         return { entry, dateDisplay, photopath}
     },
     template: `
