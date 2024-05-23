@@ -1,28 +1,8 @@
 extends ../layout.pug   
 
-
-block append scripts
-    - entry = entry ?? "";
-    script(type="module").
-        import { createApp, ref } from "vue"
-        import EditEntry from "/vue/edit-entry.js"
-
-        createApp({
-            components: {
-                EditEntry
-            },
-            setup() {
-                var entry = JSON.parse(`!{JSON.stringify(entry)}`);
-                return { entry }
-            }
-        }).mount("#app");
+block title 
+    title WWMAIRS - #{entry.name}
 
 block content
     .content
-        #app.block
-            <edit-entry :entry=entry></edit-entry>
-
-        .entry-photos.block
-            if entry.Photos
-                each photo in entry.Photos
-                    img.round-border.entry-img(src="/" + photo.path)
+        <edit-entry :id="'#{entry.id}'"></edit-entry>

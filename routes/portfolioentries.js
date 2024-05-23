@@ -63,8 +63,7 @@ function getEntries(req, res) {
 		order: [["date", "DESC"]] })
 		.then((entries) => {
             Tag.findAll().then((tags) => {
-			    res.render("entry/all", { tags: tags, 
-                                          entries: entries});
+                res.json({ tags: tags, entries: entries});
             });
 		});
 }
@@ -219,8 +218,6 @@ async function convertHEIC(file) {
 
 function defineRoutes(app) {
 	
-    app.get("/entry/all/", getEntries);
-
     app.get("/entry/tag/:tagname", getEntriesByTag);
 
     app.get("/things/:tagname", showByTag);
@@ -232,6 +229,8 @@ function defineRoutes(app) {
 	});
 
     app.get("/entry/get/:id", getEntry);
+
+    app.get("/entries/", getEntries);
 
 	app.get("/entry/edit/:id", onlyWill, edit);
 	

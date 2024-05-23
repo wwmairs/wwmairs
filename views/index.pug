@@ -3,9 +3,5 @@ extends ./layout.pug
 block content
     .content
         <div>
-            <entries-by-tag tagname="zine"></entries-by-tag>
-            <entries-by-tag tagname="print"></entries-by-tag>
+            <filter-entries></filter-entries>
         </div>
-        if session.isWill
-            div.block
-                <edit-entry></edit-entry>

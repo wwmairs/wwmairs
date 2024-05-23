@@ -30,6 +30,7 @@ export default {
             }, 0);
         });
 
+
         function toggleCart() {
             show.value = !show.value;
             updated.value = false;
@@ -54,7 +55,7 @@ export default {
         }
     },
     template: `
-        <div class="cart">
+        <div :class="{ cart, hidden: Object.keys(cart.items).length == 0}">
             <div class="cart-line-items"
                  :class="{ hidden: !show}">
                 <div class="cart-line-item">

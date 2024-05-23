@@ -5,6 +5,8 @@ script(type="module").
     import EditEntry from "/vue/edit-entry.js"
     import EntriesByTag from "/vue/entries-by-tag.js"
     import Entries from "/vue/entries.js"
+    import FilterEntries from "/vue/filter-entries.js"
+
     const CARTNAME = "wwmairs-cart";
     const cart = ref({});
     const app = createApp({
@@ -13,7 +15,8 @@ script(type="module").
             Entry,
             Entries,
             EditEntry,
-            EntriesByTag
+            EntriesByTag,
+            FilterEntries
         },
         setup() {
             function checkInitCart() {

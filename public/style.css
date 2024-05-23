@@ -203,14 +203,9 @@ button:hover {
     text-indent: 50%;
 }
 
-.block {
-    margin: 1rem;
-    overflow: hidden;
-}
-
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1rem;
 }
 
@@ -232,18 +227,31 @@ button:hover {
     grid-column: 2;
 }
 
+.col-3 {
+    grid-column: 3;
+}
+
 .img-link {
     display: block;
     width: fit-content;
 }
 
+#app {
+    height: 100vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 3rem 1fr;
+}
+
 
 #menu {
+/*
     position: fixed;
     left: 0;
     top: 0;
     border-bottom: 1px solid var(--text-color);;
     border-top: 1px solid var(--text-color);;
+    */
     width: 100%;
     margin: auto;
     padding-top: .25rem;
@@ -339,8 +347,9 @@ button:hover {
 }
 
 .content {
-    margin-top: 4rem;
-    margin-bottom: 3rem;
+    border-top: 1px solid blue;
+    overflow-x: scroll;
+    padding: 1rem;
 }
 
 .entry-tile {
@@ -353,7 +362,6 @@ button:hover {
 
 .entry-tile > a > .entry-img {
     object-fit: cover;
-    max-height: unset;
 }
 
 .entry-photos {
@@ -439,10 +447,12 @@ button:hover {
 .small-box {
     border: 1px solid var(--text-color);;
     border-radius: 1rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin: 1rem;
     padding: 1rem;
     max-width: max-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
 
 }
 
@@ -450,13 +460,38 @@ label {
     display: block;
 }
 
-input { 
+input, textarea { 
     font-family: ocr-a-std, monospace;
     width: -moz-available;
     width: -webkit-fill-available;
     margin-bottom: .25rem;
     font-size: inherit;
-    
+    border: 1px solid blue;
+    border-radius: .5rem;
+    padding: .5rem;
+    color: rgba(0, 0, 255, .5);
+}
+
+.entry input, textarea {
+    max-width: 10rem;
+}
+
+
+input:focus-visible {
+    outline: unset;
+    border: 1px solid red;
+}
+
+#file-upload-button {
+    font-family: ocr-a-std, monospace;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    margin-bottom: .25rem;
+    font-size: inherit;
+    border: 1px solid blue;
+    border-radius: .5rem;
+    padding: .5rem;
+
 }
 
 textarea {
@@ -503,15 +538,8 @@ ul {
         font-size: 4.5rem;
     }
 
-    .content {
-        margin-top: 4.5rem;
-        /*
-        border-left: 1px solid var(--text-color);;
-        */
-    }
-
-    .block {
-        margin: 1rem;
+    #app {
+        grid-template-rows: 3rem 1fr;
     }
 
     .about {
