@@ -96,6 +96,18 @@ button:hover {
     background: white;
 }
 
+.red-badge {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid blue;
+    border-radius: 1rem;
+    background-color: red;
+    position: absolute;
+    top: -.5rem;
+    right: -.5rem;
+}
+
 .btn {
     border: 1px solid blue;
     border-radius: 1rem;
@@ -200,6 +212,16 @@ button:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
+}
+
+.horizontal-grid {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, 50vw));
+    grid-auto-flow: column;
+    grid-auto-columns: 50vw;
+    overflow-x: auto;
+
 }
 
 .col-1 {
@@ -323,6 +345,9 @@ button:hover {
 
 .entry-tile {
     overflow: auto;
+}
+
+.entries-by-tag .entry-tile {
     margin-bottom: 1rem;
 }
 

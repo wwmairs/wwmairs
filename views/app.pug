@@ -4,12 +4,14 @@ script(type="module").
     import Entry from "/vue/entry.js"
     import EditEntry from "/vue/edit-entry.js"
     import EntriesByTag from "/vue/entries-by-tag.js"
+    import Entries from "/vue/entries.js"
     const CARTNAME = "wwmairs-cart";
     const cart = ref({});
     const app = createApp({
         components: {
             Cart,
             Entry,
+            Entries,
             EditEntry,
             EntriesByTag
         },

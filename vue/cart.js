@@ -11,10 +11,11 @@ export default {
             setItemQuantity,
         } = inject("cart");
         const show = ref(false)
+        const updated = ref(false);
 
 
         onMounted(() => {
-            watch(cart, (cart, old) => showCart(), {deep: true});
+            watch(cart, (cart, old) => showUpdated(), {deep: true});
         });
 
         onBeforeMount(() => {
@@ -31,10 +32,15 @@ export default {
 
         function toggleCart() {
             show.value = !show.value;
+            updated.value = false;
         }
 
         function showCart() {
             show.value = true;
+        }
+
+        function showUpdated() {
+             updated.value = true && !show.value;
         }
 
         return { 
@@ -43,7 +49,8 @@ export default {
             setItemQuantity,
             total,
             toggleCart,
-            show
+            show,
+            updated
         }
     },
     template: `
@@ -78,6 +85,9 @@ export default {
                 <h2>
                     {{ show ? "X" : "cart" }}
                 </h2>
+                <span v-if="updated"
+                      class="red-badge">
+                </span>
             </div>
         </div>`
 }

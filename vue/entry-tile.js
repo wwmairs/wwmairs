@@ -13,7 +13,7 @@ export default {
                 :href="'/entry/' + entry.id"
                 :name="entry.name"
                 class="noarrow">
-                 <img :src="entry.Photos[0].path"
+                 <img :src="'/' + entry.Photos[0].path"
                       class="round-border entry-img"/>
              </a>
         </div>`
