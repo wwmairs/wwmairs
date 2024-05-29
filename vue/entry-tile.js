@@ -9,11 +9,11 @@ export default {
     },
     template: `
         <div class="entry-tile">
-             <a v-if="entry.Photos.length"
-                :href="'/entry/' + entry.id"
+             <a :href="'/entry/' + entry.id"
                 :name="entry.name"
                 class="noarrow">
-                 <img :src="'/' + entry.Photos[0].path"
+                 <img v-if="entry.Photos.length" 
+                      :src="'/' + entry.Photos[0].path"
                       class="round-border entry-img"/>
              </a>
         </div>`

@@ -1,4 +1,4 @@
-import { ref, watchEffect, computed } from "vue"
+import { ref, watchEffect, computed, nextTick } from "vue"
 import EntryTile from "/vue/entry-tile.js"
 
 
@@ -10,32 +10,40 @@ export default {
         const url = "/entries/";
         const entries = ref([]);
         const availableTags = ref([]);
+        const filtered = ref([]);
 
         watchEffect(async () => {
             var res = await (await fetch(url)).json()
             entries.value = res.entries;
             availableTags.value = res.tags;
+            filtered.value = entries.value;
         });
 
-        const selectedTags = computed(() => {
-            return availableTags.value.filter((t) => {
+        function toggleTag(tag) {
+            filtered.value = [];
+            tag.selected = !tag.selected;
+            var selected =  availableTags.value.filter((t) => {
                 return t.selected;
             });
-        });
-
-        const filtered = computed(() => {
-            return entries.value.filter((e) => {
-                for (var i = 0; i < selectedTags.value.length; i++) {
-                    var tag = selectedTags.value[i];
-                    if (!e.Tags.find((t) => t.id == tag.id)) {
-                        return false;
+            var tags = availableTags.value.filter((t) => t.selected);
+            var filteredEntries = [];
+            entries.value.map((e) => {
+                var include = true;
+                for (var i = 0; i < tags.length; i++) {
+                    var tag = tags[i];
+                    var foundTag = e.Tags.find((t) => t.id == tag.id) !== undefined;
+                    if (!foundTag) {
+                        include = false;
                     }
                 }
-                return true;
+                if (include) {
+                    filteredEntries.push(e);
+                }
             });
-        });
+            nextTick(() => filtered.value = filteredEntries);
+        }
 
-        return { entries, availableTags, filtered, selectedTags }
+        return { entries, availableTags, filtered, toggleTag }
     },
     template: `
         <div class="entries-by-tag">
@@ -43,7 +51,7 @@ export default {
                 <span v-for="tag in availableTags"
                       :value="tag.id"
                       :selected="tag.selected"
-                      @click="tag.selected = !tag.selected"
+                      @click="toggleTag(tag)"
                       :class="{ checked: tag.selected }"
                       class="tag-option">
                     {{ tag.name }}
