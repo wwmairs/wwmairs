@@ -1,8 +1,8 @@
 extends ../layout.pug   
 
 block title 
-    title WWMAIRS - #{entry.name}
+    title WWMAIRS - #{entry ? entry.name : "new entry" }
 
 block content
     .content
-        <edit-entry :id="'#{entry.id}'"></edit-entry>
+        <edit-entry :id="'#{entry ? entry.id : ""}'"></edit-entry>

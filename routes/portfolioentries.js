@@ -107,6 +107,8 @@ function saveEntry(req, res) {
 		    .then((entryInstance) => {
                 updateAnyTagsOnEntry(req, entryInstance);
                 createStripeProduct(entryInstance);
+                req.session.success = "created entry";
+                res.json(portfolioEntry);
 		    });
 	} else {
 		PortfolioEntry.findOne({where: {id: req.body.id}})
@@ -122,6 +124,7 @@ function saveEntry(req, res) {
 					    Photo.create(photo)
 					});
 					updateAnyTagsOnEntry(req, entryInstance);
+                    req.session.success = "saved entry";
                     res.json(portfolioEntry);
 				});
 			} else {
@@ -159,10 +162,10 @@ function updateStripeProduct(entry) {
         // update doesn't allow default_price_data
         // only default_price which expects an price id
 
-        default_price_data: {
-            currency: "usd",
-            unit_amount: (entry.price ?? 0) * 100,
-        }
+        // default_price_data: {
+        //     currency: "usd",
+        //     unit_amount: (entry.price ?? 0) * 100,
+        // }
     });
 }
 

@@ -44,8 +44,8 @@ app.use((req, res, next) => {
 	delete req.session.error;
 	delete req.session.success;
 	res.locals.message = "";
-	if (err) res.locals.message = "<p class='msg error'>" + err + "</p>";
-	if (msg) res.locals.message = "<p class='msg success'>" + msg + "</p>";
+	if (err) res.locals.message += "<Message class='error'>" + err + "</Message>";
+	if (msg) res.locals.message += "<Message class='success'>" + msg + "</Message>";
 	next();
 });
 

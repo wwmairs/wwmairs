@@ -59,7 +59,6 @@ a.noarrow:hover {
 
 a {
     text-decoration: none;
-    color: var(--aqua);
 }
 
 a:hover {
@@ -94,6 +93,34 @@ button {
 button:hover {
     cursor: pointer;
     background: white;
+}
+
+.message {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: fit-content;
+}
+
+.msg {
+    padding: .75rem;
+    margin: 0;
+    background: white;
+    border: 1px solid blue;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.msg:not(:last-child) {
+    margin-bottom: .5rem;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
 }
 
 .red-badge {

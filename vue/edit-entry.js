@@ -6,14 +6,16 @@ export default {
     setup(props) {
         const url = "/entry/get/";
         const entryID = props.id;
-        const entry = ref({"name": "loading", "description": "...", "date": "0000-00-00T00:00:00.000Z", "tags": []});
+        const entry = ref({"tags": []});
         
         watchEffect(async() => {
-            var full_url = `${url}${entryID}`;
-            var res = await (await fetch(full_url)).json();
-            entry.value = res.entry;
-            entry.value.tags = entry.value.Tags.map((x) => x.id);
-            entry.value.date = justDateFromISO(entry.value.date);
+            if (entryID !== "") {
+                var full_url = `${url}${entryID}`;
+                var res = await (await fetch(full_url)).json();
+                entry.value = res.entry;
+                entry.value.tags = entry.value.Tags.map((x) => x.id);
+                entry.value.date = justDateFromISO(entry.value.date);
+            }
         });
 
 
@@ -100,7 +102,9 @@ export default {
             <div class="small-box">
                 <div>
                     <label for="name-input">name:</label>
-                    <input v-model="entry.name" id="name-input" type="text"/>
+                    <input v-model="entry.name" 
+                           placeholder="name"
+                           id="name-input" type="text"/>
                 </div>
                 <div>
                     <label for="date-input">date</label>
