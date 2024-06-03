@@ -38,9 +38,10 @@ html
                 #name 
                     a.noarrow(href="/") wwmairs
                 a#menu-button.noarrow(onclick="document.getElementById('menu-links').classList.toggle('hidden')") ...
-                #menu-links.hidden
+                #menu-links(class={hidden: !session.isWill})
                     a.noarrow(href="/about") about
                     if session.isWill
+                        a.noarrow(href="/entry/create") new
                         a.noarrow(href="/logout") logout
             block content
 

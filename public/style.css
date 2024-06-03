@@ -158,6 +158,7 @@ button:hover {
     bottom: -1px;
     left: -1px; 
     max-height: 100vh;
+    z-index: 1;
 }
 
 .cart-header:hover {
@@ -232,7 +233,7 @@ button:hover {
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
 }
 
@@ -263,22 +264,12 @@ button:hover {
     width: fit-content;
 }
 
-#app {
-    height: 100vh;
-    overflow: hidden;
-    display: grid;
-    grid-template-rows: 3rem 1fr;
-}
-
 
 #menu {
-/*
     position: fixed;
     left: 0;
     top: 0;
     border-bottom: 1px solid var(--text-color);;
-    border-top: 1px solid var(--text-color);;
-    */
     width: 100%;
     margin: auto;
     padding-top: .25rem;
@@ -358,6 +349,7 @@ button:hover {
 }
 
 
+
 #menu-button {
     float: right;
     margin-left: .5rem;
@@ -377,14 +369,11 @@ button:hover {
     border-top: 1px solid blue;
     overflow-x: scroll;
     padding: 1rem;
+    padding-top: 5rem;
 }
 
 .entry-tile {
     overflow: auto;
-}
-
-.entries-by-tag .entry-tile {
-    margin-bottom: 1rem;
 }
 
 .entry-tile > a > .entry-img {
@@ -405,6 +394,10 @@ button:hover {
     max-width: calc(100% - 3px);
     height: auto;
     width: auto;
+}
+
+.entries-by-tag > .tags-select {
+    margin-bottom: 2rem;
 }
 
 .entries-by-tag:not(:last-child) {
@@ -478,9 +471,6 @@ button:hover {
     margin: 1rem;
     padding: 1rem;
     max-width: max-content;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
 
 }
 
@@ -566,12 +556,12 @@ ul {
         font-size: 4.5rem;
     }
 
-    #app {
-        grid-template-rows: 3rem 1fr;
-    }
-
     .about {
         margin-left: 40vw;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 
     .entry {
@@ -619,6 +609,18 @@ ul {
         margin-right: 10vw;
     }
 
+    .small-box {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .entries-by-tag > .tags-select {
+        position: fixed;
+        left: .5rem;
+        top: 5rem;
+        width: 20vw;
+    }
 }
 
 
