@@ -1,0 +1,16 @@
+extends ./layout.pug 
+
+block append scripts
+    script(src="https://js.stripe.com/v3")
+    script(src="/public/checkout.js" defer)
+
+block content
+    .content
+            form#payment-form
+                #address-element
+                input#email(type="text" placeholder="Email address")
+                #payment-element
+                button#submit
+                    .spinner.hidden#spinner
+                    span#button-text pay
+                #payment-message.hidden

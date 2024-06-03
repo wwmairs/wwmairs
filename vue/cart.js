@@ -79,7 +79,7 @@ export default {
                     <span class="cart-total">\${{ total.toFixed(2) }}</span>
                 </div>
                 <div class="checkout-button">
-                    <button>buy em'!</button>
+                    <a class="button noarrow" href="/checkout">buy em'!</a>
                 </div>
             </div>
             <div @click="toggleCart()" class="cart-header">

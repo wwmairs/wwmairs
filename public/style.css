@@ -54,7 +54,6 @@ a.noarrow {
 
 a.noarrow:hover {
     color: black;
-    border-bottom: none;
 }
 
 a {
@@ -63,7 +62,6 @@ a {
 
 a:hover {
     cursor: pointer;
-    border-bottom: .125rem solid blue;
 }
 
 body {
@@ -74,7 +72,7 @@ p {
     margin-bottom: 1rem;
 }
 
-button {
+button, .button {
     font-family: ocr-a-std, monospace;
     font-size: 1.25rem;
     font-weight: 100;
@@ -86,13 +84,14 @@ button {
     margin-bottom: .5rem;
     padding: .75rem 1.75rem;
     text-transform: uppercase;
-    width: 100%;
-    min-height: 3rem;
+    display: block;
 }
 
-button:hover {
+button:hover, .button:hover {
     cursor: pointer;
     background: white;
+    border-bottom: 1px solid blue;
+    color: blue !important;
 }
 
 .message {
