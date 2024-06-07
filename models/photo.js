@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Photo.belongsTo(models.PortfolioEntry, { 
-          foreignKey: "portfolioEntryId",
-          onDelete: "CASCADE",
+          through: {model: "PortfolioEntry_Photos", unique: false},
       });
     }
   }
@@ -25,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     mimetype: DataTypes.STRING,
     size: DataTypes.INTEGER,
     path: DataTypes.STRING,
-    order: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Photo',

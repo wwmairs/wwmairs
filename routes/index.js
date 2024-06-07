@@ -3,9 +3,11 @@ import portfolioEntries from "./portfolioentries.js";
 import login from "./login.js";
 import tag from "./tags.js";
 import stripe from "./stripe.js";
+import photo from "./photo.js";
 
 const routeLoaders = [
 	portfolioEntries,
+    photo,
 	login,
     tag,
     stripe,
