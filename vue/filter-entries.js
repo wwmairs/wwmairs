@@ -1,10 +1,12 @@
 import { ref, watchEffect, computed, nextTick } from "vue"
 import EntryTile from "/vue/entry-tile.js"
+import Tags from "/vue/tags.js"
 
 
 export default {
     components: {
         EntryTile,
+        Tags
     },
     setup(props) {
         const url = "/entries/";
@@ -44,18 +46,23 @@ export default {
         }
 
         return { entries, availableTags, filtered, toggleTag }
+
+              //  <span v-for="tag in availableTags"
+              //        :value="tag.id"
+              //        :selected="tag.selected"
+              //        @click="toggleTag(tag)"
+              //        :class="{ checked: tag.selected }"
+              //        class="tag-option">
+              //      {{ tag.name }}
+              //  </span>
     },
     template: `
         <div class="entries-by-tag">
             <div class="tags-select">
-                <span v-for="tag in availableTags"
-                      :value="tag.id"
-                      :selected="tag.selected"
-                      @click="toggleTag(tag)"
-                      :class="{ checked: tag.selected }"
-                      class="tag-option">
-                    {{ tag.name }}
-                </span>
+                <span>tags</span>
+                <Tags :tags="availableTags" 
+                      :clickable="true"
+                      :onclick="toggleTag"></Tags>
             </div>
             <div class="block grid">
                 <EntryTile v-for="entry in filtered"

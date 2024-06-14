@@ -458,10 +458,7 @@ button:hover, .button:hover {
 }
 
 .tag-option.checked {
-    border: 1px solid var(--text-color);
-    border-radius: 1rem;
-    color: white;
-    background: blue;
+    border: 1px dashed var(--text-color);
 }
 
 .small-box {
